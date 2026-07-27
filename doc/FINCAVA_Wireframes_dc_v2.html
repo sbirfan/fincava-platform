@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="fincava-ds/colors_and_type.css">
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:#EFE7D6;font-family:var(--fc-font-sans)}
+a{color:var(--fc-sage-deep)} a:hover{color:var(--fc-sage-deep);text-decoration:underline}
+.dv-turn{padding:40px 44px 60px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 24px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:14px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:600 13px/1.3 system-ui,sans-serif;color:#1a1a1a}
+.dv-olabel span.sub{font-weight:400;color:rgba(0,0,0,.5)}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.scr-lbl{font:600 11px/1 var(--fc-font-sans);letter-spacing:.06em;text-transform:uppercase;color:rgba(0,0,0,.4);margin:0 0 2px}
+.browser{width:1180px;border-radius:14px;overflow:hidden;box-shadow:var(--fc-shadow-3);border:1px solid var(--fc-line)}
+.browser-bar{height:34px;background:var(--fc-paper-2);display:flex;align-items:center;gap:7px;padding:0 14px}
+.dot9{width:9px;height:9px;border-radius:50%;background:var(--fc-border-strong)}
+.urlpill{margin-left:10px;background:#fff;border-radius:999px;padding:4px 16px;font-size:12px;color:var(--fc-ink-3)}
+.phone{width:360px;border-radius:38px;background:#221f1c;padding:11px;box-shadow:var(--fc-shadow-3)}
+.phone-in{background:var(--fc-paper);border-radius:28px;overflow:hidden}
+.phone-status{height:26px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font:600 11px var(--fc-font-sans);color:var(--fc-ink)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">FINCAVA — marketplace grid, Fincava design system (sage-forward, nature palette)</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Marketplace grid <span class="sub">— sidebar filters, dense cards, blurred lock section</span></div>
+
+<p class="scr-lbl">Home — desktop</p>
+<div class="browser"><div class="browser-bar"><span class="dot9"></span><span class="dot9"></span><span class="dot9"></span><div class="urlpill">fincava.com</div></div>
+<div style="background:var(--fc-paper)">
+<nav style="background:var(--fc-paper);border-bottom:1px solid var(--fc-line);padding:14px 32px;display:flex;align-items:center;gap:28px">
+<img src="fincava-ds/fincava-logo.png" alt="Fincava" style="height:36px">
+<a href="#" style="color:var(--fc-sage-deep);text-decoration:none;padding:8px 14px;border-radius:var(--fc-radius-md);font-size:14px;font-weight:600;background:var(--fc-sage-soft)">Home</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Available Lots</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">About</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Contact</a>
+<span style="flex:1"></span>
+<button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:14px;padding:9px 18px;border-radius:var(--fc-radius-md);border:1px solid var(--fc-border-strong);background:transparent;color:var(--fc-ink)">Sign in</button>
+</nav>
+<div style="position:relative;height:380px"><image-slot id="home1a-hero" placeholder="Colombian farm hillside, green shade trees" style="width:100%;height:100%"></image-slot>
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(43,30,22,.6),rgba(43,30,22,.1));display:flex;flex-direction:column;justify-content:center;padding:0 48px;pointer-events:none">
+<h1 style="color:#fff;font-family:var(--fc-font-display);font-weight:500;font-size:44px;line-height:1.1;max-width:16ch;margin:0 0 16px">Traceable Colombian green coffee, sourced for professional buyers</h1>
+<p style="color:rgba(255,255,255,.85);font-size:17px;max-width:46ch">FINCAVA connects specialty importers, roasters, brokers and distributors directly to curated lots from Colombian cooperatives and farms.</p>
+<div style="display:flex;gap:12px;margin-top:16px;pointer-events:auto">
+<button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:15px;padding:12px 22px;border-radius:var(--fc-radius-md);border:0;background:var(--fc-sage);color:var(--fc-paper)">Browse Available Lots</button>
+<button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:15px;padding:12px 22px;border-radius:var(--fc-radius-md);border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff">Submit a Sourcing Request</button>
+</div>
+</div></div>
+<div style="display:flex;gap:32px;padding:24px 32px 0">
+<div><div style="font-family:var(--fc-font-display);font-weight:600;font-size:22px;color:var(--fc-ink)">24</div><div style="font-size:12px;color:var(--fc-ink-3)">Lots available</div></div>
+<div><div style="font-family:var(--fc-font-display);font-weight:600;font-size:22px;color:var(--fc-ink)">18</div><div style="font-size:12px;color:var(--fc-ink-3)">Buyer countries</div></div>
+<div><div style="font-family:var(--fc-font-display);font-weight:600;font-size:22px;color:var(--fc-ink)">86+</div><div style="font-size:12px;color:var(--fc-ink-3)">Avg. cup score</div></div>
+</div>
+<div style="padding:40px 32px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:28px">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fc-brick)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+<div style="font-family:var(--fc-font-sans);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fc-brick);margin:14px 0 6px">For Buyers</div>
+<h3 style="font-family:var(--fc-font-display);font-weight:500;font-size:22px;margin:0 0 10px;color:var(--fc-ink)">Source with confidence</h3>
+<p style="font-size:14px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">Browse verified lots, request samples, and buy direct — every lot carries a passport with origin, process, and cup score before you commit.</p>
+</div>
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:28px">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--fc-sage)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+<div style="font-family:var(--fc-font-sans);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fc-sage-deep);margin:14px 0 6px">Verified at the Source</div>
+<h3 style="font-family:var(--fc-font-display);font-weight:500;font-size:22px;margin:0 0 10px;color:var(--fc-ink)">How We Source</h3>
+<p style="font-size:14px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">We work directly with verified cooperatives across Antioquia, Huila, and Nariño — on-site visits, scored samples, and a lot passport for every shipment. No intermediaries, no blind sourcing.</p>
+</div>
+</div>
+<div style="padding:0 32px 64px">
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:24px;margin:0 0 16px;color:var(--fc-ink)">Available now</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start">
+<sc-for list="{{featuredLots}}" as="lot" hint-placeholder-count="3">
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);overflow:hidden">
+<image-slot id="{{lot.code}}-1a-feat" placeholder="Lot photo" style="width:100%;height:150px"></image-slot>
+<div style="padding:14px 16px">
+<div style="font-family:var(--fc-font-display);font-weight:500;font-size:17px;color:var(--fc-ink)">{{lot.title}}</div>
+<div style="font-size:12px;color:var(--fc-ink-3);margin:4px 0 8px">{{lot.variety}} · {{lot.process}} · {{lot.region}}</div>
+<span style="{{lot.badgeStyle}}">{{lot.status}}</span>
+</div></div>
+</sc-for>
+</div>
+</div>
+</div></div>
+
+<p class="scr-lbl">Available Lots — desktop</p>
+<div class="browser"><div class="browser-bar"><span class="dot9"></span><span class="dot9"></span><span class="dot9"></span><div class="urlpill">fincava.com/lots</div></div>
+<div style="background:var(--fc-paper);padding:32px">
+<h1 style="font-family:var(--fc-font-display);font-weight:500;font-size:26px;margin:0 0 4px;color:var(--fc-ink)">Available Lots</h1>
+<p style="color:var(--fc-ink-2);margin:0 0 24px;font-size:14px">Curated green coffee lots, updated as they move through harvest and sale.</p>
+<div style="display:grid;grid-template-columns:220px 1fr;gap:32px">
+<div style="display:flex;flex-direction:column;gap:20px">
+<div><label style="font-size:13px;font-weight:600;color:var(--fc-ink)">Variety</label>
+<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:13px;color:var(--fc-ink-2)"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked style="accent-color:var(--fc-sage)"/>Caturra</label><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--fc-sage)"/>Bourbon</label><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--fc-sage)"/>Geisha</label><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--fc-sage)"/>Typica</label></div></div>
+<div><label style="font-size:13px;font-weight:600;color:var(--fc-ink)">Process</label>
+<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;font-size:13px;color:var(--fc-ink-2)"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--fc-sage)"/>Washed</label><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--fc-sage)"/>Honey</label><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="accent-color:var(--fc-sage)"/>Natural</label></div></div>
+<div><label style="font-size:13px;font-weight:600;color:var(--fc-ink)">Status</label><select style="width:100%;margin-top:8px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:8px 10px"><option>All statuses</option><option>Available</option><option>Sample available</option><option>Limited quantity</option></select></div>
+</div>
+<div>
+<div style="display:flex;justify-content:flex-end;margin-bottom:8px"><span style="font-size:13px;color:var(--fc-ink-3)">6 lots</span></div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start">
+<sc-for list="{{lots}}" as="lot" hint-placeholder-count="6">
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);overflow:hidden">
+<image-slot id="{{lot.code}}-1a-cat" placeholder="Lot photo" style="width:100%;height:130px"></image-slot>
+<div style="padding:14px 16px">
+<div style="display:flex;justify-content:space-between;align-items:start;gap:8px"><div style="font-family:var(--fc-font-display);font-weight:500;font-size:15px;color:var(--fc-ink)">{{lot.title}}</div><span style="{{lot.badgeStyle}}font-size:10px;padding:3px 8px">{{lot.status}}</span></div>
+<div style="font-size:12px;color:var(--fc-ink-3);margin:4px 0 10px">{{lot.variety}} · {{lot.process}} · {{lot.region}} · {{lot.altitude}}</div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:var(--fc-font-mono);font-size:12px;color:var(--fc-sage-deep)">Cup {{lot.score}}</span><button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:12px;padding:6px 12px;border-radius:var(--fc-radius-md);border:1px solid var(--fc-border-strong);background:var(--fc-paper-2);color:var(--fc-ink)">View Lot</button></div>
+</div></div>
+</sc-for>
+</div>
+</div>
+</div>
+</div></div>
+
+<p class="scr-lbl">Lot Passport — desktop</p>
+<div class="browser"><div class="browser-bar"><span class="dot9"></span><span class="dot9"></span><span class="dot9"></span><div class="urlpill">fincava.com/lots/FNC-24-118</div></div>
+<div style="background:var(--fc-paper);padding:32px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div style="border-radius:var(--fc-radius-lg);overflow:hidden"><image-slot id="pass1a-main" placeholder="Lot hero photo" style="width:100%;height:280px"></image-slot>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px">
+<image-slot id="pass1a-t1" placeholder="Farm" style="width:100%;height:70px"></image-slot>
+<image-slot id="pass1a-t2" placeholder="Cherry" style="width:100%;height:70px"></image-slot>
+<image-slot id="pass1a-t3" placeholder="Drying beds" style="width:100%;height:70px"></image-slot>
+</div></div>
+<div>
+<span style="font-family:var(--fc-font-mono);font-size:12px;color:var(--fc-ink-3)">FNC-24-118</span>
+<h1 style="font-family:var(--fc-font-display);font-weight:500;font-size:28px;margin:4px 0 14px;color:var(--fc-ink)">Finca El Mirador</h1>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+<span style="font-family:var(--fc-font-sans);font-weight:500;font-size:11px;padding:4px 10px;border-radius:var(--fc-radius-pill);background:var(--fc-sage);color:var(--fc-paper)">Available</span>
+<span style="font-family:var(--fc-font-sans);font-weight:500;font-size:11px;padding:4px 10px;border-radius:var(--fc-radius-pill);background:var(--fc-paper-2);color:var(--fc-ink-2);border:1px solid var(--fc-border-strong)">Caturra</span>
+<span style="font-family:var(--fc-font-sans);font-weight:500;font-size:11px;padding:4px 10px;border-radius:var(--fc-radius-pill);background:var(--fc-paper-2);color:var(--fc-ink-2);border:1px solid var(--fc-border-strong)">Washed</span>
+<span style="font-family:var(--fc-font-sans);font-weight:500;font-size:11px;padding:4px 10px;border-radius:var(--fc-radius-pill);background:var(--fc-paper-2);color:var(--fc-ink-2);border:1px solid var(--fc-border-strong)">Huila</span>
+</div>
+<p style="font-size:14px;color:var(--fc-ink-2);line-height:1.55">Bright, floral cup with notes of red apple, panela and jasmine. Grown at 1,750m in Huila's volcanic soils, shaded by native trees.</p>
+<div style="display:flex;gap:32px;margin:16px 0">
+<div><div style="font-family:var(--fc-font-display);font-weight:600;font-size:18px;color:var(--fc-ink)">86.5</div><div style="font-size:11px;color:var(--fc-ink-3)">Cup score</div></div>
+<div><div style="font-family:var(--fc-font-display);font-weight:600;font-size:18px;color:var(--fc-ink)">Jun – Aug</div><div style="font-size:11px;color:var(--fc-ink-3)">Harvest window</div></div>
+</div>
+<div style="position:relative;overflow:hidden;background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:20px">
+<div style="filter:blur(5px);opacity:.55;user-select:none">
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Available volume</span><span>2,400 kg</span></div>
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>FOB pricing</span><span>$6.85 / kg</span></div>
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Moisture / Aw</span><span>10.8% / 0.55</span></div>
+<div style="display:flex;justify-content:space-between;font-size:13px"><span>Certifications</span><span>Rainforest Alliance</span></div>
+</div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--fc-white)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--fc-sage-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+<div style="font-family:var(--fc-font-display);font-weight:600;font-size:16px;text-align:center;color:var(--fc-ink)">Create a free buyer account to unlock</div>
+<div style="font-size:12px;color:var(--fc-ink-3)">Full specs · exact pricing · RFQ &amp; samples</div>
+<button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:15px;padding:12px 22px;border-radius:var(--fc-radius-md);border:0;background:var(--fc-sage);color:var(--fc-paper)">Register Free</button>
+</div></div>
+</div>
+</div>
+</div></div>
+
+<p class="scr-lbl">About — desktop</p>
+<div class="browser"><div class="browser-bar"><span class="dot9"></span><span class="dot9"></span><span class="dot9"></span><div class="urlpill">fincava.com/about</div></div>
+<div style="background:var(--fc-paper)">
+<nav style="background:var(--fc-paper);border-bottom:1px solid var(--fc-line);padding:14px 32px;display:flex;align-items:center;gap:28px">
+<img src="fincava-ds/fincava-logo.png" alt="Fincava" style="height:36px">
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Home</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Available Lots</a>
+<a href="#" style="color:var(--fc-sage-deep);text-decoration:none;padding:8px 14px;border-radius:var(--fc-radius-md);font-size:14px;font-weight:600;background:var(--fc-sage-soft)">About</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Contact</a>
+<span style="flex:1"></span>
+<button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:14px;padding:9px 18px;border-radius:var(--fc-radius-md);border:1px solid var(--fc-border-strong);background:transparent;color:var(--fc-ink)">Sign in</button>
+</nav>
+<div style="position:relative;height:300px"><image-slot id="about1a-hero" placeholder="San Gil, Santander hillside farms" style="width:100%;height:100%"></image-slot>
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(43,30,22,.62),rgba(43,30,22,.15));display:flex;flex-direction:column;justify-content:center;padding:0 48px">
+<h1 style="color:#fff;font-family:var(--fc-font-display);font-weight:500;font-size:36px;line-height:1.15;max-width:22ch;margin:0 0 14px">FINCAVA is a green-coffee procurement and supply company built on direct relationships, not automated sourcing.</h1>
+<p style="color:rgba(255,255,255,.88);font-size:15px;max-width:56ch;line-height:1.5">Owned by KR Industries, LLC, a Taylor, Texas-based company that is 50% women-owned, FINCAVA sources traceable coffee from known farms in Santander and Boyacá, Colombia — and offers independent field verification for buyers who aren't ready to purchase yet.</p>
+</div></div>
+
+<div style="max-width:920px;margin:0 auto;padding:56px 32px 0">
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:24px;margin:0 0 12px;color:var(--fc-ink)">A presence on both ends of the supply chain</h2>
+<p style="font-size:14px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">FINCAVA maintains a permanent, ongoing operating presence in San Gil, Santander, Colombia, alongside its base in Taylor, Texas. Both owners travel regularly between the two locations — meeting producers, visiting farms, and coordinating samples in Colombia, while remaining directly accountable to buyers in the U.S.</p>
+</div>
+
+<div style="max-width:920px;margin:0 auto;padding:40px 32px 0">
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:24px;margin:0 0 12px;color:var(--fc-ink)">Commercial Partnership With Women-Led Farms</h2>
+<p style="font-size:14px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">A meaningful share of the farms FINCAVA sources from in Santander and Boyacá are fully or partially owned, managed, or operated by women who are already producing coffee that competes on quality alone. FINCAVA's interest is straightforwardly commercial: these are strong, capable trading partners, and building direct, recurring purchasing relationships with them is a deliberate part of how FINCAVA sources — not a social program, and not an act of rescue. This is a partnership between equals, built on consistent quality and reliable demand, not assistance.</p>
+</div>
+
+<div style="padding:48px 32px 0">
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:22px;margin:0 0 20px;color:var(--fc-ink)">What we commit to</h2>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:22px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--fc-brick)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+<div style="font-family:var(--fc-font-display);font-weight:500;font-size:16px;margin:12px 0 6px;color:var(--fc-ink)">Known Sources</div>
+<p style="font-size:13px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">We procure only from farms and producer groups we can identify, communicate with, and document.</p>
+</div>
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:22px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--fc-brick)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+<div style="font-family:var(--fc-font-display);font-weight:500;font-size:16px;margin:12px 0 6px;color:var(--fc-ink)">Honest Representation</div>
+<p style="font-size:13px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">Coffee is described according to the evidence — origin, process, condition, and sensory results. No inflated scores, no implied certifications.</p>
+</div>
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:22px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--fc-brick)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+<div style="font-family:var(--fc-font-display);font-weight:500;font-size:16px;margin:12px 0 6px;color:var(--fc-ink)">Buyer-Driven Documentation</div>
+<p style="font-size:13px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">We invest in gathering the specs and traceability data serious buyers need, and say plainly when something isn't available yet.</p>
+</div>
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:22px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--fc-brick)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+<div style="font-family:var(--fc-font-display);font-weight:500;font-size:16px;margin:12px 0 6px;color:var(--fc-ink)">Local Accountability</div>
+<p style="font-size:13px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0">A Taylor, Texas base gives U.S. buyers a local commercial counterpart, not just an overseas supplier.</p>
+</div>
+</div>
+</div>
+
+<div style="max-width:920px;margin:0 auto;padding:48px 32px 0">
+<div style="background:var(--fc-sage-soft);border-radius:var(--fc-radius-lg);padding:32px">
+<div style="font-family:var(--fc-font-sans);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fc-sage-deep);margin:0 0 8px">Field Verification</div>
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:22px;margin:0 0 10px;color:var(--fc-ink)">Not ready to purchase? Start with verification.</h2>
+<p style="font-size:14px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0 0 20px;max-width:70ch">Not every buyer is ready to place an order. FINCAVA offers fee-based farm, producer, origin, and lot-verification — field visits, photography, documentation, and reporting — so you can evaluate a farm or lot before committing funds. This is field verification and documentation, not certification: every report separates what we directly observed from what the producer reported and anything we couldn't confirm.</p>
+<a href="#verification" style="font-family:var(--fc-font-sans);font-weight:500;font-size:15px;padding:12px 22px;border-radius:var(--fc-radius-md);border:0;background:var(--fc-sage);color:var(--fc-paper);text-decoration:none;display:inline-block">Request Farm Verification</a>
+</div>
+</div>
+
+<div style="max-width:920px;margin:0 auto;padding:28px 32px 64px">
+<p style="font-size:12px;color:var(--fc-ink-3);margin:0">Import and logistics coordination is planned as FINCAVA grows.</p>
+</div>
+</div></div>
+
+<p class="scr-lbl">Request Farm Verification — desktop <span style="text-transform:none;font-weight:400;color:var(--fc-ink-3)">(public, no sign-in required)</span></p>
+<div class="browser"><div class="browser-bar"><span class="dot9"></span><span class="dot9"></span><span class="dot9"></span><div class="urlpill">fincava.com/verification</div></div>
+<div style="background:var(--fc-paper)">
+<nav style="background:var(--fc-paper);border-bottom:1px solid var(--fc-line);padding:14px 32px;display:flex;align-items:center;gap:28px">
+<img src="fincava-ds/fincava-logo.png" alt="Fincava" style="height:36px">
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Home</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Available Lots</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">About</a>
+<a href="#" style="color:var(--fc-ink);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:500">Contact</a>
+</nav>
+<div style="max-width:680px;margin:0 auto;padding:48px 32px 64px">
+<span style="font-family:var(--fc-font-sans);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:var(--fc-radius-pill);background:var(--fc-sage-soft);color:var(--fc-sage-deep)">Open to everyone · No account needed</span>
+<h1 style="font-family:var(--fc-font-display);font-weight:500;font-size:30px;margin:16px 0 12px;color:var(--fc-ink)">Request Farm Verification</h1>
+<p style="font-size:14px;line-height:var(--fc-lh-body);color:var(--fc-ink-2);margin:0 0 32px">Not every buyer is ready to place an order. FINCAVA offers fee-based farm, producer, origin, and lot-verification — field visits, photography, documentation, and reporting — so you can evaluate a farm or lot before committing funds. This is field verification and documentation, not certification: every report separates what we directly observed from what the producer reported and anything we couldn't confirm.</p>
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:28px;display:flex;flex-direction:column;gap:16px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><label style="font-size:13px;font-weight:600;color:var(--fc-ink)">Name *</label><input type="text" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+<div><label style="font-size:13px;font-weight:600;color:var(--fc-ink)">Email *</label><input type="email" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><label style="font-size:13px;font-weight:600;color:var(--fc-ink)">Company *</label><input type="text" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+<div><label style="font-size:13px;font-weight:500;color:var(--fc-ink-2)">Phone</label><input type="tel" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><label style="font-size:13px;font-weight:500;color:var(--fc-ink-2)">Country</label><input type="text" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+<div><label style="font-size:13px;font-weight:500;color:var(--fc-ink-2)">Region of interest</label><input type="text" placeholder="e.g. Santander, Boyacá" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+</div>
+<div><label style="font-size:13px;font-weight:500;color:var(--fc-ink-2)">Farm or lot of interest</label><input type="text" placeholder="If known" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box"></div>
+<div><label style="font-size:13px;font-weight:500;color:var(--fc-ink-2)">Message</label><textarea rows="4" placeholder="What would you like us to verify?" style="width:100%;margin-top:6px;font-family:var(--fc-font-sans);font-size:14px;background:var(--fc-paper);color:var(--fc-ink);border:1px solid var(--fc-border-strong);border-radius:var(--fc-radius-md);padding:10px 12px;box-sizing:border-box;resize:vertical"></textarea></div>
+<button type="button" style="align-self:flex-start;font-family:var(--fc-font-sans);font-weight:500;font-size:15px;padding:12px 24px;border-radius:var(--fc-radius-md);border:0;background:var(--fc-sage);color:var(--fc-paper)">Submit Request</button>
+</div>
+</div>
+</div></div>
+
+<p class="scr-lbl">Mobile</p>
+<div style="display:flex;gap:20px;flex-wrap:wrap">
+<div class="phone"><div class="phone-in"><div class="phone-status"><span>9:41</span><span>●●●</span></div>
+<div style="padding:0 14px 16px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><img src="fincava-ds/fincava-logo.png" alt="Fincava" style="height:26px"><button type="button" style="font-size:11px;padding:4px 10px;border-radius:var(--fc-radius-md);border:1px solid var(--fc-border-strong);background:transparent;color:var(--fc-ink)">Sign in</button></div>
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:17px;margin:0 0 10px;color:var(--fc-ink)">Available Lots</h2>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{lots}}" as="lot" hint-placeholder-count="3">
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);overflow:hidden;display:flex;flex-direction:row">
+<image-slot id="{{lot.code}}-1a-m" placeholder="Photo" style="width:88px;height:88px;flex:none"></image-slot>
+<div style="padding:8px 10px;flex:1"><div style="font-weight:600;font-size:13px;color:var(--fc-ink)">{{lot.title}}</div><div style="font-size:11px;color:var(--fc-ink-3);margin:2px 0 6px">{{lot.variety}} · {{lot.region}}</div><span style="{{lot.badgeStyle}}font-size:10px">{{lot.status}}</span></div>
+</div>
+</sc-for>
+</div>
+</div></div></div>
+<div class="phone"><div class="phone-in"><div class="phone-status"><span>9:41</span><span>●●●</span></div>
+<div style="padding:0 0 16px">
+<image-slot id="pass1a-mobile" placeholder="Lot photo" style="width:100%;height:180px"></image-slot>
+<div style="padding:0 14px">
+<span style="font-family:var(--fc-font-mono);font-size:11px;color:var(--fc-ink-3)">FNC-24-118</span>
+<h2 style="font-family:var(--fc-font-display);font-weight:500;font-size:17px;margin:2px 0 8px;color:var(--fc-ink)">Finca El Mirador</h2>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><span style="font-size:10px;padding:3px 8px;border-radius:var(--fc-radius-pill);background:var(--fc-sage);color:var(--fc-paper)">Available</span><span style="font-size:10px;padding:3px 8px;border-radius:var(--fc-radius-pill);background:var(--fc-paper-2);color:var(--fc-ink-2);border:1px solid var(--fc-border-strong)">Caturra · Washed</span></div>
+<p style="font-size:12px;color:var(--fc-ink-2)">Bright, floral cup, notes of red apple and jasmine.</p>
+<div style="position:relative;overflow:hidden;background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);margin-top:8px;padding:12px">
+<div style="filter:blur(4px);opacity:.5;font-size:12px">Volume 2,400kg — Pricing $6.85/kg — Certifications RA</div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--fc-white)">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--fc-sage-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+<div style="font-family:var(--fc-font-display);font-weight:600;font-size:12px;color:var(--fc-ink)">Register to unlock</div>
+</div></div>
+</div>
+<div style="display:flex;gap:8px;padding:10px 14px 0"><button type="button" style="flex:1;font-family:var(--fc-font-sans);font-weight:500;font-size:12px;padding:10px;border-radius:var(--fc-radius-md);border:0;background:var(--fc-sage);color:var(--fc-paper)">Register Free</button></div>
+</div></div></div>
+</div>
+
+<p class="scr-lbl">Admin — Dashboard &amp; Lots</p>
+<div class="browser"><div class="browser-bar"><span class="dot9"></span><span class="dot9"></span><span class="dot9"></span><div class="urlpill">fincava.com/admin</div></div>
+<div style="background:var(--fc-paper);padding:32px">
+<h1 style="font-family:var(--fc-font-display);font-weight:500;font-size:22px;margin:0 0 16px;color:var(--fc-ink)">Dashboard</h1>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px">
+<sc-for list="{{dashStats}}" as="s" hint-placeholder-count="5">
+<div style="background:var(--fc-white);border:1px solid var(--fc-line);border-radius:var(--fc-radius-lg);box-shadow:var(--fc-shadow-1);padding:14px 16px"><div style="font-size:11px;color:var(--fc-ink-3);text-transform:uppercase;letter-spacing:.06em">{{s.label}}</div><div style="font-family:var(--fc-font-display);font-weight:600;font-size:26px;margin-top:4px;color:var(--fc-sage-deep)">{{s.value}}</div></div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h2 style="font-size:16px;margin:0;color:var(--fc-ink)">Lots</h2><button type="button" style="font-family:var(--fc-font-sans);font-weight:500;font-size:12px;padding:8px 14px;border-radius:var(--fc-radius-md);border:0;background:var(--fc-sage);color:var(--fc-paper)">+ New Lot</button></div>
+<table style="width:100%;border-collapse:collapse;font-size:13px">
+<thead><tr style="text-align:left;color:var(--fc-ink-3);font-size:11px;text-transform:uppercase;letter-spacing:.05em"><th style="padding:8px 0;border-bottom:1px solid var(--fc-line)">Lot</th><th style="padding:8px 0;border-bottom:1px solid var(--fc-line)">Variety / Process</th><th style="padding:8px 0;border-bottom:1px solid var(--fc-line)">Region</th><th style="padding:8px 0;border-bottom:1px solid var(--fc-line)">Status</th><th style="padding:8px 0;border-bottom:1px solid var(--fc-line)">Strategy</th><th style="padding:8px 0;border-bottom:1px solid var(--fc-line)">Visible</th></tr></thead>
+<tbody>
+<sc-for list="{{lots}}" as="lot" hint-placeholder-count="6">
+<tr style="color:var(--fc-ink)"><td style="padding:10px 0;border-bottom:1px solid var(--fc-line-soft)">{{lot.code}}<br><span style="color:var(--fc-ink-3);font-size:12px">{{lot.title}}</span></td><td style="padding:10px 0;border-bottom:1px solid var(--fc-line-soft)">{{lot.variety}} / {{lot.process}}</td><td style="padding:10px 0;border-bottom:1px solid var(--fc-line-soft)">{{lot.region}}</td><td style="padding:10px 0;border-bottom:1px solid var(--fc-line-soft)"><span style="{{lot.badgeStyle}}">{{lot.status}}</span></td><td style="padding:10px 0;border-bottom:1px solid var(--fc-line-soft);color:var(--fc-ink-3)">RFQ Only</td><td style="padding:10px 0;border-bottom:1px solid var(--fc-line-soft)">✓</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div></div>
+</div>
+
+</div>
+<p class="dv-next" style="padding:0 44px">Try next: "make the badges more sage-forward" · "show Register/OTP and Sourcing Request screens" · "new directions"</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  badgeStyle(bg, color, border) {
+    var base = "font-family:var(--fc-font-sans);font-weight:500;font-size:11px;padding:4px 10px;border-radius:var(--fc-radius-pill);display:inline-flex;align-items:center;background:" + bg + ";color:" + color + ";";
+    return border ? base + "border:1px solid " + border + ";" : base;
+  }
+  renderVals() {
+    const badgeStyle = this.badgeStyle;
+    const lots = [
+      {code:'FNC-24-118', title:'Finca El Mirador', variety:'Caturra', process:'Washed', region:'Huila', altitude:'1,750m', score:'86.5', status:'Available', badgeStyle: badgeStyle('var(--fc-sage)','var(--fc-paper)'), price:'Request Quote'},
+      {code:'FNC-24-092', title:'Finca Buenavista', variety:'Bourbon', process:'Honey', region:'Nariño', altitude:'1,900m', score:'87.25', status:'Limited Quantity', badgeStyle: badgeStyle('var(--fc-warning-soft)','#8C5E10'), price:'$7.40/kg FOB'},
+      {code:'FNC-24-201', title:'Finca La Esperanza', variety:'Geisha', process:'Natural', region:'Cauca', altitude:'2,000m', score:'89.0', status:'Sample Available', badgeStyle: badgeStyle('var(--fc-caramel)','var(--fc-paper)'), price:'Starting at $9.80/kg'},
+      {code:'FNC-25-004', title:'Finca Palmares', variety:'Typica', process:'Washed', region:'Tolima', altitude:'1,650m', score:'85.0', status:'Coming Soon', badgeStyle: badgeStyle('transparent','var(--fc-ink-2)','var(--fc-border-strong)'), price:'—'},
+      {code:'FNC-24-155', title:'Finca San Rafael', variety:'Castillo', process:'Washed', region:'Huila', altitude:'1,800m', score:'84.5', status:'Available', badgeStyle: badgeStyle('var(--fc-sage)','var(--fc-paper)'), price:'Est. $6.20–6.80/kg'},
+      {code:'FNC-23-310', title:'Finca Alto Verde', variety:'Caturra', process:'Natural', region:'Nariño', altitude:'1,950m', score:'86.0', status:'Reserved', badgeStyle: badgeStyle('var(--fc-peach)','var(--fc-brick)'), price:'Contact FINCAVA'}
+    ];
+    const dashStats = [
+      {label:'New RFQs', value:'7'},
+      {label:'New sample requests', value:'3'},
+      {label:'New sourcing requests', value:'2'},
+      {label:'New registrations (7d)', value:'14'},
+      {label:'New verification requests', value:'4'}
+    ];
+    return { lots, featuredLots: lots.slice(0,3), dashStats };
+  }
+}
+</script>
+</body>
+</html>
