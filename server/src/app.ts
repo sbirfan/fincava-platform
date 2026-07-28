@@ -12,6 +12,15 @@ import { verificationRequestsRouter } from './routes/verificationRequests.js';
 export function createApp(): Express {
   const app = express();
 
+  // Replit (and most PaaS hosts) sit behind a reverse proxy — without this,
+  // express-rate-limit sees the proxy's IP for every request (one shared
+  // bucket for all users) and req.secure/cookie handling can't trust
+  // X-Forwarded-* headers. `1` trusts exactly one hop, matching a single
+  // reverse proxy in front of the app.
+  if (env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+  }
+
   app.use(helmet());
   app.use(express.json());
   app.use(cookieParser());

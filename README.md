@@ -9,9 +9,10 @@ takes fee-based farm/lot verification requests from the public.
 This is a clean, from-scratch build. It does not reuse code, schema, or
 architecture from any prior FINCAVA platform.
 
-**Status:** Phase 0 (Foundation) complete — repo scaffold, Express skeleton,
-full Drizzle schema, migration applied to Neon, and seed data loaded. See
-"Current status" below.
+**Status:** Phase 1 (Public site) complete — Home, Available Lots, Lot
+Passport, About, Contact, Privacy, Terms, and the public Verification form are
+all live, on top of Phase 0's schema/migration/seed. See "Current status"
+below.
 
 ---
 
@@ -49,7 +50,33 @@ full Drizzle schema, migration applied to Neon, and seed data loaded. See
    - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` — Cloudinary dashboard
 3. Apply the database migration: `npm run db:migrate`
 4. Load seed data (6 sample lots): `npm run db:seed`
-5. `npm run dev` — starts the API on port 5000 and the Vite dev server on 5173
+5. Start local dev — see "Local development" below
+
+## Local development
+
+`npm run dev` only starts the Express API (on `PORT`, default `5000`). The
+React app runs as its own Vite dev server and needs a second terminal:
+
+```bash
+# Terminal 1 — API
+npm run dev
+
+# Terminal 2 — client (proxies /api to the server above)
+npm run dev --workspace client
+```
+
+The client dev server (port 5173) proxies `/api/*` requests to the backend.
+It reads the backend's port from the same root `.env`'s `PORT` value, so the
+two stay in sync automatically. If you need the client to point at a
+different backend port than what's in `.env` (e.g. running two servers side
+by side), override it explicitly for that one terminal:
+
+```bash
+API_PORT=5050 npm run dev --workspace client
+```
+
+In production (`npm start`), there's no second server or proxy — the one
+Express process serves both the API and the built client from `client/dist`.
 
 ## Commands
 
@@ -64,19 +91,40 @@ full Drizzle schema, migration applied to Neon, and seed data loaded. See
 | `npm run lint`        | Runs ESLint across the repo                       |
 | `npm run format`      | Runs Prettier across the repo                     |
 
-## Current status (Phase 0 — complete)
+## Current status (Phase 1 — complete)
 
-- Full Drizzle schema is written: all tables and enums from the execution
-  spec, plus `verificationRequests` / `verification_status` from the
-  verification addendum.
-- The initial migration (`drizzle/0000_fresh_sir_ram.sql`) has been applied
-  to the Neon database.
-- The seed script has run: 6 realistic Colombian lots, all five pricing
-  strategies, one hidden `INVITE_ONLY` lot. `rfqs`, `sampleRequests`,
+**Phase 0 (Foundation):**
+
+- Full Drizzle schema: all tables/enums from the execution spec, plus
+  `verificationRequests` / `verification_status` from the verification
+  addendum. Migration applied to Neon; seed loaded (6 lots, all five pricing
+  strategies, one hidden `INVITE_ONLY` lot). `rfqs`, `sampleRequests`,
   `sourcingRequests`, `verificationRequests`, and `buyerProfiles` are
   confirmed empty — they only ever hold real submissions.
-- No pages beyond a placeholder home screen exist yet — Phase 1 builds out
-  the public site.
+
+**Phase 1 (Public site):**
+
+- Public pages: Home, Available Lots (filters), Lot Passport (locked vs.
+  gated sections), About (incl. Field Verification CTA), Contact, Privacy,
+  Terms, and the addendum's public `/verification` form. `/login` is a
+  placeholder page — the real OTP flow ships in Phase 2.
+- Design tokens (`client/src/styles/tokens.css`): real values for every
+  `--fc-*` token the wireframe references.
+- Shared pricing-display module (`shared/src/pricing.ts`): single source of
+  truth for all five pricing-strategy display rules, used by the server's
+  field-gating layer.
+- Server-side field gating: anonymous lot responses never include gated or
+  admin-only fields — verified against raw JSON, not just UI hiding.
+- Verification request endpoint: 10/hour/IP rate limit, honeypot (silent
+  no-op), zod `.strict()` rejecting unknown fields — this is the platform's
+  only unauthenticated write endpoint, so these are held to a higher bar.
+- Reusable Resend email utility (`server/src/email/`): non-blocking
+  send-after-commit pattern. Verification confirmation and founder
+  notification templates are built and wired up, but **real delivery is not
+  yet verified** — `RESEND_API_KEY`/`EMAIL_FROM`/`FOUNDER_EMAIL` are still
+  blank in `.env`.
+- `trust proxy` is set in production so rate limiting and secure cookies see
+  the real client IP behind Replit's reverse proxy.
 
 ## Founder operations guide
 

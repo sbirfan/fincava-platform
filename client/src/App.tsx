@@ -8,6 +8,7 @@ import Contact from './pages/Contact.js';
 import Privacy from './pages/Privacy.js';
 import Terms from './pages/Terms.js';
 import Verification from './pages/Verification.js';
+import Login from './pages/Login.js';
 import NotFound from './pages/NotFound.js';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="privacy" element={<Privacy />} />
           <Route path="terms" element={<Terms />} />
           <Route path="verification" element={<Verification />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
