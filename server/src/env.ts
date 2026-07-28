@@ -32,6 +32,10 @@ const envSchema = z.object({
   EMAIL_FROM: optionalString(),
   FOUNDER_EMAIL: optionalString(),
 
+  // Preferred: full Cloudinary URL — set this and leave the three individual
+  // vars unset. Format: cloudinary://api_key:api_secret@cloud_name
+  CLOUDINARY_URL: optionalString(),
+  // Fallback: individual vars (used if CLOUDINARY_URL is absent)
   CLOUDINARY_CLOUD_NAME: optionalString(),
   CLOUDINARY_API_KEY: optionalString(),
   CLOUDINARY_API_SECRET: optionalString(),

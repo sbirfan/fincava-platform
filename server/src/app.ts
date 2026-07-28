@@ -6,7 +6,9 @@ import { pinoHttp } from 'pino-http';
 import { env } from './env.js';
 import { logger } from './logger.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { requireAdmin } from './middleware/adminAuth.js';
 import { adminRouter } from './routes/admin.js';
+import { adminLotsRouter } from './routes/adminLots.js';
 import { lotsRouter } from './routes/lots.js';
 import { verificationRequestsRouter } from './routes/verificationRequests.js';
 
@@ -33,6 +35,9 @@ export function createApp(): Express {
 
   app.use('/api/lots', lotsRouter);
   app.use('/api/verification-requests', verificationRequestsRouter);
+  // Mount /api/admin/lots before /api/admin so the more-specific prefix wins.
+  // adminLotsRouter handles image CRUD; adminRouter handles smoke-email etc.
+  app.use('/api/admin/lots', requireAdmin, adminLotsRouter);
   app.use('/api/admin', adminRouter);
 
   // Remaining API routers (auth, buyers, rfqs/samples/sourcing, admin) mount

@@ -8,16 +8,20 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "seed": "tsx src/db/seed.ts",
-    "smoke:email": "tsx scripts/smoke-email.ts"
+    "smoke:email": "tsx scripts/smoke-email.ts",
+    "smoke:cloudinary": "tsx scripts/smoke-cloudinary.ts"
   },
   "dependencies": {
     "@fincava/shared": "*",
+    "@types/multer": "^2.2.0",
+    "cloudinary": "^2.10.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.45.2",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
     "helmet": "^8.0.0",
+    "multer": "^2.2.0",
     "pg": "^8.13.1",
     "pino": "^9.6.0",
     "pino-http": "^10.4.0",
