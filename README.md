@@ -136,6 +136,28 @@ Express process serves both the API and the built client from `client/dist`.
   inline in the component with a `TODO(Phase 3)` comment. Do not let this
   ship as permanent.
 
+## Go-live checklist (Phase 5)
+
+Items confirmed during build that must be explicitly checked before
+`fincava.com` goes live — not assumed to resolve on their own:
+
+- **Disable Replit Deployment protection, if a formal Replit Deployment is
+  used to publish this app.** As of Phase 2, the app has only ever been
+  tested against the Replit _workspace preview_ URL (`*.replit.dev`), which
+  has no platform-level access gate — confirmed directly by fetching it with
+  a clean, cookie-free, header-free request and getting the app's real JSON
+  back. A formal Replit _Deployment_ (`*.replit.app` or a custom domain) is a
+  separate feature with its own settings, and Replit deployments can have a
+  "Deployment protection" / password-gate option. If that's ever turned on
+  for this project, it would block real anonymous buyers from the public
+  site entirely. Check Replit's Deployment settings and confirm this is off
+  before launch.
+- Replace the admin Bearer-token auth (`server/src/middleware/adminAuth.ts`,
+  `client/src/pages/AdminLot.tsx`) with real session-cookie admin auth per
+  execution-spec §4 (404-not-401, constant-time comparison, rate limiting).
+  Currently scoped only to `/api/admin/*` — confirmed via `grep -ri bearer`
+  across the repo and by inspecting `server/src/app.ts`'s route mounting.
+
 ## Founder operations guide
 
 This section will be filled in as each admin feature ships (Phase 4):
