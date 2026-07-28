@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "dW3ud0pq5fdsYFrynPO4k"
+uri = "file://client/src/assets/hero.jpg"
+type = "image"
+title = "FINCAVA Hero Image"
