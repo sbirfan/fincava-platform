@@ -70,3 +70,82 @@ export function submitVerificationRequest(
     body: JSON.stringify(payload),
   });
 }
+
+export interface OtpRequestPayload {
+  email: string;
+  website?: string; // honeypot — always sent empty by real users
+}
+
+export function requestOtp(payload: OtpRequestPayload): Promise<{ status: string }> {
+  return request('/auth/otp/request', { method: 'POST', body: JSON.stringify(payload) });
+}
+
+export function verifyOtp(email: string, code: string): Promise<{ isNewProfile: boolean }> {
+  return request('/auth/otp/verify', { method: 'POST', body: JSON.stringify({ email, code }) });
+}
+
+export function logout(): Promise<{ status: string }> {
+  return request('/auth/logout', { method: 'POST' });
+}
+
+export interface BuyerProfile {
+  id: string;
+  email: string;
+  emailVerifiedAt: string | null;
+  name: string | null;
+  company: string | null;
+  phone: string | null;
+  country: string | null;
+  buyerType: string | null;
+  website: string | null;
+  preferredContactMethod: string | null;
+  preferredVarieties: string[];
+  preferredProcesses: string[];
+  preferredScoreMin: string | null;
+  preferredScoreMax: string | null;
+  preferredVolumeMinKg: string | null;
+  preferredVolumeMaxKg: string | null;
+  targetOrigins: string[];
+  certificationsNeeded: string[];
+  destinationCountries: string[];
+  alertOptIn: boolean;
+  alertCompetitionLots: boolean;
+  marketingOptIn: boolean;
+  consentTimestamp: string | null;
+  lastLoginAt: string | null;
+  createdAt: string;
+}
+
+export function fetchMyProfile(): Promise<BuyerProfile> {
+  return request('/me');
+}
+
+export type BuyerProfileUpdate = Partial<
+  Pick<
+    BuyerProfile,
+    | 'name'
+    | 'company'
+    | 'phone'
+    | 'country'
+    | 'buyerType'
+    | 'website'
+    | 'preferredContactMethod'
+    | 'preferredVarieties'
+    | 'preferredProcesses'
+    | 'targetOrigins'
+    | 'certificationsNeeded'
+    | 'destinationCountries'
+    | 'alertOptIn'
+    | 'alertCompetitionLots'
+    | 'marketingOptIn'
+  >
+> & {
+  preferredScoreMin?: number;
+  preferredScoreMax?: number;
+  preferredVolumeMinKg?: number;
+  preferredVolumeMaxKg?: number;
+};
+
+export function updateMyProfile(update: BuyerProfileUpdate): Promise<BuyerProfile> {
+  return request('/me', { method: 'PATCH', body: JSON.stringify(update) });
+}

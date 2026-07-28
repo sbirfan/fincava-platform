@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.js';
 
 const navLinks = [
   { to: '/', label: 'Home', end: true },
@@ -15,6 +16,14 @@ function navLinkClasses(isActive: boolean): string {
 }
 
 export default function Layout() {
+  const { profile, logout } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    await logout();
+    navigate('/');
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-fc-paper text-fc-ink">
       <header className="border-b border-fc-line bg-fc-paper">
@@ -33,12 +42,30 @@ export default function Layout() {
             </NavLink>
           ))}
           <span className="flex-1" />
-          <NavLink
-            to="/login"
-            className="px-4 py-2 rounded-fc-md text-sm font-medium border border-fc-border-strong text-fc-ink hover:bg-fc-paper-2"
-          >
-            Sign in
-          </NavLink>
+          {profile ? (
+            <>
+              <NavLink
+                to="/profile"
+                className="px-4 py-2 rounded-fc-md text-sm font-medium text-fc-ink hover:bg-fc-paper-2"
+              >
+                My Profile
+              </NavLink>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="px-4 py-2 rounded-fc-md text-sm font-medium border border-fc-border-strong text-fc-ink hover:bg-fc-paper-2"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <NavLink
+              to="/login"
+              className="px-4 py-2 rounded-fc-md text-sm font-medium border border-fc-border-strong text-fc-ink hover:bg-fc-paper-2"
+            >
+              Sign in
+            </NavLink>
+          )}
         </nav>
       </header>
 

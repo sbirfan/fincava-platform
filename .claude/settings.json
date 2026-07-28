@@ -13,10 +13,6 @@
       "Bash(gh issue*)",
       "Bash(gh run*)"
     ],
-    "deny": [
-      "Bash(git push --force*)",
-      "Bash(git reset --hard*)",
-      "Bash(gh repo delete*)"
-    ]
+    "deny": ["Bash(git push --force*)", "Bash(git reset --hard*)", "Bash(gh repo delete*)"]
   }
 }

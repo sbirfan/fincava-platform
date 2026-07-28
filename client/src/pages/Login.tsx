@@ -1,14 +1,158 @@
-// Placeholder — the real email-OTP register/login flow ships in Phase 2
-// (see execution-spec §4 and §10). This exists so the "Sign in"/"Register
-// Free" links throughout Phase 1 land somewhere real instead of a 404.
+import { type FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { requestOtp, verifyOtp } from '../lib/api.js';
+import { useAuth } from '../context/AuthContext.js';
+
+const inputClasses =
+  'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
+
 export default function Login() {
+  const navigate = useNavigate();
+  const { refresh } = useAuth();
+
+  const [step, setStep] = useState<'email' | 'code'>('email');
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  async function handleRequestCode(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    const form = new FormData(e.currentTarget);
+    const enteredEmail = String(form.get('email') ?? '').trim();
+    const website = String(form.get('website') ?? ''); // honeypot
+
+    try {
+      await requestOtp({ email: enteredEmail, website });
+      setEmail(enteredEmail);
+      setStep('code');
+      setNotice("We've sent a 6-digit code to your email. It expires in 10 minutes.");
+    } catch {
+      // Deliberately generic — same as the server's own response, so the
+      // UI never implies anything about whether the email is registered.
+      setEmail(enteredEmail);
+      setStep('code');
+      setNotice("We've sent a 6-digit code to your email. It expires in 10 minutes.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleVerifyCode(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      const result = await verifyOtp(email, code);
+      await refresh();
+      navigate(result.isNewProfile ? '/profile?welcome=1' : '/profile');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Invalid or expired code.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <div className="max-w-md mx-auto px-6 py-20 text-center">
-      <h1 className="font-display font-medium text-2xl text-fc-ink mb-3">Sign in / Register</h1>
-      <p className="text-sm text-fc-ink-2">
-        Buyer accounts and email-OTP sign-in are coming in the next phase of the build. Check back
-        soon.
+    <div className="max-w-md mx-auto px-6 py-16">
+      <h1 className="font-display font-medium text-2xl text-fc-ink mb-2">Sign in / Register</h1>
+      <p className="text-sm text-fc-ink-2 mb-8">
+        One email, no password. We&apos;ll send you a 6-digit code.
       </p>
+
+      {step === 'email' ? (
+        <form
+          onSubmit={handleRequestCode}
+          className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-6 flex flex-col gap-4"
+        >
+          <div>
+            <label className="text-sm font-semibold text-fc-ink" htmlFor="email">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              autoFocus
+              className={inputClasses}
+            />
+          </div>
+
+          {/* Honeypot — hidden from real users. */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              width: 1,
+              height: 1,
+              overflow: 'hidden',
+            }}
+          >
+            <label htmlFor="website">Website</label>
+            <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="px-5 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
+          >
+            {submitting ? 'Sending…' : 'Send Code'}
+          </button>
+        </form>
+      ) : (
+        <form
+          onSubmit={handleVerifyCode}
+          className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-6 flex flex-col gap-4"
+        >
+          {notice && <p className="text-sm text-fc-ink-2">{notice}</p>}
+          <div>
+            <label className="text-sm font-semibold text-fc-ink" htmlFor="code">
+              6-digit code
+            </label>
+            <input
+              id="code"
+              type="text"
+              inputMode="numeric"
+              pattern="\d{6}"
+              maxLength={6}
+              required
+              autoFocus
+              value={code}
+              onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+              className={`${inputClasses} tracking-[0.3em] text-center font-mono text-lg`}
+            />
+          </div>
+
+          {error && <p className="text-sm text-fc-brick">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={submitting || code.length !== 6}
+            className="px-5 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
+          >
+            {submitting ? 'Verifying…' : 'Verify & Sign In'}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setStep('email');
+              setCode('');
+              setError(null);
+              setNotice(null);
+            }}
+            className="text-xs text-fc-ink-3 underline underline-offset-2 self-start"
+          >
+            Use a different email
+          </button>
+        </form>
+      )}
     </div>
   );
 }

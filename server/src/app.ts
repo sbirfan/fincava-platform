@@ -7,9 +7,12 @@ import { env } from './env.js';
 import { logger } from './logger.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { requireAdmin } from './middleware/adminAuth.js';
+import { attachSession } from './middleware/attachSession.js';
 import { adminRouter } from './routes/admin.js';
 import { adminLotsRouter } from './routes/adminLots.js';
+import { authRouter } from './routes/auth.js';
 import { lotsRouter } from './routes/lots.js';
+import { meRouter } from './routes/me.js';
 import { verificationRequestsRouter } from './routes/verificationRequests.js';
 
 export function createApp(): Express {
@@ -28,11 +31,14 @@ export function createApp(): Express {
   app.use(express.json());
   app.use(cookieParser());
   app.use(pinoHttp({ logger }));
+  app.use(attachSession);
 
   app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
+  app.use('/api/auth', authRouter);
+  app.use('/api/me', meRouter);
   app.use('/api/lots', lotsRouter);
   app.use('/api/verification-requests', verificationRequestsRouter);
   // Mount /api/admin/lots before /api/admin so the more-specific prefix wins.
@@ -40,8 +46,8 @@ export function createApp(): Express {
   app.use('/api/admin/lots', requireAdmin, adminLotsRouter);
   app.use('/api/admin', adminRouter);
 
-  // Remaining API routers (auth, buyers, rfqs/samples/sourcing, admin) mount
-  // here as they land in later phases.
+  // Remaining API routers (rfqs/samples/sourcing, full admin) mount here as
+  // they land in later phases.
 
   if (env.NODE_ENV === 'production') {
     const clientDist = path.resolve(import.meta.dirname, '../../client/dist');
