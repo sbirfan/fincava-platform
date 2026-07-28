@@ -1,0 +1,58 @@
+/* FINCAVA design tokens — warm sage-and-paper nature palette.
+   Matches every --fc-* custom property referenced by
+   docs/FINCAVA_Wireframes_dc_v2.html (the "1a" marketplace-grid direction).
+   The wireframe points at fincava-ds/colors_and_type.css, which isn't part
+   of the repo — these are the real values, defined once, used site-wide. */
+
+:root {
+  /* Paper / surfaces */
+  --fc-paper: #f8f4ea;
+  --fc-paper-2: #f0e9d8;
+  --fc-white: #ffffff;
+
+  /* Ink (text) */
+  --fc-ink: #2b2118;
+  --fc-ink-2: #55503f;
+  --fc-ink-3: #8a8270;
+
+  /* Lines / borders */
+  --fc-line: #e4dcc8;
+  --fc-line-soft: #ede7d8;
+  --fc-border-strong: #c9bfa4;
+
+  /* Sage — primary brand color */
+  --fc-sage: #6b7a5e;
+  --fc-sage-deep: #4c5a40;
+  --fc-sage-soft: #e4ebdd;
+
+  /* Accents */
+  --fc-brick: #b5573c;
+  --fc-caramel: #c98a3e;
+  --fc-peach: #f0c9a0;
+  --fc-warning-soft: #f6dfae;
+
+  /* Type */
+  --fc-font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --fc-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fc-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fc-lh-body: 1.6;
+
+  /* Shape */
+  --fc-radius-md: 8px;
+  --fc-radius-lg: 14px;
+  --fc-radius-pill: 999px;
+
+  /* Elevation */
+  --fc-shadow-1: 0 1px 2px rgba(43, 33, 24, 0.06), 0 1px 3px rgba(43, 33, 24, 0.08);
+  --fc-shadow-3: 0 8px 24px rgba(43, 33, 24, 0.16), 0 2px 6px rgba(43, 33, 24, 0.08);
+}
+
+body {
+  background: var(--fc-paper);
+  color: var(--fc-ink);
+  font-family: var(--fc-font-sans);
+}
+
+a {
+  color: var(--fc-sage-deep);
+}

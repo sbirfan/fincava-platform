@@ -6,6 +6,8 @@ import { pinoHttp } from 'pino-http';
 import { env } from './env.js';
 import { logger } from './logger.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { lotsRouter } from './routes/lots.js';
+import { verificationRequestsRouter } from './routes/verificationRequests.js';
 
 export function createApp(): Express {
   const app = express();
@@ -19,8 +21,11 @@ export function createApp(): Express {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
-  // API routers for each domain area (auth, lots, buyers, requests, admin)
-  // mount here as they land in later phases.
+  app.use('/api/lots', lotsRouter);
+  app.use('/api/verification-requests', verificationRequestsRouter);
+
+  // Remaining API routers (auth, buyers, rfqs/samples/sourcing, admin) mount
+  // here as they land in later phases.
 
   if (env.NODE_ENV === 'production') {
     const clientDist = path.resolve(import.meta.dirname, '../../client/dist');
