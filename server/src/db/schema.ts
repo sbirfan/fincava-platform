@@ -328,6 +328,32 @@ export const verificationRequests = pgTable(
 // Market intelligence notes (admin-only, Accio-assisted manual research)
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Email send log — append-only record of every sendEmail() attempt.
+// Persisted after the response is sent, so a DB write failure here can
+// never affect the user's request. Gives the founder a permanent audit
+// trail that doesn't require watching raw server logs to spot failures.
+// ---------------------------------------------------------------------------
+
+export const emailLogs = pgTable(
+  'email_logs',
+  {
+    id,
+    to: text('to').notNull(),
+    subject: text('subject').notNull(),
+    // 'sent' | 'error' | 'skipped'
+    // skipped = RESEND_API_KEY / EMAIL_FROM not configured
+    status: text('status').notNull(),
+    resendId: text('resend_id'),
+    errorMessage: text('error_message'),
+    createdAt,
+  },
+  (table) => [
+    index('email_logs_status_idx').on(table.status),
+    index('email_logs_created_at_idx').on(table.createdAt),
+  ],
+);
+
 export const marketIntelligenceNotes = pgTable(
   'market_intelligence_notes',
   {

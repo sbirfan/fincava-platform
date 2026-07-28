@@ -8,6 +8,13 @@
       "when": 1785253380375,
       "tag": "0000_fresh_sir_ram",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1785268553671,
+      "tag": "0001_thick_dreadnoughts",
+      "breakpoints": true
     }
   ]
 }

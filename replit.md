@@ -54,9 +54,33 @@ npm run dev
 | `RESEND_API_KEY` | Transactional email (optional until Phase 3)   |
 | `CLOUDINARY_*`   | Image uploads (optional until Phase 4)         |
 
+## Checking email delivery health
+
+Every `sendEmail()` call writes a row to the `email_logs` table (`status`: `sent` | `error` | `skipped`). If you suspect email is broken, run this query against the Neon database:
+
+```sql
+-- Last 20 send attempts, newest first
+SELECT created_at, status, "to", subject, resend_id, error_message
+FROM email_logs
+ORDER BY created_at DESC
+LIMIT 20;
+
+-- Count failures in the last 24 hours
+SELECT status, count(*)
+FROM email_logs
+WHERE created_at > now() - interval '24 hours'
+GROUP BY status;
+```
+
+**`skipped`** rows mean `RESEND_API_KEY` or `EMAIL_FROM` is not set in Replit Secrets — no emails are going out at all.  
+**`error`** rows include the Resend error message in `error_message` — check the value for domain verification issues, rate limits, or invalid recipients.  
+**`sent`** rows include the Resend message ID in `resend_id` — paste it into the Resend dashboard → Logs to see delivery status (delivered / bounced / spam).
+
+If all recent rows are `skipped`: add `RESEND_API_KEY`, `EMAIL_FROM`, and `FOUNDER_EMAIL` to Replit Secrets, then restart the workflow.
+
 ## Status
 
-Phase 0 complete — schema, migration, and seed data are applied to Neon. Phase 1 builds out the public site.
+Phase 1 complete — public site, lot catalogue, verification request form, and email logging are live.
 
 ## User preferences
 
