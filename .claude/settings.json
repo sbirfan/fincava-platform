@@ -11,7 +11,11 @@
       "Bash(git stash*)",
       "Bash(gh pr*)",
       "Bash(gh issue*)",
-      "Bash(gh run*)"
+      "Bash(gh run*)",
+      "Bash(npm view *)",
+      "Bash(npm run build --workspace shared)",
+      "mcp__Claude_Browser__read_network_requests",
+      "mcp__Claude_Browser__read_console_messages"
     ],
     "deny": ["Bash(git push --force*)", "Bash(git reset --hard*)", "Bash(gh repo delete*)"]
   }
