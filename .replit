@@ -9,8 +9,13 @@ expertMode = true
 [userenv]
 
 [userenv.shared]
+
+[userenv.development]
 NODE_ENV = "development"
 PORT = "3000"
+
+[userenv.production]
+NODE_ENV = "production"
 
 [workflows]
 runButton = "Project"
@@ -51,3 +56,8 @@ externalPort = 3002
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 120000
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["npm", "start"]
+build = ["npm", "run", "build"]
