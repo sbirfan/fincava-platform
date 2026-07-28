@@ -31,7 +31,13 @@ async function logEmailAttempt(
   try {
     await getDb()
       .insert(emailLogs)
-      .values({ to, subject, status, resendId: resendId ?? null, errorMessage: errorMessage ?? null });
+      .values({
+        to,
+        subject,
+        status,
+        resendId: resendId ?? null,
+        errorMessage: errorMessage ?? null,
+      });
   } catch (err) {
     logger.error({ err, to, subject, status }, 'Failed to write email_logs record');
   }
@@ -51,7 +57,13 @@ export async function sendEmail(message: EmailMessage): Promise<void> {
       { to: message.to, subject: message.subject },
       'Resend not configured (RESEND_API_KEY/EMAIL_FROM missing) — skipping email send',
     );
-    void logEmailAttempt(message.to, message.subject, 'skipped', undefined, 'RESEND_API_KEY or EMAIL_FROM not configured');
+    void logEmailAttempt(
+      message.to,
+      message.subject,
+      'skipped',
+      undefined,
+      'RESEND_API_KEY or EMAIL_FROM not configured',
+    );
     return;
   }
 

@@ -9,7 +9,9 @@ import { HttpError } from './errorHandler.js';
 // Expects:  Authorization: Bearer <ADMIN_PASSWORD>
 export function adminAuth(req: Request, res: Response, next: NextFunction): void {
   if (!env.ADMIN_PASSWORD) {
-    res.status(503).json({ error: 'Admin authentication is not configured (ADMIN_PASSWORD missing)' });
+    res
+      .status(503)
+      .json({ error: 'Admin authentication is not configured (ADMIN_PASSWORD missing)' });
     return;
   }
 

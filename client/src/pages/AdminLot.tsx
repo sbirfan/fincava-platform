@@ -13,11 +13,7 @@ const SESSION_KEY = 'fincava_admin_token';
 // Helpers
 // ---------------------------------------------------------------------------
 
-async function adminFetch(
-  path: string,
-  token: string,
-  init?: RequestInit,
-): Promise<Response> {
+async function adminFetch(path: string, token: string, init?: RequestInit): Promise<Response> {
   return fetch(`/api${path}`, {
     ...init,
     headers: {
@@ -212,9 +208,7 @@ export default function AdminLot() {
 
       {/* Current images */}
       <section className="mb-10">
-        <h2 className="text-sm font-semibold text-fc-ink mb-3">
-          Current images ({images.length})
-        </h2>
+        <h2 className="text-sm font-semibold text-fc-ink mb-3">Current images ({images.length})</h2>
         {loadError && (
           <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-fc-md px-3 py-2 mb-4">
             {loadError}

@@ -89,7 +89,9 @@ if (error) {
   console.error('\n✗  Resend returned an error:');
   console.error(JSON.stringify(error, null, 2));
   console.error('\nCommon causes:');
-  console.error('  • The sender domain in EMAIL_FROM has not been verified in the Resend dashboard');
+  console.error(
+    '  • The sender domain in EMAIL_FROM has not been verified in the Resend dashboard',
+  );
   console.error('  • SPF / DKIM records are missing or not yet propagated');
   console.error('  • RESEND_API_KEY is invalid or revoked');
   process.exit(1);

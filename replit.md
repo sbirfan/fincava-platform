@@ -34,25 +34,25 @@ npm run dev
 
 ## Key commands
 
-| Command               | What it does                                        |
-| --------------------- | --------------------------------------------------- |
+| Command               | What it does                                             |
+| --------------------- | -------------------------------------------------------- |
 | `npm run dev`         | Starts both Vite (5000) and Express (3000) in watch mode |
-| `npm run build`       | Builds shared → client → server                    |
-| `npm start`           | Runs the built server (serves API + built client)   |
-| `npm run db:generate` | Generates a new migration from schema changes       |
-| `npm run db:migrate`  | Applies pending migrations to DATABASE_URL          |
-| `npm run db:seed`     | Loads the 6-lot seed dataset                        |
+| `npm run build`       | Builds shared → client → server                          |
+| `npm start`           | Runs the built server (serves API + built client)        |
+| `npm run db:generate` | Generates a new migration from schema changes            |
+| `npm run db:migrate`  | Applies pending migrations to DATABASE_URL               |
+| `npm run db:seed`     | Loads the 6-lot seed dataset                             |
 
 ## Environment secrets (set in Replit Secrets)
 
-| Key              | Purpose                                        |
-| ---------------- | ---------------------------------------------- |
-| `DATABASE_URL`   | Neon PostgreSQL connection string              |
-| `SESSION_SECRET` | Signs session cookies                          |
-| `OTP_HASH_SECRET`| Hashes OTP codes server-side                  |
-| `ADMIN_PASSWORD` | Founder admin account password                 |
-| `RESEND_API_KEY` | Transactional email (optional until Phase 3)   |
-| `CLOUDINARY_*`   | Image uploads (optional until Phase 4)         |
+| Key               | Purpose                                      |
+| ----------------- | -------------------------------------------- |
+| `DATABASE_URL`    | Neon PostgreSQL connection string            |
+| `SESSION_SECRET`  | Signs session cookies                        |
+| `OTP_HASH_SECRET` | Hashes OTP codes server-side                 |
+| `ADMIN_PASSWORD`  | Founder admin account password               |
+| `RESEND_API_KEY`  | Transactional email (optional until Phase 3) |
+| `CLOUDINARY_*`    | Image uploads (optional until Phase 4)       |
 
 ## Checking email delivery health
 
