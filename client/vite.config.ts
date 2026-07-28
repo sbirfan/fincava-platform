@@ -1,0 +1,21 @@
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
+// Backend runs on 5000 in dev (see server/src/env.ts); proxy /api so the
+// client can call same-origin paths in both dev and the production build,
+// where the single Express server serves both API and built frontend.
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
+  },
+  build: {
+    outDir: 'dist',
+  },
+});
