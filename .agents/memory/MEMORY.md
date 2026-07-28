@@ -1,0 +1,1 @@
+- [Shared package rebuild](shared-rebuild.md) — always rebuild @fincava/shared after merges or the server crashes with missing-export errors.
