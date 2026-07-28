@@ -9,10 +9,9 @@ takes fee-based farm/lot verification requests from the public.
 This is a clean, from-scratch build. It does not reuse code, schema, or
 architecture from any prior FINCAVA platform.
 
-**Status:** Phase 0 (Foundation) — repo scaffold, Express skeleton, full
-Drizzle schema, and seed script are in place. The Neon database has not been
-provisioned yet; migration and seed have not been run against a real database.
-See "Current status" below.
+**Status:** Phase 0 (Foundation) complete — repo scaffold, Express skeleton,
+full Drizzle schema, migration applied to Neon, and seed data loaded. See
+"Current status" below.
 
 ---
 
@@ -65,21 +64,19 @@ See "Current status" below.
 | `npm run lint`        | Runs ESLint across the repo                       |
 | `npm run format`      | Runs Prettier across the repo                     |
 
-## Current status (Phase 0)
+## Current status (Phase 0 — complete)
 
 - Full Drizzle schema is written: all tables and enums from the execution
   spec, plus `verificationRequests` / `verification_status` from the
   verification addendum.
-- The initial migration has been generated (`drizzle/0000_fresh_sir_ram.sql`)
-  but **not yet applied** — there is no Neon database to apply it to yet.
-- The seed script (6 realistic Colombian lots, all five pricing strategies,
-  one hidden `INVITE_ONLY` lot) is written and ready but has not been run.
+- The initial migration (`drizzle/0000_fresh_sir_ram.sql`) has been applied
+  to the Neon database.
+- The seed script has run: 6 realistic Colombian lots, all five pricing
+  strategies, one hidden `INVITE_ONLY` lot. `rfqs`, `sampleRequests`,
+  `sourcingRequests`, `verificationRequests`, and `buyerProfiles` are
+  confirmed empty — they only ever hold real submissions.
 - No pages beyond a placeholder home screen exist yet — Phase 1 builds out
   the public site.
-
-**Waiting on:** a Neon `DATABASE_URL`. Once it's added to `.env`, run
-`npm run db:migrate` followed by `npm run db:seed`, then this section will be
-updated to reflect a fully-seeded database.
 
 ## Founder operations guide
 
@@ -94,7 +91,7 @@ alert-outreach export, handling a GDPR data-deletion request, and the weekly
 FINCAVA organizes the work; it does not automate the business. Buyer
 follow-up, alert outreach, sample logistics, RFQ/verification quoting, and
 sourcing fulfillment are all manual, founder-run tasks — see
-`doc/FINCAVA_PLATFORM_HANDOVER.md` for the full reasoning.
+`docs/FINCAVA_PLATFORM_HANDOVER.md` for the full reasoning.
 
 ## Cacao
 

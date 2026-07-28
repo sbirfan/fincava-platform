@@ -1,27 +1,40 @@
-import 'dotenv/config';
+import path from 'node:path';
+import dotenv from 'dotenv';
 import { z } from 'zod';
 
+// Resolve .env relative to this file rather than process.cwd() — npm sets
+// cwd to the workspace directory for `--workspace server` scripts (e.g.
+// `npm run seed --workspace server`), which would otherwise miss the .env
+// that lives at the repo root.
+dotenv.config({ path: path.resolve(import.meta.dirname, '../../.env') });
+
+// .env.example lists every var with a blank value ("KEY="), which dotenv
+// loads as an empty string, not undefined — so optional vars need to treat
+// "" the same as unset.
+const optionalString = () =>
+  z.preprocess((val) => (val === '' ? undefined : val), z.string().min(1).optional());
+
 // Every var here is documented in .env.example. Vars needed for features not
-// yet wired up (DATABASE_URL, Resend, Cloudinary) are optional at the schema
-// level so the server can boot during Phase 0 before those accounts exist —
-// code that depends on them (db, email, uploads) fails loudly at the call
+// yet wired up (Resend, Cloudinary, admin password) are optional at the
+// schema level so the server can boot before those accounts exist — code
+// that depends on them (email, uploads, admin auth) fails loudly at the call
 // site, not at process startup, until the feature phase that uses it lands.
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().int().positive().default(5000),
 
-  DATABASE_URL: z.string().min(1).optional(),
-  SESSION_SECRET: z.string().min(1).optional(),
-  OTP_HASH_SECRET: z.string().min(1).optional(),
-  ADMIN_PASSWORD: z.string().min(1).optional(),
+  DATABASE_URL: optionalString(),
+  SESSION_SECRET: optionalString(),
+  OTP_HASH_SECRET: optionalString(),
+  ADMIN_PASSWORD: optionalString(),
 
-  RESEND_API_KEY: z.string().min(1).optional(),
-  EMAIL_FROM: z.string().min(1).optional(),
-  FOUNDER_EMAIL: z.string().min(1).optional(),
+  RESEND_API_KEY: optionalString(),
+  EMAIL_FROM: optionalString(),
+  FOUNDER_EMAIL: optionalString(),
 
-  CLOUDINARY_CLOUD_NAME: z.string().min(1).optional(),
-  CLOUDINARY_API_KEY: z.string().min(1).optional(),
-  CLOUDINARY_API_SECRET: z.string().min(1).optional(),
+  CLOUDINARY_CLOUD_NAME: optionalString(),
+  CLOUDINARY_API_KEY: optionalString(),
+  CLOUDINARY_API_SECRET: optionalString(),
 });
 
 const parsed = envSchema.safeParse(process.env);

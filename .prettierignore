@@ -3,4 +3,4 @@ build
 node_modules
 drizzle/meta
 package-lock.json
-doc
+docs

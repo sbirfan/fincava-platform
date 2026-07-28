@@ -295,7 +295,7 @@ export const sourcingRequests = pgTable(
 
 // ---------------------------------------------------------------------------
 // Verification requests (addendum — public, unauthenticated by deliberate
-// design; see doc/FINCAVA_PLATFORM_ADDENDUM_VERIFICATION.md)
+// design; see docs/FINCAVA_PLATFORM_ADDENDUM_VERIFICATION.md)
 // ---------------------------------------------------------------------------
 
 export const verificationRequests = pgTable(
