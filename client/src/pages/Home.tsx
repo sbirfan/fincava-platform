@@ -21,8 +21,17 @@ export default function Home() {
 
   return (
     <div>
-      <div className="relative bg-fc-ink flex items-center py-14 md:py-0 md:h-[400px]">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 w-full">
+      <div
+        className="relative bg-fc-ink bg-cover bg-center flex items-center py-14 md:py-0 md:h-[400px]"
+        style={{ backgroundImage: "url('/images/hero.png')" }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(90deg, rgba(43,30,22,0.72), rgba(43,30,22,0.35))',
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6 md:px-10 w-full">
           <h1 className="font-display font-medium text-3xl md:text-[44px] leading-tight text-white max-w-[16ch] mb-4">
             Traceable Colombian green coffee, sourced for professional buyers
           </h1>

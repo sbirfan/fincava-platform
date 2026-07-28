@@ -28,8 +28,8 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col bg-fc-paper text-fc-ink">
       <header className="border-b border-fc-line bg-fc-paper">
         <nav className="max-w-6xl mx-auto flex flex-wrap items-center gap-2 px-6 py-3.5">
-          <NavLink to="/" className="font-display text-xl font-medium text-fc-ink mr-4">
-            FINCAVA
+          <NavLink to="/" className="mr-4 shrink-0">
+            <img src="/images/fincava-logo.png" alt="FINCAVA" className="h-11 w-auto" />
           </NavLink>
           {navLinks.map((link) => (
             <NavLink
@@ -75,7 +75,7 @@ export default function Layout() {
 
       <footer className="border-t border-fc-line bg-fc-paper-2">
         <div className="max-w-6xl mx-auto px-6 py-10 flex flex-wrap gap-x-10 gap-y-4 text-sm text-fc-ink-2">
-          <span className="font-display text-base text-fc-ink">FINCAVA</span>
+          <img src="/images/fincava-logo.png" alt="FINCAVA" className="h-9 w-auto" />
           <NavLink to="/lots" className="hover:text-fc-ink">
             Available Lots
           </NavLink>
