@@ -6,10 +6,16 @@ import { pinoHttp } from 'pino-http';
 import { env } from './env.js';
 import { logger } from './logger.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
-import { requireAdmin } from './middleware/adminAuth.js';
+import { requireAdminSession } from './middleware/adminAuth.js';
 import { attachSession } from './middleware/attachSession.js';
 import { adminRouter } from './routes/admin.js';
+import { adminAlertOutreachRouter } from './routes/adminAlertOutreach.js';
+import { adminAuthRouter } from './routes/adminAuth.js';
+import { adminBuyersRouter } from './routes/adminBuyers.js';
+import { adminDashboardRouter } from './routes/adminDashboard.js';
 import { adminLotsRouter } from './routes/adminLots.js';
+import { adminMarketIntelligenceRouter } from './routes/adminMarketIntelligence.js';
+import { adminRequestsRouter } from './routes/adminRequests.js';
 import { authRouter } from './routes/auth.js';
 import { lotsRouter } from './routes/lots.js';
 import { meRouter } from './routes/me.js';
@@ -47,13 +53,20 @@ export function createApp(): Express {
   app.use('/api/sample-requests', sampleRequestsRouter);
   app.use('/api/sourcing-requests', sourcingRequestsRouter);
   app.use('/api/verification-requests', verificationRequestsRouter);
-  // Mount /api/admin/lots before /api/admin so the more-specific prefix wins.
-  // adminLotsRouter handles image CRUD; adminRouter handles smoke-email etc.
-  app.use('/api/admin/lots', requireAdmin, adminLotsRouter);
-  app.use('/api/admin', adminRouter);
 
-  // Full admin (session-cookie auth, market intelligence, alert outreach)
-  // mounts here in Phase 4.
+  // Admin login/logout (/api/admin/login, /api/admin/logout) are
+  // unauthenticated by definition — mounted first so they resolve before
+  // the session gate below. Every other /api/admin/* route requires a
+  // valid admin session, gated uniformly by requireAdminSession (404, not
+  // 401 — see adminAuth.ts).
+  app.use('/api/admin', adminAuthRouter);
+  app.use('/api/admin/dashboard', requireAdminSession, adminDashboardRouter);
+  app.use('/api/admin/lots', requireAdminSession, adminLotsRouter);
+  app.use('/api/admin/buyers', requireAdminSession, adminBuyersRouter);
+  app.use('/api/admin/requests', requireAdminSession, adminRequestsRouter);
+  app.use('/api/admin/market-intelligence', requireAdminSession, adminMarketIntelligenceRouter);
+  app.use('/api/admin/alert-outreach', requireAdminSession, adminAlertOutreachRouter);
+  app.use('/api/admin', requireAdminSession, adminRouter);
 
   if (env.NODE_ENV === 'production') {
     const clientDist = path.resolve(import.meta.dirname, '../../client/dist');

@@ -2,13 +2,12 @@ import { Router } from 'express';
 import { Resend } from 'resend';
 import { env } from '../env.js';
 import { logger } from '../logger.js';
-import { adminAuth } from '../middleware/adminAuth.js';
 import { renderEmailLayout } from '../email/templates/layout.js';
 
 export const adminRouter = Router();
 
-// All admin routes require the founder password.
-adminRouter.use(adminAuth);
+// Auth is enforced by requireAdminSession at the app.ts mount point, not
+// here — same session-cookie gate as every other /api/admin/* route.
 
 // POST /api/admin/smoke-email
 // Sends a test email to FOUNDER_EMAIL via Resend and returns the message ID.

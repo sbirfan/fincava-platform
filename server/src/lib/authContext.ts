@@ -10,3 +10,9 @@ export function isBuyerAuthenticated(req: Request): boolean {
 export function currentBuyerProfileId(req: Request): string | null {
   return isBuyerAuthenticated(req) ? (req.authSession!.buyerProfileId as string) : null;
 }
+
+// A valid admin session. Requires middleware/attachSession.ts to have run
+// first (mounted globally in app.ts) so req.authSession is populated.
+export function isAdminAuthenticated(req: Request): boolean {
+  return !!req.authSession && req.authSession.isAdmin;
+}

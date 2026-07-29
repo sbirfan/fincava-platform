@@ -1,6 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout.js';
+import AdminLayout from './components/AdminLayout.js';
 import { AuthProvider } from './context/AuthContext.js';
+import { AdminAuthProvider } from './context/AdminAuthContext.js';
 import Home from './pages/Home.js';
 import AvailableLots from './pages/AvailableLots.js';
 import LotPassport from './pages/LotPassport.js';
@@ -15,30 +17,55 @@ import RfqForm from './pages/RfqForm.js';
 import SampleRequestForm from './pages/SampleRequestForm.js';
 import SourcingRequestForm from './pages/SourcingRequestForm.js';
 import NotFound from './pages/NotFound.js';
+import AdminLogin from './pages/admin/AdminLogin.js';
+import AdminDashboard from './pages/admin/AdminDashboard.js';
+import AdminLots from './pages/admin/AdminLots.js';
+import AdminLotForm from './pages/admin/AdminLotForm.js';
+import AdminBuyers from './pages/admin/AdminBuyers.js';
+import AdminBuyerDetail from './pages/admin/AdminBuyerDetail.js';
+import AdminRequests from './pages/admin/AdminRequests.js';
+import AdminMarketIntelligence from './pages/admin/AdminMarketIntelligence.js';
+import AdminAlertOutreach from './pages/admin/AdminAlertOutreach.js';
 
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="lots" element={<AvailableLots />} />
-            <Route path="lots/:lotCode" element={<LotPassport />} />
-            <Route path="lots/:lotCode/request-quote" element={<RfqForm />} />
-            <Route path="lots/:lotCode/request-sample" element={<SampleRequestForm />} />
-            <Route path="sourcing-request" element={<SourcingRequestForm />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="privacy" element={<Privacy />} />
-            <Route path="terms" element={<Terms />} />
-            <Route path="verification" element={<Verification />} />
-            <Route path="login" element={<Login />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AdminAuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="lots" element={<AvailableLots />} />
+              <Route path="lots/:lotCode" element={<LotPassport />} />
+              <Route path="lots/:lotCode/request-quote" element={<RfqForm />} />
+              <Route path="lots/:lotCode/request-sample" element={<SampleRequestForm />} />
+              <Route path="sourcing-request" element={<SourcingRequestForm />} />
+              <Route path="about" element={<About />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="privacy" element={<Privacy />} />
+              <Route path="terms" element={<Terms />} />
+              <Route path="verification" element={<Verification />} />
+              <Route path="login" element={<Login />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+
+            <Route path="admin/login" element={<AdminLogin />} />
+            <Route path="admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="lots" element={<AdminLots />} />
+              <Route path="lots/new" element={<AdminLotForm />} />
+              <Route path="lots/:lotCode" element={<AdminLotForm />} />
+              <Route path="buyers" element={<AdminBuyers />} />
+              <Route path="buyers/:id" element={<AdminBuyerDetail />} />
+              <Route path="requests" element={<AdminRequests />} />
+              <Route path="market-intelligence" element={<AdminMarketIntelligence />} />
+              <Route path="alert-outreach" element={<AdminAlertOutreach />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AdminAuthProvider>
     </AuthProvider>
   );
 }

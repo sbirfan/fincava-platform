@@ -49,3 +49,14 @@ export const otpIpRateLimiter = rateLimit({
   legacyHeaders: false,
   message: { error: 'Too many requests from this address. Please try again later.' },
 });
+
+// §4/§9: max 5 admin login attempts per IP per 15 min. A single shared
+// password with no per-user lockout warrants a tighter bucket than every
+// other limiter in the app.
+export const adminLoginRateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many login attempts from this address. Please try again later.' },
+});
