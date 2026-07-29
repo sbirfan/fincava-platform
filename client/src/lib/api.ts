@@ -149,3 +149,86 @@ export type BuyerProfileUpdate = Partial<
 export function updateMyProfile(update: BuyerProfileUpdate): Promise<BuyerProfile> {
   return request('/me', { method: 'PATCH', body: JSON.stringify(update) });
 }
+
+export interface RequestHistory {
+  rfqs: Array<{
+    id: string;
+    lotCode: string;
+    lotTitle: string;
+    requestedVolumeKg: string;
+    destinationCountry: string;
+    status: string;
+    createdAt: string;
+  }>;
+  sampleRequests: Array<{
+    id: string;
+    lotCode: string;
+    lotTitle: string;
+    sampleDestination: string;
+    status: string;
+    createdAt: string;
+  }>;
+  sourcingRequests: Array<{
+    id: string;
+    intendedUse: string;
+    requestedVolumeKg: string;
+    destinationCountry: string;
+    status: string;
+    matchedLotId: string | null;
+    createdAt: string;
+  }>;
+}
+
+export function fetchMyRequestHistory(): Promise<RequestHistory> {
+  return request('/me/requests');
+}
+
+export interface RfqPayload {
+  lotCode: string;
+  requestedVolumeKg: number;
+  destinationCountry: string;
+  preferredIncoterm?: string;
+  targetDeliveryTimeline?: string;
+  message?: string;
+  website?: string; // honeypot
+}
+
+export function submitRfq(payload: RfqPayload): Promise<{ status: string }> {
+  return request('/rfqs', { method: 'POST', body: JSON.stringify(payload) });
+}
+
+export interface SampleRequestPayload {
+  lotCode: string;
+  sampleDestination: string;
+  courierAccount?: string;
+  evaluationTimeline?: string;
+  message?: string;
+  website?: string; // honeypot
+}
+
+export function submitSampleRequest(payload: SampleRequestPayload): Promise<{ status: string }> {
+  return request('/sample-requests', { method: 'POST', body: JSON.stringify(payload) });
+}
+
+export interface SourcingRequestPayload {
+  intendedUse: string;
+  varietyPreferences?: string[];
+  processPreferences?: string[];
+  minCupScore?: number;
+  requestedVolumeKg: number;
+  volumeFlexibility: string;
+  targetDeliveryWindow: string;
+  destinationCountry: string;
+  altitudePreference?: string;
+  regionPreferences?: string[];
+  certificationsNeeded?: string[];
+  maxBudgetPerKg?: number;
+  additionalNotes?: string;
+  website?: string; // honeypot
+}
+
+export function submitSourcingRequest(
+  payload: SourcingRequestPayload,
+): Promise<{ status: string }> {
+  return request('/sourcing-requests', { method: 'POST', body: JSON.stringify(payload) });
+}

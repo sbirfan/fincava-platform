@@ -126,16 +126,6 @@ Express process serves both the API and the built client from `client/dist`.
 - `trust proxy` is set in production so rate limiting and secure cookies see
   the real client IP behind Replit's reverse proxy.
 
-## Tracked TODOs
-
-- **Home page's second hero CTA (`client/src/pages/Home.tsx`) is a stopgap.**
-  It currently links to `/verification` ("Request Farm Verification"). The
-  execution spec's intended CTA there is "Submit a Sourcing Request", but
-  Sourcing Request is auth-gated and doesn't exist until Phase 3. **Revert
-  this to the real Sourcing Request CTA once Phase 3 ships** — also flagged
-  inline in the component with a `TODO(Phase 3)` comment. Do not let this
-  ship as permanent.
-
 ## Go-live checklist (Phase 5)
 
 Items confirmed during build that must be explicitly checked before

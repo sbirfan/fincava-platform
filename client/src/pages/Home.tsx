@@ -46,16 +46,11 @@ export default function Home() {
             >
               Browse Available Lots
             </Link>
-            {/* TODO(Phase 3): revert to Sourcing Request form. This links to
-                /verification as a stopgap because Sourcing Request (auth-gated,
-                per execution-spec §7 item 10) doesn't exist yet — the spec's
-                intended second hero CTA is "Submit a Sourcing Request", not
-                verification. Also tracked in README.md "Tracked TODOs". */}
             <Link
-              to="/verification"
+              to="/sourcing-request"
               className="px-5 py-3 rounded-fc-md text-[15px] font-medium border border-white/60 text-white"
             >
-              Request Farm Verification
+              Submit a Sourcing Request
             </Link>
           </div>
         </div>

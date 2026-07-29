@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.js';
 import { fetchLots, type ApiLot } from '../lib/api.js';
 import LotCard from '../components/LotCard.js';
 
@@ -13,6 +15,7 @@ const STATUS_OPTIONS = [
 ];
 
 export default function AvailableLots() {
+  const { profile } = useAuth();
   const [lots, setLots] = useState<ApiLot[]>([]);
   const [loading, setLoading] = useState(true);
   const [varietyFilter, setVarietyFilter] = useState<string[]>([]);
@@ -47,6 +50,15 @@ export default function AvailableLots() {
       <p className="text-sm text-fc-ink-2 mb-6">
         Curated green coffee lots, updated as they move through harvest and sale.
       </p>
+
+      {profile && (
+        <Link
+          to="/sourcing-request"
+          className="inline-block mb-6 text-sm font-medium text-fc-sage-deep underline underline-offset-2"
+        >
+          Can&apos;t find what you need? Submit a sourcing request →
+        </Link>
+      )}
 
       <div className="grid md:grid-cols-[220px_1fr] gap-8">
         <div className="flex flex-col gap-5">

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { ApiLot } from '../lib/api.js';
 
 // Renders once a buyer session unlocks the full passport (Phase 2+). The
@@ -29,25 +30,27 @@ export default function GatedPassportSection({ lot }: { lot: ApiLot }) {
         ))}
       </dl>
       <div className="flex gap-2 mt-4">
-        <button
-          type="button"
-          disabled
-          title="Available once RFQ requests ship in Phase 3"
-          className="flex-1 px-4 py-2.5 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper opacity-50 cursor-not-allowed"
+        <Link
+          to={`/lots/${lot.lotCode}/request-quote`}
+          className="flex-1 text-center px-4 py-2.5 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper"
         >
           Request Quote
-        </button>
+        </Link>
         {lot.sampleAvailable && (
-          <button
-            type="button"
-            disabled
-            title="Available once sample requests ship in Phase 3"
-            className="flex-1 px-4 py-2.5 rounded-fc-md text-sm font-medium border border-fc-border-strong text-fc-ink opacity-50 cursor-not-allowed"
+          <Link
+            to={`/lots/${lot.lotCode}/request-sample`}
+            className="flex-1 text-center px-4 py-2.5 rounded-fc-md text-sm font-medium border border-fc-border-strong text-fc-ink"
           >
             Request Sample
-          </button>
+          </Link>
         )}
       </div>
+      <Link
+        to="/sourcing-request"
+        className="block mt-3 text-center text-xs text-fc-sage-deep underline underline-offset-2"
+      >
+        Can&apos;t find what you need?
+      </Link>
     </div>
   );
 }

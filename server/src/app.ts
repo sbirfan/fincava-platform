@@ -13,6 +13,9 @@ import { adminLotsRouter } from './routes/adminLots.js';
 import { authRouter } from './routes/auth.js';
 import { lotsRouter } from './routes/lots.js';
 import { meRouter } from './routes/me.js';
+import { rfqsRouter } from './routes/rfqs.js';
+import { sampleRequestsRouter } from './routes/sampleRequests.js';
+import { sourcingRequestsRouter } from './routes/sourcingRequests.js';
 import { verificationRequestsRouter } from './routes/verificationRequests.js';
 
 export function createApp(): Express {
@@ -40,14 +43,17 @@ export function createApp(): Express {
   app.use('/api/auth', authRouter);
   app.use('/api/me', meRouter);
   app.use('/api/lots', lotsRouter);
+  app.use('/api/rfqs', rfqsRouter);
+  app.use('/api/sample-requests', sampleRequestsRouter);
+  app.use('/api/sourcing-requests', sourcingRequestsRouter);
   app.use('/api/verification-requests', verificationRequestsRouter);
   // Mount /api/admin/lots before /api/admin so the more-specific prefix wins.
   // adminLotsRouter handles image CRUD; adminRouter handles smoke-email etc.
   app.use('/api/admin/lots', requireAdmin, adminLotsRouter);
   app.use('/api/admin', adminRouter);
 
-  // Remaining API routers (rfqs/samples/sourcing, full admin) mount here as
-  // they land in later phases.
+  // Full admin (session-cookie auth, market intelligence, alert outreach)
+  // mounts here in Phase 4.
 
   if (env.NODE_ENV === 'production') {
     const clientDist = path.resolve(import.meta.dirname, '../../client/dist');

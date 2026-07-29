@@ -1,8 +1,14 @@
 import { buyerProfileUpdateSchema } from '@fincava/shared';
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 import { Router } from 'express';
 import { getDb } from '../db/index.js';
-import { buyerProfiles } from '../db/schema.js';
+import {
+  buyerProfiles,
+  greenCoffeeLots,
+  rfqs,
+  sampleRequests,
+  sourcingRequests,
+} from '../db/schema.js';
 import { currentBuyerProfileId } from '../lib/authContext.js';
 import { HttpError } from '../middleware/errorHandler.js';
 import { requireBuyerAuth } from '../middleware/requireBuyerAuth.js';
@@ -55,6 +61,66 @@ meRouter.get('/', async (req, res, next) => {
 
     if (!profile) throw new HttpError(404, 'Profile not found');
     res.json(profile);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Request history — all three types, each with its own status field
+// (request_status for RFQ/sample, sourcing_status for sourcing).
+meRouter.get('/requests', async (req, res, next) => {
+  try {
+    const buyerProfileId = currentBuyerProfileId(req)!;
+    const db = getDb();
+
+    const rfqRows = await db
+      .select({
+        id: rfqs.id,
+        lotCode: greenCoffeeLots.lotCode,
+        lotTitle: greenCoffeeLots.title,
+        requestedVolumeKg: rfqs.requestedVolumeKg,
+        destinationCountry: rfqs.destinationCountry,
+        status: rfqs.status,
+        createdAt: rfqs.createdAt,
+      })
+      .from(rfqs)
+      .innerJoin(greenCoffeeLots, eq(rfqs.lotId, greenCoffeeLots.id))
+      .where(eq(rfqs.buyerProfileId, buyerProfileId))
+      .orderBy(desc(rfqs.createdAt));
+
+    const sampleRequestRows = await db
+      .select({
+        id: sampleRequests.id,
+        lotCode: greenCoffeeLots.lotCode,
+        lotTitle: greenCoffeeLots.title,
+        sampleDestination: sampleRequests.sampleDestination,
+        status: sampleRequests.status,
+        createdAt: sampleRequests.createdAt,
+      })
+      .from(sampleRequests)
+      .innerJoin(greenCoffeeLots, eq(sampleRequests.lotId, greenCoffeeLots.id))
+      .where(eq(sampleRequests.buyerProfileId, buyerProfileId))
+      .orderBy(desc(sampleRequests.createdAt));
+
+    const sourcingRequestRows = await db
+      .select({
+        id: sourcingRequests.id,
+        intendedUse: sourcingRequests.intendedUse,
+        requestedVolumeKg: sourcingRequests.requestedVolumeKg,
+        destinationCountry: sourcingRequests.destinationCountry,
+        status: sourcingRequests.status,
+        matchedLotId: sourcingRequests.matchedLotId,
+        createdAt: sourcingRequests.createdAt,
+      })
+      .from(sourcingRequests)
+      .where(eq(sourcingRequests.buyerProfileId, buyerProfileId))
+      .orderBy(desc(sourcingRequests.createdAt));
+
+    res.json({
+      rfqs: rfqRows,
+      sampleRequests: sampleRequestRows,
+      sourcingRequests: sourcingRequestRows,
+    });
   } catch (err) {
     next(err);
   }

@@ -11,6 +11,9 @@ import Terms from './pages/Terms.js';
 import Verification from './pages/Verification.js';
 import Login from './pages/Login.js';
 import Profile from './pages/Profile.js';
+import RfqForm from './pages/RfqForm.js';
+import SampleRequestForm from './pages/SampleRequestForm.js';
+import SourcingRequestForm from './pages/SourcingRequestForm.js';
 import NotFound from './pages/NotFound.js';
 
 export default function App() {
@@ -22,6 +25,9 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="lots" element={<AvailableLots />} />
             <Route path="lots/:lotCode" element={<LotPassport />} />
+            <Route path="lots/:lotCode/request-quote" element={<RfqForm />} />
+            <Route path="lots/:lotCode/request-sample" element={<SampleRequestForm />} />
+            <Route path="sourcing-request" element={<SourcingRequestForm />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="privacy" element={<Privacy />} />

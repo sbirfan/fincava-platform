@@ -2,7 +2,23 @@ import { BUYER_TYPE, CONTACT_METHOD } from '@fincava/shared';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
-import { updateMyProfile, type BuyerProfile } from '../lib/api.js';
+import {
+  fetchMyRequestHistory,
+  updateMyProfile,
+  type BuyerProfile,
+  type RequestHistory,
+} from '../lib/api.js';
+
+const STATUS_LABELS: Record<string, string> = {
+  NEW: 'New',
+  REVIEWING: 'Reviewing',
+  REPLIED: 'Replied',
+  SAMPLE_SENT: 'Sample sent',
+  QUOTED: 'Quoted',
+  SOURCING: 'Sourcing',
+  MATCHED: 'Matched',
+  CLOSED: 'Closed',
+};
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
@@ -27,9 +43,17 @@ export default function Profile() {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [history, setHistory] = useState<RequestHistory | null>(null);
 
   useEffect(() => {
     if (profile) setForm(profile);
+  }, [profile]);
+
+  useEffect(() => {
+    if (profile)
+      fetchMyRequestHistory()
+        .then(setHistory)
+        .catch(() => setHistory(null));
   }, [profile]);
 
   if (loading) {
@@ -266,6 +290,90 @@ export default function Profile() {
           {saving ? 'Saving…' : 'Save Changes'}
         </button>
       </div>
+
+      {history && (
+        <div className="mt-8 flex flex-col gap-6">
+          <RequestHistorySection
+            title="Quote requests"
+            emptyText="No quote requests yet."
+            rows={history.rfqs.map((r) => ({
+              id: r.id,
+              primary: `${r.lotTitle} (${r.lotCode})`,
+              secondary: `${r.requestedVolumeKg} kg · ${r.destinationCountry}`,
+              status: r.status,
+              createdAt: r.createdAt,
+            }))}
+          />
+          <RequestHistorySection
+            title="Sample requests"
+            emptyText="No sample requests yet."
+            rows={history.sampleRequests.map((r) => ({
+              id: r.id,
+              primary: `${r.lotTitle} (${r.lotCode})`,
+              secondary: r.sampleDestination,
+              status: r.status,
+              createdAt: r.createdAt,
+            }))}
+          />
+          <RequestHistorySection
+            title="Sourcing requests"
+            emptyText="No sourcing requests yet."
+            rows={history.sourcingRequests.map((r) => ({
+              id: r.id,
+              primary: r.intendedUse.replaceAll('_', ' '),
+              secondary: `${r.requestedVolumeKg} kg · ${r.destinationCountry}`,
+              status: r.status,
+              createdAt: r.createdAt,
+            }))}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface RequestHistoryRow {
+  id: string;
+  primary: string;
+  secondary: string;
+  status: string;
+  createdAt: string;
+}
+
+function RequestHistorySection({
+  title,
+  emptyText,
+  rows,
+}: {
+  title: string;
+  emptyText: string;
+  rows: RequestHistoryRow[];
+}) {
+  return (
+    <div className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-6">
+      <h2 className="text-sm font-semibold text-fc-ink mb-3">{title}</h2>
+      {rows.length === 0 ? (
+        <p className="text-xs text-fc-ink-3">{emptyText}</p>
+      ) : (
+        <ul className="flex flex-col divide-y divide-fc-line-soft">
+          {rows.map((row) => (
+            <li
+              key={row.id}
+              className="py-3 flex items-center justify-between gap-4 first:pt-0 last:pb-0"
+            >
+              <div>
+                <div className="text-sm font-medium text-fc-ink">{row.primary}</div>
+                <div className="text-xs text-fc-ink-3">
+                  {row.secondary} · {new Date(row.createdAt).toLocaleDateString()}
+                </div>
+              </div>
+              <span className="text-[11px] font-medium px-2.5 py-1 rounded-fc-pill bg-fc-paper-2 text-fc-ink-2 border border-fc-border-strong whitespace-nowrap">
+                {STATUS_LABELS[row.status] ?? row.status}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
