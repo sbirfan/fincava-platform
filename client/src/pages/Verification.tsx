@@ -1,10 +1,12 @@
 import { type FormEvent, useState } from 'react';
 import { submitVerificationRequest } from '../lib/api.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
 
 export default function Verification() {
+  usePageTitle('Request Farm Verification');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'done' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 

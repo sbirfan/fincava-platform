@@ -4,8 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/verify-shared-build.mjs",
     "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json",
+    "prestart": "node scripts/verify-shared-build.mjs",
     "start": "node dist/index.js",
     "seed": "tsx src/db/seed.ts",
     "smoke:email": "tsx scripts/smoke-email.ts",

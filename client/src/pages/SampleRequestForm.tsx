@@ -3,12 +3,14 @@ import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 import { fetchLot, submitSampleRequest, type ApiLot } from '../lib/api.js';
 import HoneypotField from '../components/HoneypotField.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
 
 export default function SampleRequestForm() {
   const { lotCode } = useParams<{ lotCode: string }>();
+  usePageTitle(lotCode ? `Request a Sample — ${lotCode}` : 'Request a Sample');
   const { profile, loading: authLoading } = useAuth();
   const [lot, setLot] = useState<ApiLot | null>(null);
   const [lotLoading, setLotLoading] = useState(true);

@@ -3,6 +3,7 @@ import {
   fetchAdminDashboard,
   type AdminDashboard as AdminDashboardData,
 } from '../../lib/adminApi.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 type StatKey =
   | 'newRfqs'
@@ -20,6 +21,7 @@ const STAT_LABELS: Record<StatKey, string> = {
 };
 
 export default function AdminDashboard() {
+  usePageTitle('Admin — Dashboard');
   const [data, setData] = useState<AdminDashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
 

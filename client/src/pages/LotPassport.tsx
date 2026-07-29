@@ -4,12 +4,14 @@ import { fetchLot, type ApiLot } from '../lib/api.js';
 import StatusBadge from '../components/StatusBadge.js';
 import LockedPassportSection from '../components/LockedPassportSection.js';
 import GatedPassportSection from '../components/GatedPassportSection.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 export default function LotPassport() {
   const { lotCode } = useParams<{ lotCode: string }>();
   const [lot, setLot] = useState<ApiLot | null>(null);
   const [notFound, setNotFound] = useState(false);
   const [loading, setLoading] = useState(true);
+  usePageTitle(lot ? lot.title : (lotCode ?? 'Lot'));
 
   useEffect(() => {
     if (!lotCode) return;

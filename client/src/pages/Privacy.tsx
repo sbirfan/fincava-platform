@@ -1,4 +1,7 @@
+import { usePageTitle } from '../lib/usePageTitle.js';
+
 export default function Privacy() {
+  usePageTitle('Privacy Policy');
   return (
     <div className="max-w-[720px] mx-auto px-6 md:px-10 py-14">
       <h1 className="font-display font-medium text-2xl md:text-[28px] text-fc-ink mb-6">

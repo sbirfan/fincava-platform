@@ -179,7 +179,7 @@ authRouter.post('/otp/verify', async (req, res, next) => {
 
 authRouter.post('/logout', async (req, res, next) => {
   try {
-    const sessionId = req.cookies?.[SESSION_COOKIE_NAME] as string | undefined;
+    const sessionId = req.signedCookies?.[SESSION_COOKIE_NAME] as string | undefined;
     await destroySession(sessionId);
     clearSessionCookie(res);
     res.json({ status: 'ok' });

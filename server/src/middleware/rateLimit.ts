@@ -1,5 +1,18 @@
 import rateLimit from 'express-rate-limit';
 
+// §9: "global sane default" — a generous baseline applied to every request,
+// independent of the tighter per-feature limiters below. Those still bind
+// first for their specific routes (a request must pass both); this one
+// exists purely to blunt generic scraping/abuse against routes that have no
+// dedicated limiter at all (e.g. GET /api/lots, GET /api/admin/*).
+export const globalRateLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests from this address. Please slow down.' },
+});
+
 // §9: 10/hour/IP, for the one endpoint on the site with no auth wall in
 // front of it. Kept in its own bucket, separate from the buyer-authenticated
 // forms below — otherwise an anonymous actor hammering this endpoint from an

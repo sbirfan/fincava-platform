@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAdminLots, type AdminLot } from '../../lib/adminApi.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 export default function AdminLots() {
+  usePageTitle('Admin — Lots');
   const [lots, setLots] = useState<AdminLot[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 

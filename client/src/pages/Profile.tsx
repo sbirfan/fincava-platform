@@ -8,6 +8,7 @@ import {
   type BuyerProfile,
   type RequestHistory,
 } from '../lib/api.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 const STATUS_LABELS: Record<string, string> = {
   NEW: 'New',
@@ -35,6 +36,7 @@ function textToArray(value: string): string[] {
 }
 
 export default function Profile() {
+  usePageTitle('My Profile');
   const { profile, loading, refresh } = useAuth();
   const [searchParams] = useSearchParams();
   const isWelcome = searchParams.get('welcome') === '1';

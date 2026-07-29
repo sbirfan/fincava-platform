@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 const commitments = [
   {
@@ -20,6 +21,7 @@ const commitments = [
 ];
 
 export default function About() {
+  usePageTitle('About');
   return (
     <div>
       <div className="relative bg-fc-ink flex items-center py-12 md:py-0 md:h-[300px]">

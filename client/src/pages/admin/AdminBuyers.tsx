@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAdminBuyers, type AdminBuyerListItem } from '../../lib/adminApi.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 export default function AdminBuyers() {
+  usePageTitle('Admin — Buyers');
   const [buyers, setBuyers] = useState<AdminBuyerListItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 

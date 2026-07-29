@@ -9,7 +9,7 @@ export async function attachSession(
   _res: Response,
   next: NextFunction,
 ): Promise<void> {
-  const sessionId = req.cookies?.[SESSION_COOKIE_NAME] as string | undefined;
+  const sessionId = req.signedCookies?.[SESSION_COOKIE_NAME] as string | undefined;
   const session = await getValidSession(sessionId);
   req.authSession = session;
 

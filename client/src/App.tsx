@@ -62,6 +62,7 @@ export default function App() {
               <Route path="requests" element={<AdminRequests />} />
               <Route path="market-intelligence" element={<AdminMarketIntelligence />} />
               <Route path="alert-outreach" element={<AdminAlertOutreach />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </BrowserRouter>

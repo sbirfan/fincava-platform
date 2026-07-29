@@ -4,7 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FINCAVA — Green Coffee Buyer Relationship Platform</title>
+    <meta
+      name="description"
+      content="FINCAVA connects professional buyers — importers, roasters, brokers, and distributors — directly to traceable, curated Colombian green coffee lots."
+    />
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Open Graph / social share preview — per-lot pages override these
+         server-side (see server/src/app.ts) since crawlers/unfurlers don't
+         execute client JS. This is the site-wide fallback. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FINCAVA" />
+    <meta property="og:title" content="FINCAVA — Green Coffee Buyer Relationship Platform" />
+    <meta
+      property="og:description"
+      content="FINCAVA connects professional buyers directly to traceable, curated Colombian green coffee lots."
+    />
+    <meta property="og:image" content="/images/hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

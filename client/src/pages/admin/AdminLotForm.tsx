@@ -11,6 +11,7 @@ import {
   type AdminLot,
   type LotImage,
 } from '../../lib/adminApi.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
@@ -105,6 +106,7 @@ export default function AdminLotForm() {
   const params = useParams<{ lotCode?: string }>();
   const isCreate = !params.lotCode;
   const navigate = useNavigate();
+  usePageTitle(isCreate ? 'Admin — New Lot' : `Admin — Edit ${params.lotCode}`);
 
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [images, setImages] = useState<LotImage[]>([]);

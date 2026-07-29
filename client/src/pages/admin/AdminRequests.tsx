@@ -11,6 +11,7 @@ import {
   type AdminSourcingRow,
   type AdminVerificationRow,
 } from '../../lib/adminApi.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 type AnyRow = AdminRfqRow | AdminSampleRow | AdminSourcingRow | AdminVerificationRow;
 
@@ -46,6 +47,7 @@ function rowSummary(type: AdminRequestType, row: AnyRow): string {
 }
 
 export default function AdminRequests() {
+  usePageTitle('Admin — Requests');
   const [tab, setTab] = useState<AdminRequestType>('rfq');
   const [rows, setRows] = useState<AnyRow[]>([]);
   const [lots, setLots] = useState<AdminLot[]>([]);

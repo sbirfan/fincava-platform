@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 import { fetchLots, type ApiLot } from '../lib/api.js';
 import LotCard from '../components/LotCard.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 const STATUS_OPTIONS = [
   'All statuses',
@@ -15,6 +16,7 @@ const STATUS_OPTIONS = [
 ];
 
 export default function AvailableLots() {
+  usePageTitle('Available Lots');
   const { profile } = useAuth();
   const [lots, setLots] = useState<ApiLot[]>([]);
   const [loading, setLoading] = useState(true);

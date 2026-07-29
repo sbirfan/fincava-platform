@@ -8,6 +8,7 @@ import {
   type AdminLot,
   type MarketIntelligenceNote,
 } from '../../lib/adminApi.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
@@ -34,6 +35,7 @@ function numOrUndefined(v: string): number | undefined {
 }
 
 export default function AdminMarketIntelligence() {
+  usePageTitle('Admin — Market Intelligence');
   const [notes, setNotes] = useState<MarketIntelligenceNote[]>([]);
   const [lots, setLots] = useState<AdminLot[]>([]);
   const [filterVariety, setFilterVariety] = useState('');

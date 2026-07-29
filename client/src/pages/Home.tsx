@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchLots, type ApiLot } from '../lib/api.js';
 import LotCard from '../components/LotCard.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 export default function Home() {
+  usePageTitle('');
   const [lots, setLots] = useState<ApiLot[]>([]);
   const [loading, setLoading] = useState(true);
 

@@ -2,11 +2,13 @@ import { type FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestOtp, verifyOtp } from '../lib/api.js';
 import { useAuth } from '../context/AuthContext.js';
+import { usePageTitle } from '../lib/usePageTitle.js';
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
 
 export default function Login() {
+  usePageTitle('Sign In');
   const navigate = useNavigate();
   const { refresh } = useAuth();
 

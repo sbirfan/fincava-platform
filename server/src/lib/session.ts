@@ -112,6 +112,7 @@ export function setSessionCookie(res: Response, sessionId: string, expiresAt: Da
     httpOnly: true,
     secure: env.NODE_ENV === 'production',
     sameSite: 'lax',
+    signed: true,
     expires: expiresAt,
     path: '/',
   });

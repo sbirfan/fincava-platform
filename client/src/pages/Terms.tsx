@@ -1,4 +1,7 @@
+import { usePageTitle } from '../lib/usePageTitle.js';
+
 export default function Terms() {
+  usePageTitle('Terms of Service');
   return (
     <div className="max-w-[720px] mx-auto px-6 md:px-10 py-14">
       <h1 className="font-display font-medium text-2xl md:text-[28px] text-fc-ink mb-6">
@@ -56,9 +59,12 @@ export default function Terms() {
 
         <section>
           <h2 className="font-display text-lg font-medium text-fc-ink mb-2">Governing law</h2>
-          <p className="italic text-fc-ink-3">
-            [Governing law and jurisdiction to be confirmed by FINCAVA with legal counsel before
-            launch.]
+          <p>
+            These Terms, and any dispute arising out of or relating to the Platform or these Terms,
+            are governed by the laws of the State of Texas, without regard to its conflict-of-laws
+            principles. The parties agree that any such dispute shall be brought exclusively in the
+            state or federal courts located in Williamson County, Texas, and each party consents to
+            personal jurisdiction and venue there.
           </p>
         </section>
 

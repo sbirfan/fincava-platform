@@ -1,13 +1,19 @@
+import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import cookieParser from 'cookie-parser';
+import { eq } from 'drizzle-orm';
 import express, { type Express } from 'express';
 import helmet from 'helmet';
 import { pinoHttp } from 'pino-http';
-import { env } from './env.js';
+import { getDb } from './db/index.js';
+import { greenCoffeeLots } from './db/schema.js';
+import { env, requireEnv } from './env.js';
+import { injectLotMeta, type LotMetaInput } from './lib/lotMetaHtml.js';
 import { logger } from './logger.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { requireAdminSession } from './middleware/adminAuth.js';
 import { attachSession } from './middleware/attachSession.js';
+import { globalRateLimiter } from './middleware/rateLimit.js';
 import { adminRouter } from './routes/admin.js';
 import { adminAlertOutreachRouter } from './routes/adminAlertOutreach.js';
 import { adminAuthRouter } from './routes/adminAuth.js';
@@ -37,8 +43,15 @@ export function createApp(): Express {
   }
 
   app.use(helmet());
+  app.use(globalRateLimiter);
   app.use(express.json());
-  app.use(cookieParser());
+  // Signed cookies — §9 "session secret from env". Sessions are opaque
+  // server-side references (looked up in the sessions table on every
+  // request), so a forged/tampered value can never grant access on its
+  // own; signing adds a cheap first check that rejects a tampered cookie
+  // before it ever reaches the DB. Required, not optional, now that it's
+  // actually used — fails loudly at startup, not per-request, if missing.
+  app.use(cookieParser(requireEnv('SESSION_SECRET')));
   app.use(pinoHttp({ logger }));
   app.use(attachSession);
 
@@ -70,13 +83,60 @@ export function createApp(): Express {
 
   if (env.NODE_ENV === 'production') {
     const clientDist = path.resolve(import.meta.dirname, '../../client/dist');
+    const indexHtmlPath = path.join(clientDist, 'index.html');
+
     app.use(express.static(clientDist));
+
+    // Per-lot OpenGraph/Twitter meta injected server-side — most link
+    // unfurlers (Slack, WhatsApp, X, LinkedIn) don't execute client JS, so
+    // the client-side <title> update (usePageTitle.ts) never reaches them.
+    // Falls through to the generic index.html for an invisible/missing lot
+    // (client-side "not found" handling in LotPassport.tsx still applies).
+    app.get('/lots/:lotCode', async (req, res, next) => {
+      try {
+        const db = getDb();
+        const [lot] = await db
+          .select({
+            lotCode: greenCoffeeLots.lotCode,
+            title: greenCoffeeLots.title,
+            tastingNotes: greenCoffeeLots.tastingNotes,
+            region: greenCoffeeLots.region,
+            variety: greenCoffeeLots.variety,
+            visible: greenCoffeeLots.visible,
+            images: greenCoffeeLots.images,
+          })
+          .from(greenCoffeeLots)
+          .where(eq(greenCoffeeLots.lotCode, req.params['lotCode'] as string))
+          .limit(1);
+
+        if (!lot || !lot.visible) {
+          res.sendFile(indexHtmlPath);
+          return;
+        }
+
+        const images = lot.images as Array<{ url: string }>;
+        const lotMeta: LotMetaInput = {
+          lotCode: lot.lotCode,
+          title: lot.title,
+          tastingNotes: lot.tastingNotes,
+          region: lot.region,
+          variety: lot.variety,
+          imageUrl: images[0]?.url ?? null,
+        };
+
+        const html = await readFile(indexHtmlPath, 'utf8');
+        res.send(injectLotMeta(html, lotMeta));
+      } catch (err) {
+        next(err);
+      }
+    });
+
     app.get('*', (req, res, next) => {
       if (req.path.startsWith('/api')) {
         next();
         return;
       }
-      res.sendFile(path.join(clientDist, 'index.html'));
+      res.sendFile(indexHtmlPath);
     });
   }
 

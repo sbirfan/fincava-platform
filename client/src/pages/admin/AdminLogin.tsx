@@ -2,8 +2,10 @@ import { type FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { adminLogin } from '../../lib/adminApi.js';
 import { useAdminAuth } from '../../context/AdminAuthContext.js';
+import { usePageTitle } from '../../lib/usePageTitle.js';
 
 export default function AdminLogin() {
+  usePageTitle('Admin Sign In');
   const navigate = useNavigate();
   const { markAuthenticated } = useAdminAuth();
   const [password, setPassword] = useState('');
