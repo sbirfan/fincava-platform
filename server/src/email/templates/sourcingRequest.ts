@@ -3,10 +3,10 @@ import { escapeHtml } from '../escapeHtml.js';
 import { renderEmailLayout } from './layout.js';
 import { renderDetailRows } from './rows.js';
 
-// Exact wording from execution-spec §5/§8 — this is the platform's explicit
-// "not a guarantee" framing for sourcing. Do not paraphrase or shorten it.
+// Approved "not a guarantee" framing for sourcing (§5/§8). Do not paraphrase
+// or shorten it — reused verbatim in the buyer confirmation email.
 export const SOURCING_NOT_A_GUARANTEE_TEXT =
-  "We'll search our network of Colombian cooperatives and farms and respond within 10 business days with available options — or let you know if we can't match your requirements right now.";
+  'We have received your sourcing request. Our team will review our network of Colombian cooperatives and farms to identify suitable options. You can expect a response within 10 business days with available matches. If we are unable to meet your requirements at this time, we will let you know promptly.';
 
 interface SourcingRequestBuyerConfirmationInput {
   buyerEmail: string;
@@ -15,9 +15,9 @@ interface SourcingRequestBuyerConfirmationInput {
 export function sourcingRequestBuyerConfirmationEmail(
   input: SourcingRequestBuyerConfirmationInput,
 ): EmailMessage {
-  const text = `We received your sourcing request. ${SOURCING_NOT_A_GUARANTEE_TEXT}\n\n— FINCAVA`;
+  const text = `${SOURCING_NOT_A_GUARANTEE_TEXT}\n\n— FINCAVA`;
   const html = renderEmailLayout(`
-    <p>We received your sourcing request. ${SOURCING_NOT_A_GUARANTEE_TEXT}</p>
+    <p>${SOURCING_NOT_A_GUARANTEE_TEXT}</p>
     <p>— FINCAVA</p>
   `);
   return {
