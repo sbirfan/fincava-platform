@@ -9,7 +9,7 @@ import {
 } from '../email/templates/verification.js';
 import { sendEmail } from '../email/send.js';
 import { logger } from '../logger.js';
-import { formSubmissionRateLimiter } from '../middleware/rateLimit.js';
+import { verificationRateLimiter } from '../middleware/rateLimit.js';
 
 export const verificationRequestsRouter = Router();
 
@@ -19,7 +19,7 @@ function normalize(value: string | undefined): string | null {
   return trimmed === '' ? null : trimmed;
 }
 
-verificationRequestsRouter.post('/', formSubmissionRateLimiter, async (req, res, next) => {
+verificationRequestsRouter.post('/', verificationRateLimiter, async (req, res, next) => {
   try {
     const parsed = verificationRequestInputSchema.safeParse(req.body);
     if (!parsed.success) {

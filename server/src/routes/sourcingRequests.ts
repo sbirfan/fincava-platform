@@ -12,14 +12,14 @@ import { sendEmail } from '../email/send.js';
 import { logger } from '../logger.js';
 import { currentBuyerProfileId } from '../lib/authContext.js';
 import { HttpError } from '../middleware/errorHandler.js';
-import { formSubmissionRateLimiter } from '../middleware/rateLimit.js';
+import { buyerFormRateLimiter } from '../middleware/rateLimit.js';
 import { requireBuyerAuth } from '../middleware/requireBuyerAuth.js';
 
 export const sourcingRequestsRouter = Router();
 
 sourcingRequestsRouter.use(requireBuyerAuth);
 
-sourcingRequestsRouter.post('/', formSubmissionRateLimiter, async (req, res, next) => {
+sourcingRequestsRouter.post('/', buyerFormRateLimiter, async (req, res, next) => {
   try {
     const parsed = sourcingRequestInputSchema.safeParse(req.body);
     if (!parsed.success) {

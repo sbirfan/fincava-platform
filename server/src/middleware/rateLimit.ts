@@ -1,9 +1,22 @@
 import rateLimit from 'express-rate-limit';
 
-// General public-form submission limit per execution-spec §9: 10/hour/IP.
-// Applies to verification requests now (Phase 1) and to RFQ/sample/sourcing
-// forms when Phase 3 adds them — same limiter, same rule everywhere.
-export const formSubmissionRateLimiter = rateLimit({
+// §9: 10/hour/IP, for the one endpoint on the site with no auth wall in
+// front of it. Kept in its own bucket, separate from the buyer-authenticated
+// forms below — otherwise an anonymous actor hammering this endpoint from an
+// IP (shared office network, corporate NAT) could exhaust the same quota a
+// legitimate signed-in buyer behind that IP needs for RFQ/sample/sourcing.
+export const verificationRateLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many submissions from this address. Please try again later.' },
+});
+
+// §9: 10/hour/IP, shared across the three buyer-authenticated forms
+// (RFQ/sample/sourcing) — separate instance from verificationRateLimiter
+// above so the two buckets never share a counter.
+export const buyerFormRateLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   limit: 10,
   standardHeaders: true,

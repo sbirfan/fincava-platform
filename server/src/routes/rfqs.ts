@@ -9,14 +9,14 @@ import { sendEmail } from '../email/send.js';
 import { logger } from '../logger.js';
 import { currentBuyerProfileId } from '../lib/authContext.js';
 import { HttpError } from '../middleware/errorHandler.js';
-import { formSubmissionRateLimiter } from '../middleware/rateLimit.js';
+import { buyerFormRateLimiter } from '../middleware/rateLimit.js';
 import { requireBuyerAuth } from '../middleware/requireBuyerAuth.js';
 
 export const rfqsRouter = Router();
 
 rfqsRouter.use(requireBuyerAuth);
 
-rfqsRouter.post('/', formSubmissionRateLimiter, async (req, res, next) => {
+rfqsRouter.post('/', buyerFormRateLimiter, async (req, res, next) => {
   try {
     const parsed = rfqInputSchema.safeParse(req.body);
     if (!parsed.success) {
