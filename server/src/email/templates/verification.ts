@@ -7,9 +7,6 @@ interface VerificationRequesterConfirmationInput {
   requesterName: string;
 }
 
-// "5 business days" is the addendum's placeholder figure pending Irfan's
-// sign-off on scope/pricing turnaround — do not change this number without
-// his confirmation, and never leave a literal "[X]" in its place.
 const RESPONSE_TIME = '5 business days';
 
 export function verificationRequesterConfirmationEmail(

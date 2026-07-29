@@ -91,9 +91,8 @@ build a merge/link flow for this now (matches the platform's existing
    We'll respond within 5 business days to discuss scope, timing, and
    pricing." Same non-blocking pattern as every other confirmation email
    (fires after DB commit, logs on failure, never fails the user's
-   request). The "5 business days" figure is a placeholder for Irfan to
-   confirm or change — do not ship a different number without his sign-off,
-   and do not leave it as `[X]` (same exit-test rule as the rest of the spec).
+   request). The "5 business days" figure is confirmed final (Phase 4
+   sign-off) — not a placeholder.
 2. **Founder notification** — fires on every new verification request,
    same as the other three request types. Include requester details and a
    link to the admin record.

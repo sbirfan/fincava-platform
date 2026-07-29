@@ -91,6 +91,28 @@ Express process serves both the API and the built client from `client/dist`.
 | `npm run lint`        | Runs ESLint across the repo                       |
 | `npm run format`      | Runs Prettier across the repo                     |
 
+## Deploying
+
+**⚠️ Every push to `main` requires a manual redeploy — there is no
+auto-redeploy on push.** Confirmed directly against Replit's own
+documentation (docs.replit.com, checked July 2026): Autoscale Deployments
+have no native GitHub-triggered redeploy. Pushing to `main` updates the
+repo and the workspace's own dev preview, but the separate published
+Deployment (the live `fincava.com` / `*.replit.app` URL) keeps serving
+whatever was last explicitly published until someone redeploys it —
+confirmed the hard way, twice, during Phase 3 and Phase 4 (a push landed,
+the live site kept serving the old build, then 500'd once that instance
+was recycled).
+
+After every push you intend to go live:
+
+1. Open Replit → **Deployments** → **Publish** (or "Redeploy").
+2. Confirm the new build succeeds.
+3. Hit `/api/health` on the live URL and confirm it responds.
+
+Do this every time, no exceptions — a push landing in git is not the same
+as it being live.
+
 ## Current status (Phase 1 — complete)
 
 **Phase 0 (Foundation):**
@@ -142,11 +164,14 @@ Items confirmed during build that must be explicitly checked before
   for this project, it would block real anonymous buyers from the public
   site entirely. Check Replit's Deployment settings and confirm this is off
   before launch.
-- Replace the admin Bearer-token auth (`server/src/middleware/adminAuth.ts`,
-  `client/src/pages/AdminLot.tsx`) with real session-cookie admin auth per
-  execution-spec §4 (404-not-401, constant-time comparison, rate limiting).
-  Currently scoped only to `/api/admin/*` — confirmed via `grep -ri bearer`
-  across the repo and by inspecting `server/src/app.ts`'s route mounting.
+- ~~Replace the admin Bearer-token auth with real session-cookie admin
+  auth~~ — **done in Phase 4.** Session-cookie auth (404-not-401,
+  constant-time comparison, 5/15min rate limit) is live;
+  `grep -ri bearer` across the repo returns zero hits.
+- **Redeploy manually after every push** — see "Deploying" above. No native
+  auto-redeploy exists for this Deployment; confirm App Monitoring's actual
+  coverage (see "Deploying" section) before assuming an outage would page
+  anyone.
 
 ## Founder operations guide
 
