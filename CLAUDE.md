@@ -67,11 +67,18 @@ don't silently follow this file instead.
   requests/sessions, with their session cookie confirmed invalidated immediately. Verification
   requests are NOT linked to buyerProfileId (per the no-auth design above) and are unaffected by
   buyer deletion.
-- **Governing law/venue clause in Terms.tsx is finalized, not a placeholder**: Texas law,
-  Williamson County courts. (Terms.tsx does *not* contain a separate business-customers-only
-  representation or international-buyer acknowledgment clause — that content was never in `docs/`
-  or in any commit; an earlier draft of this file claimed it existed and was wrong. Don't add such
-  clauses without the user asking first, and don't assume they're already there.)
+- **Terms of Service and Privacy Policy are on their full B2B-focused legal version** (both
+  replaced in full — not the earlier short-form copy). Terms.tsx has 14 sections: B2B-only scope,
+  listings-not-offers, requests-don't-create-a-contract, pricing, platform disclaimer, liability
+  cap (greater of US$100 or trailing-12-months payments), IP, acceptable use, governing law/venue
+  (Texas, Williamson County, jury-trial waiver, **plus an international-buyer acknowledgment
+  clause** — Texas law/forum governs even for non-US buyers except where a non-waivable mandatory
+  law of their jurisdiction says otherwise), changes, severability, no-waiver, entire agreement,
+  and contact. Privacy.tsx has 14 sections covering collection/use/legal bases/cookies/disclosure/
+  international transfer/retention/rights/account deletion/security/children/third-party
+  services/changes/contact. Both use a real Effective Date (not a placeholder) and
+  info@fincava.com as the contact email throughout. Don't re-flag this content as pending, and
+  don't silently shorten or re-derive it — treat the current file content as the finalized text.
 - **Contact page**: WhatsApp 512-360-0118, email info@fincava.com — finalized, not placeholders.
 - **Verification confirmation email's "5 business days" response time is finalized.**
 - **Replit Autoscale Deployments do not auto-redeploy on push** — confirmed directly against
