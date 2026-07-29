@@ -6,7 +6,7 @@ import { renderDetailRows } from './rows.js';
 // Approved "not a guarantee" framing for sourcing (§5/§8). Do not paraphrase
 // or shorten it — reused verbatim in the buyer confirmation email.
 export const SOURCING_NOT_A_GUARANTEE_TEXT =
-  'We have received your sourcing request. Our team will review our network of Colombian cooperatives and farms to identify suitable options. You can expect a response within 10 business days with available matches. If we are unable to meet your requirements at this time, we will let you know promptly.';
+  'Thank you for your sourcing request. Our team will review our network of Colombian cooperatives and farms to identify suitable options. You can expect a response within 10 business days with available matches. If we are unable to meet your requirements at this time, we will let you know promptly.';
 
 interface SourcingRequestBuyerConfirmationInput {
   buyerEmail: string;

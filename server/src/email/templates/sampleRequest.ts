@@ -15,9 +15,9 @@ export function sampleRequestBuyerConfirmationEmail(
   input: SampleRequestBuyerConfirmationInput,
 ): EmailMessage {
   const lotCode = escapeHtml(input.lotCode);
-  const text = `We received your sample request for lot ${input.lotCode}. We respond within ${RESPONSE_TIME}.\n\n— FINCAVA`;
+  const text = `Thank you for your sample request for lot ${input.lotCode}. Our team will review your request and respond within ${RESPONSE_TIME}.\n\n— FINCAVA`;
   const html = renderEmailLayout(`
-    <p>We received your sample request for lot <strong>${lotCode}</strong>. We respond within ${RESPONSE_TIME}.</p>
+    <p>Thank you for your sample request for lot <strong>${lotCode}</strong>. Our team will review your request and respond within ${RESPONSE_TIME}.</p>
     <p>— FINCAVA</p>
   `);
   return {

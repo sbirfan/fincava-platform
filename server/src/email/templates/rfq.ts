@@ -13,9 +13,9 @@ interface RfqBuyerConfirmationInput {
 
 export function rfqBuyerConfirmationEmail(input: RfqBuyerConfirmationInput): EmailMessage {
   const lotCode = escapeHtml(input.lotCode);
-  const text = `We received your quote request for lot ${input.lotCode}. We respond within ${RESPONSE_TIME}.\n\n— FINCAVA`;
+  const text = `Thank you for requesting a quote for lot ${input.lotCode}. Our team is reviewing your request and will respond within ${RESPONSE_TIME}.\n\n— FINCAVA`;
   const html = renderEmailLayout(`
-    <p>We received your quote request for lot <strong>${lotCode}</strong>. We respond within ${RESPONSE_TIME}.</p>
+    <p>Thank you for requesting a quote for lot <strong>${lotCode}</strong>. Our team is reviewing your request and will respond within ${RESPONSE_TIME}.</p>
     <p>— FINCAVA</p>
   `);
   return {

@@ -63,7 +63,7 @@ export default function SourcingRequestForm() {
       <div className="max-w-[680px] mx-auto px-6 md:px-8 py-16 text-center">
         <h1 className="font-display font-medium text-2xl text-fc-ink mb-3">Request received</h1>
         <p className="text-sm text-fc-ink-2">
-          We have received your sourcing request. Our team will review our network of Colombian
+          Thank you for your sourcing request. Our team will review our network of Colombian
           cooperatives and farms to identify suitable options. You can expect a response within 10
           business days with available matches. If we are unable to meet your requirements at this
           time, we will let you know promptly.
