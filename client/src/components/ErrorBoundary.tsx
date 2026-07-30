@@ -30,13 +30,14 @@ export default class ErrorBoundary extends Component<Props, State> {
             Something went wrong
           </h1>
           <p className="text-sm text-fc-ink-2 mb-6">
-            An unexpected error occurred. Please try reloading the page.
+            Something on this page failed to load. Reloading usually fixes it — if the problem
+            continues, contact us and we&apos;ll take a look.
           </p>
           <a
             href="/"
             className="inline-block text-sm font-medium bg-fc-sage-deep text-fc-white px-5 py-2.5 rounded-fc-md"
           >
-            Back to Home
+            Back to home
           </a>
         </div>
       );

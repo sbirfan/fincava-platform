@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 import { fetchLots, type ApiLot } from '../lib/api.js';
 import LotCard from '../components/LotCard.js';
+import { LOT_STATUS_LABELS } from '../components/StatusBadge.js';
 import { usePageTitle } from '../lib/usePageTitle.js';
 
 const STATUS_OPTIONS = [
@@ -108,7 +109,7 @@ export default function AvailableLots() {
             >
               {STATUS_OPTIONS.map((s) => (
                 <option key={s} value={s}>
-                  {s === 'All statuses' ? s : s.replaceAll('_', ' ')}
+                  {s === 'All statuses' ? s : (LOT_STATUS_LABELS[s] ?? s)}
                 </option>
               ))}
             </select>
@@ -124,7 +125,10 @@ export default function AvailableLots() {
           {loading ? (
             <p className="text-sm text-fc-ink-3">Loading lots…</p>
           ) : filtered.length === 0 ? (
-            <p className="text-sm text-fc-ink-3">No lots match these filters.</p>
+            <p className="text-sm text-fc-ink-3">
+              No lots match these filters. Try clearing a filter, or submit a sourcing request and
+              we&apos;ll look beyond the current catalog.
+            </p>
           ) : (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {filtered.map((lot) => (

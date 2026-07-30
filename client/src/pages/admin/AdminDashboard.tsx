@@ -4,6 +4,7 @@ import {
   type AdminDashboard as AdminDashboardData,
 } from '../../lib/adminApi.js';
 import { usePageTitle } from '../../lib/usePageTitle.js';
+import { LOT_STATUS_LABELS } from '../../components/StatusBadge.js';
 
 type StatKey =
   | 'newRfqs'
@@ -52,7 +53,7 @@ export default function AdminDashboard() {
       <div className="border border-fc-line rounded-fc-lg bg-fc-white divide-y divide-fc-line">
         {data.lotsByStatus.map((row) => (
           <div key={row.status} className="flex items-center justify-between px-4 py-2.5 text-sm">
-            <span className="text-fc-ink-2">{row.status}</span>
+            <span className="text-fc-ink-2">{LOT_STATUS_LABELS[row.status] ?? row.status}</span>
             <span className="font-medium text-fc-ink">{row.count}</span>
           </div>
         ))}

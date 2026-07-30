@@ -13,10 +13,14 @@ export function verificationRequesterConfirmationEmail(
   input: VerificationRequesterConfirmationInput,
 ): EmailMessage {
   const name = escapeHtml(input.requesterName);
-  const text = `Hi ${input.requesterName},\n\nWe received your farm verification request. We'll respond within ${RESPONSE_TIME} to discuss scope, timing, and pricing.\n\n— FINCAVA`;
+  const body1 = `We received your verification request. Within ${RESPONSE_TIME}, we'll review the location, farm, producer, or lot you named, confirm whether it's feasible and within our field coverage, and come back to you with a proposed scope, what we'd document, deliverables, timing, and pricing — or a clarifying question if we need more detail first.`;
+  const body2 =
+    'That window covers this initial scoping and response, not completion of the fieldwork or report itself. This is field verification and documentation, not certification, an audit, or a guarantee, and FINCAVA is not an independent third party for this service — verification is one of our own revenue lines alongside coffee procurement and resale.';
+  const text = `Hi ${input.requesterName},\n\n${body1}\n\n${body2}\n\n— FINCAVA`;
   const html = renderEmailLayout(`
     <p>Hi ${name},</p>
-    <p>We received your verification request. We'll respond within <strong>${RESPONSE_TIME}</strong> to discuss scope, timing, and pricing.</p>
+    <p>${body1}</p>
+    <p>${body2}</p>
     <p>— FINCAVA</p>
   `);
 
@@ -50,7 +54,7 @@ export function verificationFounderNotificationEmail(
   ];
 
   const textRows = rows.map(([label, value]) => `${label}: ${value}`).join('\n');
-  const text = `New verification request\n\n${textRows}\n\nRecord ID: ${input.requestId}\n(View in Admin → Requests once the admin dashboard ships.)`;
+  const text = `New verification request\n\n${textRows}\n\nRecord ID: ${input.requestId}\n(View in Admin → Requests.)`;
 
   const htmlRows = rows
     .map(
@@ -62,7 +66,7 @@ export function verificationFounderNotificationEmail(
   const html = renderEmailLayout(`
     <p><strong>New verification request</strong></p>
     <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:14px;">${htmlRows}</table>
-    <p style="margin-top:16px;color:#6b6459;font-size:13px;">Record ID: ${escapeHtml(input.requestId)}<br/>View in Admin → Requests once the admin dashboard ships (Phase 4).</p>
+    <p style="margin-top:16px;color:#6b6459;font-size:13px;">Record ID: ${escapeHtml(input.requestId)}<br/>View in Admin → Requests.</p>
   `);
 
   return {

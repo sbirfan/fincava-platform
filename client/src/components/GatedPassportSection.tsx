@@ -34,14 +34,14 @@ export default function GatedPassportSection({ lot }: { lot: ApiLot }) {
           to={`/lots/${lot.lotCode}/request-quote`}
           className="flex-1 text-center px-4 py-2.5 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper"
         >
-          Request Quote
+          Request a quote
         </Link>
         {lot.sampleAvailable && (
           <Link
             to={`/lots/${lot.lotCode}/request-sample`}
             className="flex-1 text-center px-4 py-2.5 rounded-fc-md text-sm font-medium border border-fc-border-strong text-fc-ink"
           >
-            Request Sample
+            Request a sample
           </Link>
         )}
       </div>

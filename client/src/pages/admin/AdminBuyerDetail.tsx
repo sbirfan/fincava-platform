@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+  BUYER_TYPE_LABELS,
+  INTENDED_USE_LABELS,
+  REQUEST_STATUS_LABELS,
+} from '../../lib/adminLabels.js';
+import {
   deleteAdminBuyer,
   fetchAdminBuyer,
   updateAdminBuyerNotes,
@@ -72,7 +77,9 @@ export default function AdminBuyerDetail() {
         <dl className="grid grid-cols-2 gap-3 text-sm">
           <div>
             <dt className="text-xs text-fc-ink-3">Buyer type</dt>
-            <dd>{buyer.buyerType ?? '—'}</dd>
+            <dd>
+              {buyer.buyerType ? (BUYER_TYPE_LABELS[buyer.buyerType] ?? buyer.buyerType) : '—'}
+            </dd>
           </div>
           <div>
             <dt className="text-xs text-fc-ink-3">Phone</dt>
@@ -135,32 +142,33 @@ export default function AdminBuyerDetail() {
 
       <div className="border border-fc-line rounded-fc-lg bg-fc-white p-6 mb-6">
         <h2 className="text-sm font-semibold text-fc-ink mb-3">RFQs ({buyer.rfqs.length})</h2>
-        {buyer.rfqs.length === 0 && <p className="text-sm text-fc-ink-3">None.</p>}
+        {buyer.rfqs.length === 0 && <p className="text-sm text-fc-ink-3">None yet.</p>}
         {buyer.rfqs.map((r) => (
           <div key={r.id} className="text-sm border-t border-fc-line first:border-t-0 py-2">
             {r.lotCode} — {r.requestedVolumeKg}kg — {r.destinationCountry} —{' '}
-            <strong>{r.status}</strong>
+            <strong>{REQUEST_STATUS_LABELS[r.status] ?? r.status}</strong>
           </div>
         ))}
 
         <h2 className="text-sm font-semibold text-fc-ink mb-3 mt-5">
           Sample requests ({buyer.sampleRequests.length})
         </h2>
-        {buyer.sampleRequests.length === 0 && <p className="text-sm text-fc-ink-3">None.</p>}
+        {buyer.sampleRequests.length === 0 && <p className="text-sm text-fc-ink-3">None yet.</p>}
         {buyer.sampleRequests.map((r) => (
           <div key={r.id} className="text-sm border-t border-fc-line first:border-t-0 py-2">
-            {r.lotCode} — {r.sampleDestination} — <strong>{r.status}</strong>
+            {r.lotCode} — {r.sampleDestination} —{' '}
+            <strong>{REQUEST_STATUS_LABELS[r.status] ?? r.status}</strong>
           </div>
         ))}
 
         <h2 className="text-sm font-semibold text-fc-ink mb-3 mt-5">
           Sourcing requests ({buyer.sourcingRequests.length})
         </h2>
-        {buyer.sourcingRequests.length === 0 && <p className="text-sm text-fc-ink-3">None.</p>}
+        {buyer.sourcingRequests.length === 0 && <p className="text-sm text-fc-ink-3">None yet.</p>}
         {buyer.sourcingRequests.map((r) => (
           <div key={r.id} className="text-sm border-t border-fc-line first:border-t-0 py-2">
-            {r.intendedUse} — {r.requestedVolumeKg}kg — {r.destinationCountry} —{' '}
-            <strong>{r.status}</strong>
+            {INTENDED_USE_LABELS[r.intendedUse] ?? r.intendedUse} — {r.requestedVolumeKg}kg —{' '}
+            {r.destinationCountry} — <strong>{REQUEST_STATUS_LABELS[r.status] ?? r.status}</strong>
           </div>
         ))}
       </div>

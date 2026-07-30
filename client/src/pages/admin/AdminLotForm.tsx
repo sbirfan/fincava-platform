@@ -2,6 +2,11 @@ import { COMMODITY_TYPE, INVENTORY_TYPE, LOT_STATUS, PRICING_STRATEGY } from '@f
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
+  COMMODITY_TYPE_LABELS,
+  INVENTORY_TYPE_LABELS,
+  PRICING_STRATEGY_LABELS,
+} from '../../lib/adminLabels.js';
+import {
   createAdminLot,
   deleteAdminLot,
   deleteLotImage,
@@ -12,6 +17,7 @@ import {
   type LotImage,
 } from '../../lib/adminApi.js';
 import { usePageTitle } from '../../lib/usePageTitle.js';
+import { LOT_STATUS_LABELS } from '../../components/StatusBadge.js';
 
 const inputClasses =
   'w-full mt-1.5 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2.5 box-border';
@@ -279,7 +285,7 @@ export default function AdminLotForm() {
             >
               {COMMODITY_TYPE.map((v) => (
                 <option key={v} value={v}>
-                  {v}
+                  {COMMODITY_TYPE_LABELS[v] ?? v}
                 </option>
               ))}
             </select>
@@ -293,7 +299,7 @@ export default function AdminLotForm() {
             >
               {INVENTORY_TYPE.map((v) => (
                 <option key={v} value={v}>
-                  {v}
+                  {INVENTORY_TYPE_LABELS[v] ?? v}
                 </option>
               ))}
             </select>
@@ -307,7 +313,7 @@ export default function AdminLotForm() {
             >
               {LOT_STATUS.map((v) => (
                 <option key={v} value={v}>
-                  {v}
+                  {LOT_STATUS_LABELS[v] ?? v}
                 </option>
               ))}
             </select>
@@ -318,7 +324,7 @@ export default function AdminLotForm() {
               checked={form['visible'] as boolean}
               onChange={(e) => set('visible', e.target.checked)}
             />
-            Visible on public site
+            Visible on public site — unchecked hides this lot from buyers without deleting it
           </label>
         </div>
 
@@ -473,10 +479,15 @@ export default function AdminLotForm() {
             >
               {PRICING_STRATEGY.map((v) => (
                 <option key={v} value={v}>
-                  {v}
+                  {PRICING_STRATEGY_LABELS[v] ?? v}
                 </option>
               ))}
             </select>
+            <span className="block mt-1 text-fc-ink-3 normal-case">
+              Controls what buyers see before signing in. "Invite only" hides the lot from the
+              public catalog by default on creation — flip "Visible on public site" above to publish
+              it anyway.
+            </span>
           </label>
           <label className="text-xs text-fc-ink-2">
             Currency

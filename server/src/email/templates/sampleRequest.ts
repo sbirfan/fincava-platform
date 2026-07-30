@@ -15,9 +15,13 @@ export function sampleRequestBuyerConfirmationEmail(
   input: SampleRequestBuyerConfirmationInput,
 ): EmailMessage {
   const lotCode = escapeHtml(input.lotCode);
-  const text = `Thank you for your sample request for lot ${input.lotCode}. Our team will review your request and respond within ${RESPONSE_TIME}.\n\n— FINCAVA`;
+  const body1 = `Thank you for your sample request for lot ${input.lotCode}. We'll review sample availability, your shipping details, and evaluation timing, and respond within ${RESPONSE_TIME}.`;
+  const body2 =
+    "Our response will confirm availability and next steps, ask for any missing shipping information, or explain that a sample can't currently be provided. Submitting this request does not mean a sample has been approved or shipped yet.";
+  const text = `${body1}\n\n${body2}\n\n— FINCAVA`;
   const html = renderEmailLayout(`
-    <p>Thank you for your sample request for lot <strong>${lotCode}</strong>. Our team will review your request and respond within ${RESPONSE_TIME}.</p>
+    <p>Thank you for your sample request for lot <strong>${lotCode}</strong>. We'll review sample availability, your shipping details, and evaluation timing, and respond within ${RESPONSE_TIME}.</p>
+    <p>${body2}</p>
     <p>— FINCAVA</p>
   `);
   return {
@@ -50,11 +54,11 @@ export function sampleRequestFounderNotificationEmail(
   ];
   const { html: rowsHtml, text: rowsText } = renderDetailRows(rows);
 
-  const text = `New sample request\n\n${rowsText}\n\nRecord ID: ${input.requestId}\n(View in Admin → Requests once the admin dashboard ships.)`;
+  const text = `New sample request\n\n${rowsText}\n\nRecord ID: ${input.requestId}\n(View in Admin → Requests.)`;
   const html = renderEmailLayout(`
     <p><strong>New sample request</strong></p>
     ${rowsHtml}
-    <p style="margin-top:16px;color:#6b6459;font-size:13px;">Record ID: ${escapeHtml(input.requestId)}<br/>View in Admin → Requests once the admin dashboard ships (Phase 4).</p>
+    <p style="margin-top:16px;color:#6b6459;font-size:13px;">Record ID: ${escapeHtml(input.requestId)}<br/>View in Admin → Requests.</p>
   `);
 
   return {

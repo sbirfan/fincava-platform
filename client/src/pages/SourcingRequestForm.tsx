@@ -54,7 +54,7 @@ export default function SourcingRequestForm() {
       <div className="max-w-md mx-auto px-6 py-16 text-center">
         <p className="text-sm text-fc-ink-2 mb-4">Sign in to submit a sourcing request.</p>
         <Link to="/login" className="text-sm font-medium text-fc-sage-deep">
-          Sign in / Register
+          Sign in or register
         </Link>
       </div>
     );
@@ -275,6 +275,7 @@ export default function SourcingRequestForm() {
               min="0"
               max="100"
               step="0.25"
+              placeholder="e.g. 85 (0–100 scale)"
               className={inputClasses}
             />
           </div>
@@ -294,7 +295,7 @@ export default function SourcingRequestForm() {
 
         <div>
           <label className="text-sm font-medium text-fc-ink-2" htmlFor="maxBudgetPerKg">
-            Max budget per kg
+            Max budget per kg (USD)
           </label>
           <input
             id="maxBudgetPerKg"
@@ -302,10 +303,13 @@ export default function SourcingRequestForm() {
             type="number"
             min="0"
             step="0.01"
+            placeholder="e.g. 5.50"
+            aria-describedby="maxBudgetPerKg-help"
             className={inputClasses}
           />
-          <p className="text-xs text-fc-ink-3 mt-1">
-            Helps us narrow the search — kept confidential, never shared with producers.
+          <p id="maxBudgetPerKg-help" className="text-xs text-fc-ink-3 mt-1">
+            Optional, in US dollars. Helps us narrow the search — kept confidential and never shared
+            with producers.
           </p>
         </div>
 
@@ -331,7 +335,7 @@ export default function SourcingRequestForm() {
           disabled={status === 'submitting'}
           className="self-start px-6 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Submitting…' : 'Submit Sourcing Request'}
+          {status === 'submitting' ? 'Submitting…' : 'Submit sourcing request'}
         </button>
       </form>
     </div>

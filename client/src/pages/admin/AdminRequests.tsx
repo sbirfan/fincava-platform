@@ -1,5 +1,6 @@
 import { REQUEST_STATUS, SOURCING_STATUS, VERIFICATION_STATUS } from '@fincava/shared';
 import { useEffect, useState } from 'react';
+import { INTENDED_USE_LABELS, REQUEST_STATUS_LABELS } from '../../lib/adminLabels.js';
 import {
   fetchAdminLots,
   fetchAdminRequests,
@@ -15,11 +16,11 @@ import { usePageTitle } from '../../lib/usePageTitle.js';
 
 type AnyRow = AdminRfqRow | AdminSampleRow | AdminSourcingRow | AdminVerificationRow;
 
-const TABS: Array<{ type: AdminRequestType; label: string }> = [
-  { type: 'rfq', label: 'RFQ' },
-  { type: 'sample', label: 'Sample' },
-  { type: 'sourcing', label: 'Sourcing' },
-  { type: 'verification', label: 'Verification' },
+const TABS: Array<{ type: AdminRequestType; label: string; plural: string }> = [
+  { type: 'rfq', label: 'RFQ', plural: 'RFQs' },
+  { type: 'sample', label: 'Sample', plural: 'sample requests' },
+  { type: 'sourcing', label: 'Sourcing', plural: 'sourcing requests' },
+  { type: 'verification', label: 'Verification', plural: 'verification requests' },
 ];
 
 const STATUS_OPTIONS: Record<AdminRequestType, readonly string[]> = {
@@ -40,7 +41,8 @@ function rowSummary(type: AdminRequestType, row: AnyRow): string {
   }
   if (type === 'sourcing') {
     const r = row as AdminSourcingRow;
-    return `${r.buyerCompany ?? r.buyerEmail} — ${r.intendedUse} — ${r.requestedVolumeKg}kg — ${r.destinationCountry}`;
+    const intendedUse = INTENDED_USE_LABELS[r.intendedUse] ?? r.intendedUse;
+    return `${r.buyerCompany ?? r.buyerEmail} — ${intendedUse} — ${r.requestedVolumeKg}kg — ${r.destinationCountry}`;
   }
   const r = row as AdminVerificationRow;
   return `${r.requesterCompany} (${r.requesterEmail}) — ${r.farmOrLotOfInterest ?? 'general inquiry'}`;
@@ -138,7 +140,9 @@ export default function AdminRequests() {
       {!loading && !error && (
         <div className="border border-fc-line rounded-fc-lg bg-fc-white divide-y divide-fc-line">
           {rows.length === 0 && (
-            <p className="px-4 py-6 text-sm text-fc-ink-3 text-center">No {tab} requests yet.</p>
+            <p className="px-4 py-6 text-sm text-fc-ink-3 text-center">
+              No {TABS.find((t) => t.type === tab)?.plural ?? tab} yet.
+            </p>
           )}
           {rows.map((row) => (
             <div key={row.id} className="px-4 py-3">
@@ -156,13 +160,18 @@ export default function AdminRequests() {
                 >
                   {STATUS_OPTIONS[tab].map((s) => (
                     <option key={s} value={s}>
-                      {s}
+                      {REQUEST_STATUS_LABELS[s] ?? s}
                     </option>
                   ))}
                 </select>
                 {(tab === 'sourcing' || tab === 'verification') && (
                   <select
                     className="text-sm border border-fc-border-strong rounded-fc-md px-2 py-1.5 bg-fc-paper"
+                    title={
+                      tab === 'sourcing'
+                        ? 'Matched lot — which catalog lot fulfills this sourcing request'
+                        : 'Linked lot — which existing catalog lot this verification concerns'
+                    }
                     value={
                       (tab === 'sourcing'
                         ? (row as AdminSourcingRow).matchedLotId
@@ -170,7 +179,9 @@ export default function AdminRequests() {
                     }
                     onChange={(e) => handleLotLink(row.id, e.target.value)}
                   >
-                    <option value="">No linked lot</option>
+                    <option value="">
+                      {tab === 'sourcing' ? 'No matched lot' : 'No linked lot'}
+                    </option>
                     {lots.map((lot) => (
                       <option key={lot.id} value={lot.id}>
                         {lot.lotCode}
@@ -189,6 +200,9 @@ export default function AdminRequests() {
 
               {expandedId === row.id && (
                 <div className="mt-3">
+                  <label className="text-xs text-fc-ink-3 block mb-1">
+                    Internal notes — admin-only, never shown to the buyer
+                  </label>
                   <textarea
                     className="w-full text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-3 py-2 box-border"
                     rows={3}

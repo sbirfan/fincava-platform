@@ -14,7 +14,9 @@ export default function Contact() {
     <div className="max-w-2xl mx-auto px-6 md:px-10 py-14">
       <h1 className="font-display font-medium text-2xl md:text-[28px] text-fc-ink mb-3">Contact</h1>
       <p className="text-sm text-fc-ink-2 leading-relaxed mb-8">
-        Questions about a lot, a sourcing need, or FINCAVA in general — reach out directly.
+        Questions about a lot, a sourcing need, or FINCAVA in general — reach out directly. For
+        quote, sample, sourcing, and verification requests, use the request forms linked from each
+        lot or the footer below so your request reaches the right queue.
       </p>
 
       <div className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-6 flex flex-col gap-4">
@@ -42,7 +44,7 @@ export default function Contact() {
           href={`mailto:${CONTACT_EMAIL}`}
           className="mt-2 inline-block text-center px-5 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper"
         >
-          Send an Inquiry
+          Send an inquiry
         </a>
       </div>
     </div>

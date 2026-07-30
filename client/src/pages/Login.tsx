@@ -60,9 +60,10 @@ export default function Login() {
 
   return (
     <div className="max-w-md mx-auto px-6 py-16">
-      <h1 className="font-display font-medium text-2xl text-fc-ink mb-2">Sign in / Register</h1>
+      <h1 className="font-display font-medium text-2xl text-fc-ink mb-2">Sign in or register</h1>
       <p className="text-sm text-fc-ink-2 mb-8">
-        One email, no password. We&apos;ll send you a 6-digit code.
+        Enter your work email and we&apos;ll send a 6-digit code — no password to remember. New
+        emails are registered automatically once the code is verified.
       </p>
 
       {step === 'email' ? (
@@ -104,7 +105,7 @@ export default function Login() {
             disabled={submitting}
             className="px-5 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
           >
-            {submitting ? 'Sending…' : 'Send Code'}
+            {submitting ? 'Sending…' : 'Send code'}
           </button>
         </form>
       ) : (
@@ -138,7 +139,7 @@ export default function Login() {
             disabled={submitting || code.length !== 6}
             className="px-5 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
           >
-            {submitting ? 'Verifying…' : 'Verify & Sign In'}
+            {submitting ? 'Verifying…' : 'Verify and sign in'}
           </button>
 
           <button

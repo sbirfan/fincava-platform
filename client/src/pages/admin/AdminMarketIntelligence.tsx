@@ -134,8 +134,8 @@ export default function AdminMarketIntelligence() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="font-display font-medium text-2xl text-fc-ink">Market Intelligence</h1>
+      <div className="flex items-center justify-between mb-1">
+        <h1 className="font-display font-medium text-2xl text-fc-ink">Market intelligence</h1>
         <button
           type="button"
           onClick={startCreate}
@@ -144,6 +144,10 @@ export default function AdminMarketIntelligence() {
           New note
         </button>
       </div>
+      <p className="text-sm text-fc-ink-3 mb-6">
+        Internal research notes on demand, pricing, and comparable offerings — never shown to
+        buyers.
+      </p>
 
       <div className="flex gap-3 mb-6">
         <input

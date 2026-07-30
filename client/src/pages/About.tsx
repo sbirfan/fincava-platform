@@ -47,7 +47,7 @@ export default function About() {
           <p className="text-white/90 text-sm md:text-[15px] max-w-[56ch] leading-relaxed">
             Owned by KR Industries, LLC, a Taylor, Texas-based company that is 50% women-owned,
             FINCAVA sources traceable coffee from known farms in Santander and Boyacá, Colombia —
-            and offers independent field verification for buyers who aren&apos;t ready to purchase
+            and offers fee-based field verification for buyers who aren&apos;t ready to purchase
             yet.
           </p>
         </div>

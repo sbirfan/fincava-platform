@@ -38,7 +38,7 @@ export default function Home() {
             Traceable Colombian green coffee, sourced for professional buyers
           </h1>
           <p className="text-white/85 text-base md:text-[17px] max-w-[46ch] mb-5">
-            FINCAVA connects specialty importers, roasters, brokers and distributors directly to
+            FINCAVA connects specialty importers, roasters, brokers, and distributors directly to
             curated lots from Colombian cooperatives and farms.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -46,13 +46,13 @@ export default function Home() {
               to="/lots"
               className="px-5 py-3 rounded-fc-md text-[15px] font-medium bg-fc-sage text-fc-paper"
             >
-              Browse Available Lots
+              Browse available lots
             </Link>
             <Link
               to="/sourcing-request"
               className="px-5 py-3 rounded-fc-md text-[15px] font-medium border border-white/60 text-white"
             >
-              Submit a Sourcing Request
+              Submit a sourcing request
             </Link>
           </div>
         </div>
@@ -76,25 +76,25 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 md:px-10 py-10 grid md:grid-cols-2 gap-6">
         <div className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-7">
           <div className="text-[12px] font-medium tracking-[0.16em] uppercase text-fc-brick mb-1.5">
-            For Buyers
+            For buyers
           </div>
           <h3 className="font-display text-xl font-medium text-fc-ink mb-2">
             Source with confidence
           </h3>
           <p className="text-sm text-fc-ink-2 leading-relaxed">
-            Browse verified lots, request samples, and buy direct — every lot carries a passport
+            Browse documented lots, request samples, and buy direct — every lot carries a passport
             with origin, process, and cup score before you commit.
           </p>
         </div>
         <div className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-7">
           <div className="text-[12px] font-medium tracking-[0.16em] uppercase text-fc-sage-deep mb-1.5">
-            Verified at the Source
+            Direct at the source
           </div>
-          <h3 className="font-display text-xl font-medium text-fc-ink mb-2">How We Source</h3>
+          <h3 className="font-display text-xl font-medium text-fc-ink mb-2">How we source</h3>
           <p className="text-sm text-fc-ink-2 leading-relaxed">
-            We work directly with verified cooperatives across Colombian growing regions — on-site
-            visits, scored samples, and a lot passport for every shipment. No intermediaries, no
-            blind sourcing.
+            We work directly with known cooperatives across Colombian growing regions — on-site
+            visits, scored samples, and a lot passport for every shipment. Direct working
+            relationships, not blind sourcing.
           </p>
         </div>
       </div>

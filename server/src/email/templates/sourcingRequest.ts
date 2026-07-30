@@ -60,11 +60,11 @@ export function sourcingRequestFounderNotificationEmail(
   ];
   const { html: rowsHtml, text: rowsText } = renderDetailRows(rows);
 
-  const text = `New sourcing request\n\n${rowsText}\n\nRecord ID: ${input.requestId}\n(View in Admin → Requests once the admin dashboard ships.)`;
+  const text = `New sourcing request\n\n${rowsText}\n\nRecord ID: ${input.requestId}\n(View in Admin → Requests.)`;
   const html = renderEmailLayout(`
     <p><strong>New sourcing request</strong></p>
     ${rowsHtml}
-    <p style="margin-top:16px;color:#6b6459;font-size:13px;">Record ID: ${escapeHtml(input.requestId)}<br/>View in Admin → Requests once the admin dashboard ships (Phase 4).</p>
+    <p style="margin-top:16px;color:#6b6459;font-size:13px;">Record ID: ${escapeHtml(input.requestId)}<br/>View in Admin → Requests.</p>
   `);
 
   return {

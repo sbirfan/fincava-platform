@@ -21,7 +21,7 @@ export function errorHandler(err: unknown, req: Request, res: Response, _next: N
   }
 
   logger.error({ err, path: req.path }, 'unhandled error');
-  res.status(500).json({ error: 'Internal server error' });
+  res.status(500).json({ error: 'Something went wrong on our end. Please try again.' });
 }
 
 export function notFoundHandler(req: Request, res: Response): void {

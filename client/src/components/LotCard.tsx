@@ -31,7 +31,7 @@ export default function LotCard({ lot }: { lot: ApiLot }) {
             {lot.cupScore ? `Cup ${lot.cupScore}` : lot.lotCode}
           </span>
           <span className="text-xs font-medium px-3 py-1.5 rounded-fc-md border border-fc-border-strong bg-fc-paper-2 text-fc-ink">
-            View Lot
+            View lot
           </span>
         </div>
       </div>

@@ -40,9 +40,17 @@ export default function Verification() {
     return (
       <div className="max-w-[680px] mx-auto px-6 md:px-8 py-16 text-center">
         <h1 className="font-display font-medium text-2xl text-fc-ink mb-3">Request received</h1>
-        <p className="text-sm text-fc-ink-2">
-          We received your verification request. We&apos;ll respond within 5 business days to
-          discuss scope, timing, and pricing.
+        <p className="text-sm text-fc-ink-2 leading-relaxed text-left">
+          We received your verification request. Within 5 business days, we&apos;ll review the
+          location, farm, producer, or lot you named, confirm whether it&apos;s feasible and within
+          our field coverage, and come back to you with a proposed scope, what we&apos;d document,
+          deliverables, timing, and pricing — or a clarifying question if we need more detail first.
+        </p>
+        <p className="text-sm text-fc-ink-2 leading-relaxed text-left mt-3">
+          That 5-business-day window covers this initial scoping and response, not completion of the
+          fieldwork or report itself. If a request isn&apos;t one we can take on — for example, it
+          falls outside our current field coverage — we&apos;ll tell you plainly rather than leave
+          it open.
         </p>
       </div>
     );
@@ -54,14 +62,19 @@ export default function Verification() {
         Open to everyone · No account needed
       </span>
       <h1 className="font-display font-medium text-[30px] text-fc-ink mt-4 mb-3">
-        Request Farm Verification
+        Request farm verification
       </h1>
-      <p className="text-sm text-fc-ink-2 leading-relaxed mb-8">
+      <p className="text-sm text-fc-ink-2 leading-relaxed mb-4">
         Not every buyer is ready to place an order. FINCAVA offers fee-based farm, producer, origin,
-        and lot-verification — field visits, photography, documentation, and reporting — so you can
-        evaluate a farm or lot before committing funds. This is field verification and
-        documentation, not certification: every report separates what we directly observed from what
-        the producer reported and anything we couldn&apos;t confirm.
+        and lot verification — field visits, photography, documentation, and reporting — so you can
+        evaluate a farm or lot before committing funds.
+      </p>
+      <p className="text-sm text-fc-ink-2 leading-relaxed mb-8">
+        This is field verification and documentation, not certification, an audit, or a guarantee.
+        FINCAVA is not an independent third party for this service — verification is one of our own
+        revenue lines alongside coffee procurement and resale, and we may also stand to earn income
+        from a lot's purchase — so every report is written to separate what we directly observed
+        from what a producer told us and anything we couldn&apos;t confirm.
       </p>
 
       <form
@@ -184,7 +197,7 @@ export default function Verification() {
           disabled={status === 'submitting'}
           className="self-start px-6 py-3 rounded-fc-md text-[15px] font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Submitting…' : 'Submit Request'}
+          {status === 'submitting' ? 'Submitting…' : 'Submit request'}
         </button>
       </form>
     </div>

@@ -21,7 +21,7 @@ export type PricingDisplay =
   | { locked: true; message: string }
   | { locked: false; strategy: PricingStrategy; text: string; incoterm: string | null };
 
-const LOCKED_MESSAGE = 'Register to view pricing & full specs';
+const LOCKED_MESSAGE = 'Sign in or register to view pricing and full specs';
 
 function formatMoney(amount: number, currency: string, fractionDigits = 2): string {
   return `${currency} ${amount.toFixed(fractionDigits)}`;
@@ -70,14 +70,14 @@ export function getPricingDisplay(lot: LotPricingInput, isAuthenticated: boolean
       return {
         locked: false,
         strategy: lot.pricingStrategy,
-        text: 'Request Quote',
+        text: 'Request a quote for pricing',
         incoterm: lot.incoterm,
       };
     case 'INVITE_ONLY':
       return {
         locked: false,
         strategy: lot.pricingStrategy,
-        text: 'Contact FINCAVA',
+        text: 'Contact FINCAVA for pricing',
         incoterm: lot.incoterm,
       };
   }

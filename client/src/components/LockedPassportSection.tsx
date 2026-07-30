@@ -21,14 +21,16 @@ export default function LockedPassportSection() {
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
       <p className="font-display text-base font-medium text-fc-ink">
-        Create a free buyer account to unlock
+        Sign in or register free to unlock
       </p>
-      <p className="text-xs text-fc-ink-3">Full specs · exact pricing · RFQ &amp; samples</p>
+      <p className="text-xs text-fc-ink-3">
+        Full specs, exact pricing, and quote and sample requests
+      </p>
       <Link
         to="/login"
         className="mt-2 inline-block px-5 py-2.5 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper"
       >
-        Register Free
+        Sign in or register
       </Link>
     </div>
   );

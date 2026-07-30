@@ -30,7 +30,7 @@ export default function RfqForm() {
       <div className="max-w-md mx-auto px-6 py-16 text-center">
         <p className="text-sm text-fc-ink-2 mb-4">Sign in to request a quote.</p>
         <Link to="/login" className="text-sm font-medium text-fc-sage-deep">
-          Sign in / Register
+          Sign in or register
         </Link>
       </div>
     );
@@ -40,9 +40,15 @@ export default function RfqForm() {
     return (
       <div className="max-w-[680px] mx-auto px-6 md:px-8 py-16 text-center">
         <h1 className="font-display font-medium text-2xl text-fc-ink mb-3">Request received</h1>
-        <p className="text-sm text-fc-ink-2">
-          Thank you for requesting a quote for lot {lotCode}. Our team is reviewing your request and
-          will respond within 2 business days.
+        <p className="text-sm text-fc-ink-2 leading-relaxed text-left">
+          Thank you for requesting a quote for lot {lotCode}. We&apos;ll review your requested
+          volume, destination, preferred Incoterm, and delivery timing against this lot&apos;s
+          current availability and commercial terms, and respond within 2 business days.
+        </p>
+        <p className="text-sm text-fc-ink-2 leading-relaxed text-left mt-3">
+          Our response may include pricing and available volume, proposed terms, follow-up
+          questions, or — if the lot can no longer meet your request — a direct explanation of why.
+          Submitting this request does not reserve inventory or create a binding quotation.
         </p>
       </div>
     );
@@ -73,10 +79,15 @@ export default function RfqForm() {
 
   return (
     <div className="max-w-[680px] mx-auto px-6 md:px-8 py-12">
-      <h1 className="font-display font-medium text-[28px] text-fc-ink mb-1">Request a Quote</h1>
-      <p className="text-sm text-fc-ink-3 mb-6">
+      <h1 className="font-display font-medium text-[28px] text-fc-ink mb-1">Request a quote</h1>
+      <p className="text-sm text-fc-ink-3 mb-1">
         Lot {lotCode}
         {lot ? ` — ${lot.title}` : ''}
+      </p>
+      <p className="text-sm text-fc-ink-2 leading-relaxed mb-6">
+        Tell us the volume and destination you need. We&apos;ll check this lot&apos;s current
+        availability and commercial terms and respond within 2 business days — required fields are
+        marked with an asterisk.
       </p>
 
       <div className="bg-fc-paper-2 rounded-fc-md px-4 py-3 mb-6 text-xs text-fc-ink-2">
@@ -120,15 +131,21 @@ export default function RfqForm() {
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
             <label className="text-sm font-medium text-fc-ink-2" htmlFor="preferredIncoterm">
-              Preferred incoterm
+              Preferred Incoterm
             </label>
             <input
               id="preferredIncoterm"
               name="preferredIncoterm"
               type="text"
               placeholder="e.g. FOB, CIF"
+              aria-describedby="preferredIncoterm-help"
               className={inputClasses}
             />
+            <p id="preferredIncoterm-help" className="text-xs text-fc-ink-3 mt-1">
+              The shipping term that defines where FINCAVA&apos;s responsibility for the coffee ends
+              and yours begins (e.g. FOB origin port, CIF destination port). Leave blank if
+              you&apos;re not sure — we&apos;ll propose terms with the quote.
+            </p>
           </div>
           <div>
             <label className="text-sm font-medium text-fc-ink-2" htmlFor="targetDeliveryTimeline">
@@ -159,7 +176,7 @@ export default function RfqForm() {
           disabled={status === 'submitting'}
           className="self-start px-6 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Submitting…' : 'Submit Quote Request'}
+          {status === 'submitting' ? 'Submitting…' : 'Submit quote request'}
         </button>
       </form>
     </div>

@@ -67,7 +67,7 @@ export default function Profile() {
       <div className="max-w-2xl mx-auto px-6 py-16 text-center">
         <p className="text-sm text-fc-ink-2 mb-4">Sign in to view your profile.</p>
         <Link to="/login" className="text-sm font-medium text-fc-sage-deep">
-          Sign in / Register
+          Sign in or register
         </Link>
       </div>
     );
@@ -114,8 +114,9 @@ export default function Profile() {
     <div className="max-w-2xl mx-auto px-6 py-10">
       {isWelcome && (
         <div className="bg-fc-sage-soft rounded-fc-lg p-4 mb-6 text-sm text-fc-sage-deep">
-          Welcome to FINCAVA — complete your profile to unlock full lot passports, pricing, RFQs and
-          samples.
+          Welcome to FINCAVA. Your account is ready — full lot passports, pricing, and quote and
+          sample requests are now unlocked. Add your sourcing preferences below to help us match you
+          with the right lots.
         </div>
       )}
 
@@ -244,7 +245,10 @@ export default function Profile() {
           </div>
         </div>
 
-        <h2 className="text-sm font-semibold text-fc-ink mt-2">Alerts &amp; consent</h2>
+        <h2 className="text-sm font-semibold text-fc-ink mt-2">Alerts and consent</h2>
+        <p className="text-xs text-fc-ink-3 -mt-2">
+          Lot alerts and general updates are separate — opt into either, both, or neither.
+        </p>
         <div className="flex flex-col gap-2.5">
           <label className="flex items-center gap-2.5 text-sm text-fc-ink-2">
             <input
@@ -253,16 +257,16 @@ export default function Profile() {
               checked={form.alertOptIn ?? false}
               onChange={(e) => set('alertOptIn', e.target.checked)}
             />
-            Notify me when new lots match my preferences
+            Notify me by email when new lots match my sourcing preferences
           </label>
-          <label className="flex items-center gap-2.5 text-sm text-fc-ink-2">
+          <label className="flex items-center gap-2.5 text-sm text-fc-ink-2 pl-6">
             <input
               type="checkbox"
               className="accent-fc-sage"
               checked={form.alertCompetitionLots ?? false}
               onChange={(e) => set('alertCompetitionLots', e.target.checked)}
             />
-            Include competition-grade lots in alerts
+            Also include competition-grade lots in those alerts
           </label>
           <label className="flex items-center gap-2.5 text-sm text-fc-ink-2">
             <input
@@ -271,7 +275,7 @@ export default function Profile() {
               checked={form.marketingOptIn ?? false}
               onChange={(e) => set('marketingOptIn', e.target.checked)}
             />
-            Send me occasional FINCAVA updates
+            Send me occasional FINCAVA news and updates (unrelated to lot alerts)
           </label>
           {profile.consentTimestamp && (
             <p className="text-xs text-fc-ink-3">
@@ -281,7 +285,7 @@ export default function Profile() {
         </div>
 
         {saveError && <p className="text-sm text-fc-brick">{saveError}</p>}
-        {saved && <p className="text-sm text-fc-sage-deep">Saved.</p>}
+        {saved && <p className="text-sm text-fc-sage-deep">Profile saved.</p>}
 
         <button
           type="button"
@@ -289,7 +293,7 @@ export default function Profile() {
           disabled={saving}
           className="self-start px-6 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
         >
-          {saving ? 'Saving…' : 'Save Changes'}
+          {saving ? 'Saving…' : 'Save changes'}
         </button>
       </div>
 

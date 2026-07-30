@@ -1,8 +1,8 @@
-const STATUS_LABELS: Record<string, string> = {
-  COMING_SOON: 'Coming Soon',
-  SAMPLE_AVAILABLE: 'Sample Available',
+export const LOT_STATUS_LABELS: Record<string, string> = {
+  COMING_SOON: 'Coming soon',
+  SAMPLE_AVAILABLE: 'Sample available',
   AVAILABLE: 'Available',
-  LIMITED_QUANTITY: 'Limited Quantity',
+  LIMITED_QUANTITY: 'Limited quantity',
   RESERVED: 'Reserved',
   SOLD: 'Sold',
 };
@@ -22,7 +22,7 @@ export default function StatusBadge({ status }: { status: string }) {
     <span
       className={`inline-flex items-center rounded-fc-pill px-2.5 py-1 text-[11px] font-medium font-sans ${classes}`}
     >
-      {STATUS_LABELS[status] ?? status}
+      {LOT_STATUS_LABELS[status] ?? status}
     </span>
   );
 }

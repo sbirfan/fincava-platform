@@ -32,7 +32,7 @@ export default function SampleRequestForm() {
       <div className="max-w-md mx-auto px-6 py-16 text-center">
         <p className="text-sm text-fc-ink-2 mb-4">Sign in to request a sample.</p>
         <Link to="/login" className="text-sm font-medium text-fc-sage-deep">
-          Sign in / Register
+          Sign in or register
         </Link>
       </div>
     );
@@ -58,9 +58,15 @@ export default function SampleRequestForm() {
     return (
       <div className="max-w-[680px] mx-auto px-6 md:px-8 py-16 text-center">
         <h1 className="font-display font-medium text-2xl text-fc-ink mb-3">Request received</h1>
-        <p className="text-sm text-fc-ink-2">
-          Thank you for your sample request for lot {lotCode}. Our team will review your request and
-          respond within 2 business days.
+        <p className="text-sm text-fc-ink-2 leading-relaxed text-left">
+          Thank you for your sample request for lot {lotCode}. We&apos;ll review sample
+          availability, your shipping details, and evaluation timing, and respond within 2 business
+          days.
+        </p>
+        <p className="text-sm text-fc-ink-2 leading-relaxed text-left mt-3">
+          Our response will confirm availability and next steps, ask for any missing shipping
+          information, or explain that a sample can&apos;t currently be provided. Submitting this
+          request does not mean a sample has been approved or shipped yet.
         </p>
       </div>
     );
@@ -90,9 +96,13 @@ export default function SampleRequestForm() {
 
   return (
     <div className="max-w-[680px] mx-auto px-6 md:px-8 py-12">
-      <h1 className="font-display font-medium text-[28px] text-fc-ink mb-1">Request a Sample</h1>
-      <p className="text-sm text-fc-ink-3 mb-6">
+      <h1 className="font-display font-medium text-[28px] text-fc-ink mb-1">Request a sample</h1>
+      <p className="text-sm text-fc-ink-3 mb-1">
         Lot {lotCode} — {lot.title}
+      </p>
+      <p className="text-sm text-fc-ink-2 leading-relaxed mb-6">
+        Give us a shipping address and we&apos;ll confirm availability and next steps within 2
+        business days — required fields are marked with an asterisk.
       </p>
 
       <div className="bg-fc-paper-2 rounded-fc-md px-4 py-3 mb-6 text-xs text-fc-ink-2">
@@ -113,9 +123,13 @@ export default function SampleRequestForm() {
             name="sampleDestination"
             rows={2}
             required
-            placeholder="Shipping address for the sample"
+            placeholder="Full shipping address, including recipient name"
+            aria-describedby="sampleDestination-help"
             className={`${inputClasses} resize-y`}
           />
+          <p id="sampleDestination-help" className="text-xs text-fc-ink-3 mt-1">
+            Where the physical sample should ship to.
+          </p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
@@ -127,8 +141,13 @@ export default function SampleRequestForm() {
               name="courierAccount"
               type="text"
               placeholder="e.g. FedEx account #"
+              aria-describedby="courierAccount-help"
               className={inputClasses}
             />
+            <p id="courierAccount-help" className="text-xs text-fc-ink-3 mt-1">
+              Optional. If you&apos;d rather bill the shipment to your own courier account, add it
+              here.
+            </p>
           </div>
           <div>
             <label className="text-sm font-medium text-fc-ink-2" htmlFor="evaluationTimeline">
@@ -139,8 +158,12 @@ export default function SampleRequestForm() {
               name="evaluationTimeline"
               type="text"
               placeholder="e.g. Within 2 weeks of arrival"
+              aria-describedby="evaluationTimeline-help"
               className={inputClasses}
             />
+            <p id="evaluationTimeline-help" className="text-xs text-fc-ink-3 mt-1">
+              Optional. How soon you expect to cup and evaluate the sample once it arrives.
+            </p>
           </div>
         </div>
         <div>
@@ -159,7 +182,7 @@ export default function SampleRequestForm() {
           disabled={status === 'submitting'}
           className="self-start px-6 py-3 rounded-fc-md text-sm font-medium bg-fc-sage text-fc-paper disabled:opacity-60"
         >
-          {status === 'submitting' ? 'Submitting…' : 'Submit Sample Request'}
+          {status === 'submitting' ? 'Submitting…' : 'Submit sample request'}
         </button>
       </form>
     </div>

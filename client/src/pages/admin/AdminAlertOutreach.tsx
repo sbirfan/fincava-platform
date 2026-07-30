@@ -32,12 +32,17 @@ export default function AdminAlertOutreach() {
 
   return (
     <div>
-      <h1 className="font-display font-medium text-2xl text-fc-ink mb-6">Alert Outreach</h1>
+      <h1 className="font-display font-medium text-2xl text-fc-ink mb-6">Alert outreach</h1>
 
       <div className="border border-fc-line rounded-fc-lg bg-fc-white p-6 mb-6">
-        <h2 className="text-sm font-semibold text-fc-ink mb-3">
+        <h2 className="text-sm font-semibold text-fc-ink mb-1">
           Filter buyers (alert opt-in only)
         </h2>
+        <p className="text-xs text-fc-ink-3 mb-3">
+          Only buyers who opted into lot-match alerts on their profile are searchable here. Use this
+          to find who to notify manually about a new or upcoming lot — outreach itself is sent by
+          hand, not automated from this screen.
+        </p>
         <div className="grid grid-cols-3 gap-4 mb-4">
           <label className="text-xs text-fc-ink-2">
             Variety
@@ -112,7 +117,7 @@ export default function AdminAlertOutreach() {
               href={alertOutreachExportUrl(filter)}
               className="text-sm border border-fc-border-strong rounded-fc-md px-4 py-2 text-fc-ink hover:bg-fc-paper-2"
             >
-              Export CSV
+              Export matching buyers (CSV)
             </a>
           )}
         </div>

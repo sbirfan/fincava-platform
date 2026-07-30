@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { PRICING_STRATEGY_LABELS } from '../../lib/adminLabels.js';
 import { fetchAdminLots, type AdminLot } from '../../lib/adminApi.js';
 import { usePageTitle } from '../../lib/usePageTitle.js';
+import { LOT_STATUS_LABELS } from '../../components/StatusBadge.js';
 
 export default function AdminLots() {
   usePageTitle('Admin — Lots');
@@ -53,15 +55,17 @@ export default function AdminLots() {
                     </Link>
                   </td>
                   <td className="px-4 py-2.5">{lot.title}</td>
-                  <td className="px-4 py-2.5">{lot.status}</td>
-                  <td className="px-4 py-2.5">{lot.pricingStrategy}</td>
+                  <td className="px-4 py-2.5">{LOT_STATUS_LABELS[lot.status] ?? lot.status}</td>
+                  <td className="px-4 py-2.5">
+                    {PRICING_STRATEGY_LABELS[lot.pricingStrategy] ?? lot.pricingStrategy}
+                  </td>
                   <td className="px-4 py-2.5">{lot.visible ? 'Yes' : 'No'}</td>
                 </tr>
               ))}
               {lots.length === 0 && (
                 <tr>
                   <td colSpan={5} className="px-4 py-6 text-center text-fc-ink-3">
-                    No lots yet.
+                    No lots yet. Use "New lot" to add the first one.
                   </td>
                 </tr>
               )}
