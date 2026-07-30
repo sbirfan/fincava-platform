@@ -82,8 +82,9 @@ export default function Home() {
             Source with confidence
           </h3>
           <p className="text-sm text-fc-ink-2 leading-relaxed">
-            Browse documented lots, request samples, and buy direct — every lot carries a passport
-            with origin, process, and cup score before you commit.
+            Browse traceable lots with available origin, process, quality, and commercial
+            information, request samples, and buy direct — every lot carries a passport before you
+            commit.
           </p>
         </div>
         <div className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-7">
@@ -92,9 +93,9 @@ export default function Home() {
           </div>
           <h3 className="font-display text-xl font-medium text-fc-ink mb-2">How we source</h3>
           <p className="text-sm text-fc-ink-2 leading-relaxed">
-            We work directly with known cooperatives across Colombian growing regions — on-site
-            visits, scored samples, and a lot passport for every shipment. Direct working
-            relationships, not blind sourcing.
+            We maintain established relationships with identified cooperatives and farms across
+            Colombian growing regions — on-site visits, scored samples, and a lot passport for every
+            shipment.
           </p>
         </div>
       </div>

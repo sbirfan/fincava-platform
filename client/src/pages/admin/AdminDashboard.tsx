@@ -29,7 +29,13 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchAdminDashboard()
       .then(setData)
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load'));
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Could not load dashboard data. Refresh the page and try again.',
+        ),
+      );
   }, []);
 
   if (error) return <p className="text-sm text-red-600">{error}</p>;

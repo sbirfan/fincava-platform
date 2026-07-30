@@ -59,7 +59,13 @@ export default function AdminMarketIntelligence() {
       lotId: filterLotId || undefined,
     })
       .then(setNotes)
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load'))
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Could not load market intelligence notes. Refresh the page and try again.',
+        ),
+      )
       .finally(() => setLoading(false));
   }
 
@@ -118,7 +124,11 @@ export default function AdminMarketIntelligence() {
       setShowForm(false);
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Save failed');
+      alert(
+        err instanceof Error
+          ? err.message
+          : 'This note could not be saved. Review the fields and try again.',
+      );
     }
   }
 
@@ -128,7 +138,7 @@ export default function AdminMarketIntelligence() {
       await deleteMarketIntelligence(id);
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Delete failed');
+      alert(err instanceof Error ? err.message : 'This note could not be deleted. Try again.');
     }
   }
 

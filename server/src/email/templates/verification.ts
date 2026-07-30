@@ -15,7 +15,7 @@ export function verificationRequesterConfirmationEmail(
   const name = escapeHtml(input.requesterName);
   const body1 = `We received your verification request. Within ${RESPONSE_TIME}, we'll review the location, farm, producer, or lot you named, confirm whether it's feasible and within our field coverage, and come back to you with a proposed scope, what we'd document, deliverables, timing, and pricing — or a clarifying question if we need more detail first.`;
   const body2 =
-    'That window covers this initial scoping and response, not completion of the fieldwork or report itself. This is field verification and documentation, not certification, an audit, or a guarantee, and FINCAVA is not an independent third party for this service — verification is one of our own revenue lines alongside coffee procurement and resale.';
+    'That window covers this initial scoping and response, not completion of the fieldwork or report itself. This is paid field verification and documentation, not a certification, accredited audit, legal opinion, or guarantee — FINCAVA also sources, procures, and resells green coffee as its other core business.';
   const text = `Hi ${input.requesterName},\n\n${body1}\n\n${body2}\n\n— FINCAVA`;
   const html = renderEmailLayout(`
     <p>Hi ${name},</p>

@@ -13,7 +13,13 @@ export default function AdminLots() {
   useEffect(() => {
     fetchAdminLots()
       .then(setLots)
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load'));
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Could not load lots. Refresh the page and try again.',
+        ),
+      );
   }, []);
 
   return (

@@ -34,7 +34,13 @@ export default function AdminBuyerDetail() {
         setBuyer(b);
         setNotes(b.internalNotes ?? '');
       })
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load'));
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Could not load this buyer's record. Refresh the page and try again.",
+        ),
+      );
   }, [id]);
 
   async function handleSaveNotes() {
@@ -44,7 +50,7 @@ export default function AdminBuyerDetail() {
       const updated = await updateAdminBuyerNotes(id, notes);
       setBuyer(updated);
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Save failed');
+      alert(err instanceof Error ? err.message : 'These notes could not be saved. Try again.');
     } finally {
       setSaving(false);
     }
@@ -57,7 +63,7 @@ export default function AdminBuyerDetail() {
       await deleteAdminBuyer(id);
       navigate('/admin/buyers');
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Delete failed');
+      alert(err instanceof Error ? err.message : 'This buyer could not be deleted. Try again.');
       setDeleting(false);
     }
   }

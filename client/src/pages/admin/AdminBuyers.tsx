@@ -11,7 +11,13 @@ export default function AdminBuyers() {
   useEffect(() => {
     fetchAdminBuyers()
       .then(setBuyers)
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load'));
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Could not load buyers. Refresh the page and try again.',
+        ),
+      );
   }, []);
 
   return (

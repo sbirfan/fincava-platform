@@ -52,6 +52,10 @@ export default function Verification() {
           falls outside our current field coverage — we&apos;ll tell you plainly rather than leave
           it open.
         </p>
+        <p className="text-xs text-fc-ink-3 leading-relaxed text-left mt-3">
+          Reminder: this is paid field verification and documentation, not a certification,
+          accredited audit, legal opinion, or guarantee.
+        </p>
       </div>
     );
   }
@@ -70,11 +74,12 @@ export default function Verification() {
         evaluate a farm or lot before committing funds.
       </p>
       <p className="text-sm text-fc-ink-2 leading-relaxed mb-8">
-        This is field verification and documentation, not certification, an audit, or a guarantee.
-        FINCAVA is not an independent third party for this service — verification is one of our own
-        revenue lines alongside coffee procurement and resale, and we may also stand to earn income
-        from a lot's purchase — so every report is written to separate what we directly observed
-        from what a producer told us and anything we couldn&apos;t confirm.
+        This is field verification and documentation — not a certification, an accredited audit, a
+        legal due-diligence opinion, or a guarantee. FINCAVA provides it on a paid basis, and also
+        sources, procures, and resells green coffee as its other core business, so a verification
+        may concern a farm, producer, or lot FINCAVA has a commercial interest in. Every report
+        separates what we directly observed, what the producer reported, records we reviewed, and
+        anything we couldn&apos;t confirm.
       </p>
 
       <form

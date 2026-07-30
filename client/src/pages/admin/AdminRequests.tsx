@@ -69,7 +69,13 @@ export default function AdminRequests() {
     setError(null);
     fetchAdminRequests<AnyRow>(tab)
       .then(setRows)
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : 'Failed to load'))
+      .catch((err: unknown) =>
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Could not load requests. Refresh the page and try again.',
+        ),
+      )
       .finally(() => setLoading(false));
   }
 
@@ -83,7 +89,9 @@ export default function AdminRequests() {
       await updateAdminRequest(tab, id, { status });
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Update failed');
+      alert(
+        err instanceof Error ? err.message : 'The request status could not be updated. Try again.',
+      );
     }
   }
 
@@ -98,7 +106,7 @@ export default function AdminRequests() {
       setExpandedId(null);
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Update failed');
+      alert(err instanceof Error ? err.message : 'These notes could not be saved. Try again.');
     }
   }
 
@@ -108,7 +116,11 @@ export default function AdminRequests() {
       await updateAdminRequest(tab, id, { [field]: lotId || null });
       load();
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Update failed');
+      alert(
+        err instanceof Error
+          ? err.message
+          : `The ${tab === 'sourcing' ? 'matched' : 'linked'} lot could not be updated. Try again.`,
+      );
     }
   }
 

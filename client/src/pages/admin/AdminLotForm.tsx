@@ -136,7 +136,11 @@ export default function AdminLotForm() {
         setLoading(false);
       })
       .catch((err: unknown) => {
-        setError(err instanceof Error ? err.message : 'Failed to load lot');
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Could not load this lot. Refresh the page and try again.',
+        );
         setLoading(false);
       });
   }, [isCreate, params.lotCode]);
@@ -192,7 +196,11 @@ export default function AdminLotForm() {
       await updateAdminLot(params.lotCode as string, payload);
       setSaved(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Save failed');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Changes could not be saved. Review the form and try again.',
+      );
     } finally {
       setSaving(false);
     }
@@ -205,7 +213,11 @@ export default function AdminLotForm() {
       await deleteAdminLot(params.lotCode);
       navigate('/admin/lots');
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Delete failed');
+      alert(
+        err instanceof Error
+          ? err.message
+          : 'The lot could not be deleted. It may be linked to existing requests.',
+      );
     }
   }
 
@@ -220,7 +232,11 @@ export default function AdminLotForm() {
       setAltText('');
       if (fileInputRef.current) fileInputRef.current.value = '';
     } catch (err) {
-      setUploadError(err instanceof Error ? err.message : 'Upload failed');
+      setUploadError(
+        err instanceof Error
+          ? err.message
+          : 'The image could not be uploaded. Check the file and try again.',
+      );
     } finally {
       setUploading(false);
     }
@@ -233,7 +249,7 @@ export default function AdminLotForm() {
       await deleteLotImage(params.lotCode, publicId);
       setImages((prev) => prev.filter((img) => img.publicId !== publicId));
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Delete failed');
+      alert(err instanceof Error ? err.message : 'This image could not be deleted. Try again.');
     }
   }
 

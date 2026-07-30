@@ -24,7 +24,11 @@ export default function AdminAlertOutreach() {
       const result = await fetchAlertOutreach(filter);
       setBuyers(result.buyers);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Search failed');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Could not search buyers. Review the filters and try again.',
+      );
     } finally {
       setLoading(false);
     }
