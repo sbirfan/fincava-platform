@@ -1,3 +1,4 @@
+import { MapPinCheck, ShieldCheck, FileStack, Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { usePageTitle } from '../lib/usePageTitle.js';
 
@@ -5,18 +6,22 @@ const commitments = [
   {
     title: 'Known Sources',
     body: 'We procure only from farms and producer groups we can identify, communicate with, and document.',
+    icon: MapPinCheck,
   },
   {
     title: 'Honest Representation',
     body: 'Coffee is described according to the evidence — origin, process, condition, and sensory results. No inflated scores, no implied certifications.',
+    icon: ShieldCheck,
   },
   {
     title: 'Buyer-Driven Documentation',
     body: "We invest in gathering the specs and traceability data serious buyers need, and say plainly when something isn't available yet.",
+    icon: FileStack,
   },
   {
     title: 'Local Accountability',
     body: 'A Taylor, Texas base gives U.S. buyers a local commercial counterpart, not just an overseas supplier.',
+    icon: Building2,
   },
 ];
 
@@ -24,8 +29,17 @@ export default function About() {
   usePageTitle('About');
   return (
     <div>
-      <div className="relative bg-fc-ink flex items-center py-12 md:py-0 md:h-[300px]">
-        <div className="max-w-6xl mx-auto px-6 md:px-10 w-full">
+      <div
+        className="relative bg-fc-ink bg-cover bg-center flex items-center py-12 md:py-16"
+        style={{ backgroundImage: "url('/images/hero.png')" }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(90deg, rgba(43,30,22,0.72), rgba(43,30,22,0.35))',
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6 md:px-10 w-full">
           <h1 className="font-display font-medium text-2xl md:text-4xl leading-snug text-white max-w-[22ch] mb-3.5">
             FINCAVA is a green-coffee procurement and supply company built on direct relationships,
             not automated sourcing.
@@ -68,16 +82,24 @@ export default function About() {
 
       <div className="max-w-6xl mx-auto px-6 md:px-10 pt-12">
         <h2 className="font-display text-xl font-medium text-fc-ink mb-5">What we commit to</h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {commitments.map((c) => (
-            <div
-              key={c.title}
-              className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-5.5"
-            >
-              <div className="font-display font-medium text-base text-fc-ink mb-1.5">{c.title}</div>
-              <p className="text-[13px] text-fc-ink-2 leading-relaxed">{c.body}</p>
-            </div>
-          ))}
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {commitments.map((c) => {
+            const Icon = c.icon;
+            return (
+              <div
+                key={c.title}
+                className="bg-fc-white border border-fc-line rounded-fc-lg shadow-fc-1 p-7"
+              >
+                <div className="w-10 h-10 rounded-full bg-fc-sage-soft flex items-center justify-center mb-3">
+                  <Icon className="w-5 h-5 text-fc-sage-deep" strokeWidth={1.75} />
+                </div>
+                <div className="font-display font-medium text-base text-fc-ink mb-1.5">
+                  {c.title}
+                </div>
+                <p className="text-[13px] text-fc-ink-2 leading-relaxed">{c.body}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
 
