@@ -89,23 +89,64 @@ don't silently follow this file instead.
 - **The shared-package startup guard must fail loudly**, with a specific error naming what's
   missing/stale and how to fix it — never silently continue in a degraded state. A missing export
   from `@fincava/shared` is a real client/server integrity risk, not something to paper over.
+- **Verification's service-limitation disclaimer is finalized** (Verification.tsx and
+  `server/src/email/templates/verification.ts`, both the pre-submission copy and the confirmation
+  screen/email): the service is fee-based; it is not a certification, an accredited audit, a legal
+  due-diligence opinion, or a guarantee; reports distinguish what FINCAVA directly observed, what
+  the producer reported, records reviewed, and anything that couldn't be confirmed; and FINCAVA
+  discloses — as a factual, non-categorical statement — that it has a commercial interest in some
+  verified coffee via its other revenue line (sourcing/procurement/resale). **Do not use the phrase
+  "independent third party" (or any rephrasing that claims or denies independence) anywhere in this
+  copy** — a prior draft used it and it was deliberately removed as overclaiming; the current
+  wording states facts, not a categorical independence claim in either direction.
+- **The per-request commercial-relationship disclosure (item 5 of the verification disclaimer) is
+  a known, deliberately incomplete gap, not a bug.** The page states the general structural fact
+  (FINCAVA's dual business lines), but there is no schema field or admin workflow that checks or
+  discloses whether a *specific* farm/producer/lot in a given verification request has an existing
+  commercial relationship with FINCAVA. This is a pending business/product decision — don't "fix"
+  it by inventing a disclosure workflow, and don't re-flag it as a newly-discovered gap; it's
+  already known and intentionally left open.
+- **`scripts/validate-copy.mjs` exists** — a dependency-free Node script (no test framework exists
+  in this repo) that checks response-time figures, the verification-disclaimer wording limits
+  above, the protected sourcing confirmation text, USD budget labeling, and that admin pages use
+  formatted labels instead of raw enum values. Run it with `node scripts/validate-copy.mjs`. **Re-run
+  it after each phase (A–F) of the upcoming UX/form-enhancement work** — those phases will touch
+  many of the same confirmation strings and admin labels this script checks, and it's a cheap way
+  to catch the same class of regression (a "verified lots" or "independent" phrase creeping back
+  in, a response-time figure drifting, a raw enum reappearing) before it ships.
+- **The "Buyer type" and "Preferred contact method" dropdowns in Profile.tsx render raw,
+  underscore-stripped enum casing** (e.g. "SPECIALTY ROASTER", "WHATSAPP" instead of "Specialty
+  roaster", "WhatsApp") — found during manual verification of the copy-review work. This predates
+  both copy-review passes and was deliberately left alone rather than expanding either pass's
+  scope. It's intentionally deferred to the upcoming UX/form-enhancement work, not something to fix
+  ad hoc or re-report as newly found.
 
 ## Current status
 
-Phases 0–5 are all closed. Phase 5 (Polish + deploy), the final phase, landed in commit `f6b9f37`
-("Add Phase 5: polish, SEO, fail-fast guard, final README, security pass") on top of `984d1c5`
-(finalize 5-business-days copy + document manual-redeploy). Verified directly against code as of
-2026-07-29: `globalRateLimiter`/`verificationRateLimiter`/`buyerFormRateLimiter` are separate
-instances in `server/src/middleware/rateLimit.ts`; zero `bearer` hits anywhere in the codebase;
-session cookies are signed (`cookieParser(requireEnv('SESSION_SECRET'))` in `server/src/app.ts`,
+Phases 0–4 closed with verified exit-test evidence. Phase 5 (Polish + deploy), the final phase,
+landed in commit `f6b9f37` ("Add Phase 5: polish, SEO, fail-fast guard, final README, security
+pass") on top of `984d1c5` (finalize 5-business-days copy + document manual-redeploy), and is also
+closed: `globalRateLimiter`/`verificationRateLimiter`/`buyerFormRateLimiter` are separate instances
+in `server/src/middleware/rateLimit.ts`; zero `bearer` hits anywhere in the codebase; session
+cookies are signed (`cookieParser(requireEnv('SESSION_SECRET'))` in `server/src/app.ts`,
 `req.signedCookies` used consistently); `server/scripts/verify-shared-build.mjs` is wired via
 `predev`/`prestart`; README has a "Deploying" section with the manual-redeploy + post-redeploy
-smoke-test steps and a full founder operations guide; Contact.tsx has the real email/WhatsApp;
-Terms.tsx has the finalized governing-law clause (see the correction above — no business-use/
-international clause exists, contrary to an earlier draft of this file).
+smoke-test steps and a full founder operations guide; Contact.tsx has the real email/WhatsApp; and
+Terms.tsx/Privacy.tsx carry the full legal-pages replacement, including the governing-law,
+business-use, and international-buyer clauses in Terms.tsx — all present and finalized, per the
+"Deliberate decisions" section above (a stale sentence here previously claimed the international
+clause didn't exist; that was wrong and has been corrected).
 
-There is no remaining known-open Phase 5 work. If new work starts, treat this section as stale
-until re-verified — don't assume it stays accurate as the repo moves on.
+Two copy-review passes have since landed on top of the closed Phase 5 work, each in its own
+commit, separate from this file's own correction: `c59d84a` (the initial editorial pass — public/
+buyer pages, forms, admin labels, email templates) and `90b2b10` (a follow-up addressing that
+pass's own findings — the verification-disclaimer rewrite, the "documented"/"known" terminology
+audit, 19 admin error messages made actionable). `e984325` added `scripts/validate-copy.mjs` as a
+separate commit (new tooling, not content). See the "Deliberate decisions" bullets above for what's
+now finalized from that work (the verification disclaimer, the deliberately-incomplete item-5 gap,
+and the deferred buyer-type/contact-method casing issue). There is no remaining known-open Phase 5
+work. If new work starts, treat this section as stale until re-verified — don't assume it stays
+accurate as the repo moves on.
 
 <!-- Claude Code: when you reconcile this file against the actual repo, update this section with
 the real current state and note anything above that conflicts with what you find in code. -->
