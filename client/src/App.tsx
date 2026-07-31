@@ -18,6 +18,7 @@ import RfqForm from './pages/RfqForm.js';
 import SampleRequestForm from './pages/SampleRequestForm.js';
 import SourcingRequestForm from './pages/SourcingRequestForm.js';
 import NotFound from './pages/NotFound.js';
+import { SHOW_OUR_STORY_PAGE } from './lib/featureFlags.js';
 import AdminLogin from './pages/admin/AdminLogin.js';
 import AdminDashboard from './pages/admin/AdminDashboard.js';
 import AdminLots from './pages/admin/AdminLots.js';
@@ -42,7 +43,10 @@ export default function App() {
               <Route path="lots/:lotCode/request-sample" element={<SampleRequestForm />} />
               <Route path="sourcing-request" element={<SourcingRequestForm />} />
               <Route path="about" element={<About />} />
-              <Route path="our-story" element={<OurStory />} />
+              <Route
+                path="our-story"
+                element={SHOW_OUR_STORY_PAGE ? <OurStory /> : <Navigate to="/" replace />}
+              />
               <Route path="contact" element={<Contact />} />
               <Route path="privacy" element={<Privacy />} />
               <Route path="terms" element={<Terms />} />
