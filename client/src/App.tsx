@@ -7,6 +7,7 @@ import Home from './pages/Home.js';
 import AvailableLots from './pages/AvailableLots.js';
 import LotPassport from './pages/LotPassport.js';
 import About from './pages/About.js';
+import OurStory from './pages/OurStory.js';
 import Contact from './pages/Contact.js';
 import Privacy from './pages/Privacy.js';
 import Terms from './pages/Terms.js';
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="lots/:lotCode/request-sample" element={<SampleRequestForm />} />
               <Route path="sourcing-request" element={<SourcingRequestForm />} />
               <Route path="about" element={<About />} />
+              <Route path="our-story" element={<OurStory />} />
               <Route path="contact" element={<Contact />} />
               <Route path="privacy" element={<Privacy />} />
               <Route path="terms" element={<Terms />} />

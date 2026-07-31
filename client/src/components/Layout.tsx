@@ -5,6 +5,7 @@ const navLinks = [
   { to: '/', label: 'Home', end: true },
   { to: '/lots', label: 'Available Lots' },
   { to: '/about', label: 'About' },
+  { to: '/our-story', label: 'Our Story' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -81,6 +82,9 @@ export default function Layout() {
           </NavLink>
           <NavLink to="/about" className="hover:text-fc-ink">
             About
+          </NavLink>
+          <NavLink to="/our-story" className="hover:text-fc-ink">
+            Our Story
           </NavLink>
           <NavLink to="/contact" className="hover:text-fc-ink">
             Contact
