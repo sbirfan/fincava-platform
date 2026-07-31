@@ -1,11 +1,12 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
+import { SHOW_OUR_STORY_PAGE } from '../lib/featureFlags.js';
 
 const navLinks = [
   { to: '/', label: 'Home', end: true },
   { to: '/lots', label: 'Available Lots' },
   { to: '/about', label: 'About' },
-  { to: '/our-story', label: 'Our Story' },
+  ...(SHOW_OUR_STORY_PAGE ? [{ to: '/our-story', label: 'Our Story' }] : []),
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -29,8 +30,11 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col bg-fc-paper text-fc-ink">
       <header className="border-b border-fc-line bg-fc-paper">
         <nav className="max-w-6xl mx-auto flex flex-wrap items-center gap-2 px-6 py-3.5">
-          <NavLink to="/" className="mr-4 shrink-0">
+          <NavLink to="/" className="mr-4 shrink-0 flex items-center gap-2">
             <img src="/images/fincava-logo.png" alt="FINCAVA" className="h-11 w-auto" />
+            <span className="inline-flex items-center rounded-fc-pill bg-fc-sage-soft text-fc-sage-deep text-[10px] font-medium font-sans px-2 py-0.5">
+              Beta
+            </span>
           </NavLink>
           {navLinks.map((link) => (
             <NavLink
@@ -83,9 +87,11 @@ export default function Layout() {
           <NavLink to="/about" className="hover:text-fc-ink">
             About
           </NavLink>
-          <NavLink to="/our-story" className="hover:text-fc-ink">
-            Our Story
-          </NavLink>
+          {SHOW_OUR_STORY_PAGE && (
+            <NavLink to="/our-story" className="hover:text-fc-ink">
+              Our Story
+            </NavLink>
+          )}
           <NavLink to="/contact" className="hover:text-fc-ink">
             Contact
           </NavLink>
