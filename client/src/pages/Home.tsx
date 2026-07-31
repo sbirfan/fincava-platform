@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.js';
 import { fetchLots, type ApiLot } from '../lib/api.js';
+import EmptyLotsState from '../components/EmptyLotsState.js';
 import LotCard from '../components/LotCard.js';
 import { usePageTitle } from '../lib/usePageTitle.js';
 
 export default function Home() {
   usePageTitle('');
+  const { profile } = useAuth();
   const [lots, setLots] = useState<ApiLot[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -104,6 +107,8 @@ export default function Home() {
         <h2 className="font-display text-2xl font-medium text-fc-ink mb-4">Available now</h2>
         {loading ? (
           <p className="text-sm text-fc-ink-3">Loading lots…</p>
+        ) : lots.length === 0 ? (
+          <EmptyLotsState authenticated={!!profile} />
         ) : (
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {lots.slice(0, 3).map((lot) => (

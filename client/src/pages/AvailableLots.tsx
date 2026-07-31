@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.js';
 import { fetchLots, type ApiLot } from '../lib/api.js';
+import EmptyLotsState from '../components/EmptyLotsState.js';
 import LotCard from '../components/LotCard.js';
 import { LOT_STATUS_LABELS } from '../components/StatusBadge.js';
 import { usePageTitle } from '../lib/usePageTitle.js';
@@ -54,7 +55,7 @@ export default function AvailableLots() {
         Curated green coffee lots, updated as they move through harvest and sale.
       </p>
 
-      {profile && (
+      {profile && lots.length > 0 && (
         <Link
           to="/sourcing-request"
           className="inline-block mb-6 text-sm font-medium text-fc-sage-deep underline underline-offset-2"
@@ -63,81 +64,85 @@ export default function AvailableLots() {
         </Link>
       )}
 
-      <div className="grid md:grid-cols-[220px_1fr] gap-8">
-        <div className="flex flex-col gap-5">
-          <div>
-            <label className="text-sm font-semibold text-fc-ink">Variety</label>
-            <div className="flex flex-col gap-1.5 mt-2 text-sm text-fc-ink-2">
-              {varieties.map((v) => (
-                <label key={v} className="flex gap-2 items-center">
-                  <input
-                    type="checkbox"
-                    checked={varietyFilter.includes(v)}
-                    onChange={() => toggle(varietyFilter, v, setVarietyFilter)}
-                    className="accent-fc-sage"
-                  />
-                  {v}
-                </label>
-              ))}
+      {!loading && lots.length === 0 ? (
+        <EmptyLotsState authenticated={!!profile} />
+      ) : (
+        <div className="grid md:grid-cols-[220px_1fr] gap-8">
+          <div className="flex flex-col gap-5">
+            <div>
+              <label className="text-sm font-semibold text-fc-ink">Variety</label>
+              <div className="flex flex-col gap-1.5 mt-2 text-sm text-fc-ink-2">
+                {varieties.map((v) => (
+                  <label key={v} className="flex gap-2 items-center">
+                    <input
+                      type="checkbox"
+                      checked={varietyFilter.includes(v)}
+                      onChange={() => toggle(varietyFilter, v, setVarietyFilter)}
+                      className="accent-fc-sage"
+                    />
+                    {v}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-fc-ink">Process</label>
+              <div className="flex flex-col gap-1.5 mt-2 text-sm text-fc-ink-2">
+                {processes.map((p) => (
+                  <label key={p} className="flex gap-2 items-center">
+                    <input
+                      type="checkbox"
+                      checked={processFilter.includes(p)}
+                      onChange={() => toggle(processFilter, p, setProcessFilter)}
+                      className="accent-fc-sage"
+                    />
+                    {p}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-semibold text-fc-ink" htmlFor="status-filter">
+                Status
+              </label>
+              <select
+                id="status-filter"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="w-full mt-2 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-2.5 py-2"
+              >
+                {STATUS_OPTIONS.map((s) => (
+                  <option key={s} value={s}>
+                    {s === 'All statuses' ? s : (LOT_STATUS_LABELS[s] ?? s)}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-          <div>
-            <label className="text-sm font-semibold text-fc-ink">Process</label>
-            <div className="flex flex-col gap-1.5 mt-2 text-sm text-fc-ink-2">
-              {processes.map((p) => (
-                <label key={p} className="flex gap-2 items-center">
-                  <input
-                    type="checkbox"
-                    checked={processFilter.includes(p)}
-                    onChange={() => toggle(processFilter, p, setProcessFilter)}
-                    className="accent-fc-sage"
-                  />
-                  {p}
-                </label>
-              ))}
-            </div>
-          </div>
-          <div>
-            <label className="text-sm font-semibold text-fc-ink" htmlFor="status-filter">
-              Status
-            </label>
-            <select
-              id="status-filter"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full mt-2 text-sm bg-fc-paper text-fc-ink border border-fc-border-strong rounded-fc-md px-2.5 py-2"
-            >
-              {STATUS_OPTIONS.map((s) => (
-                <option key={s} value={s}>
-                  {s === 'All statuses' ? s : (LOT_STATUS_LABELS[s] ?? s)}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
 
-        <div>
-          <div className="flex justify-end mb-2">
-            <span className="text-sm text-fc-ink-3">
-              {loading ? '…' : `${filtered.length} lot${filtered.length === 1 ? '' : 's'}`}
-            </span>
-          </div>
-          {loading ? (
-            <p className="text-sm text-fc-ink-3">Loading lots…</p>
-          ) : filtered.length === 0 ? (
-            <p className="text-sm text-fc-ink-3">
-              No lots match these filters. Try clearing a filter, or submit a sourcing request and
-              we&apos;ll look beyond the current catalog.
-            </p>
-          ) : (
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {filtered.map((lot) => (
-                <LotCard key={lot.lotCode} lot={lot} />
-              ))}
+          <div>
+            <div className="flex justify-end mb-2">
+              <span className="text-sm text-fc-ink-3">
+                {loading ? '…' : `${filtered.length} lot${filtered.length === 1 ? '' : 's'}`}
+              </span>
             </div>
-          )}
+            {loading ? (
+              <p className="text-sm text-fc-ink-3">Loading lots…</p>
+            ) : filtered.length === 0 ? (
+              <p className="text-sm text-fc-ink-3">
+                No lots match these filters. Try clearing a filter, or submit a sourcing request and
+                we&apos;ll look beyond the current catalog.
+              </p>
+            ) : (
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {filtered.map((lot) => (
+                  <LotCard key={lot.lotCode} lot={lot} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
